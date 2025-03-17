@@ -3,7 +3,7 @@
 
 ### Environment Setup
 
-1. **Install Node.js**: Ensure Node.js is installed on your system. This project requires Node.js 18.x or later.
+1. 
 2. **Clone the Repository**: Clone this project to your local machine.
    ```bash
    git clone <repository-url>
