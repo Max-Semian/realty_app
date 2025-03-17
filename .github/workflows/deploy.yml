@@ -20,9 +20,6 @@ jobs:
     - name: Build Next.js site
       run: npm run build
 
-    - name: Copy CNAME
-      run: cp CNAME ./out/  # Assuming CNAME is at the root of your project
-
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
