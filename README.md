@@ -1,6 +1,3 @@
-
-## Getting Started
-
 ### Environment Setup
 
 1. 
