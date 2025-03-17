@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  basePath: '/realty_app',
+  assetPrefix: '/realty_app/',
   output: 'export',
   images: {
     loader: 'custom',
