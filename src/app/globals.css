@@ -1,9 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap');
-
-@font-face {
-  font-family: 'martian-mono';
-  src: local('Courier New');
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
 
 * {
   box-sizing: border-box;
@@ -15,5 +10,5 @@ html,
 body {
   width: 100%;
   overflow-x: hidden;
-  font-family: 'Martian Mono', 'martian-mono';
+  font-family: 'Montserrat', sans-serif;
 }
