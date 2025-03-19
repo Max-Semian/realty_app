@@ -8,7 +8,7 @@ const Header = () => {
       <div className={styles.container}>
         {/* Logo */}
         <div className={styles.logo}>
-           {/* <Image src="src/app/assets/logo.svg" alt="Logo" width={40} height={40} /> */}
+        <img src="/realty_app/logo.svg" alt="Logo" width="78.44px" height="74.24px" />
         </div>
 
         {/* Navigation Links */}
