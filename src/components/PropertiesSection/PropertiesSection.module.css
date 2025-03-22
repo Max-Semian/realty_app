@@ -1,0 +1,91 @@
+.propertiesSection {
+    background-color: #20222B;
+    color: white;
+    padding: 80px 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  .title {
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: 40px;
+  }
+  
+  .propertiesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+  }
+  
+  .propertyCard {
+    background-color: #2A2D38;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .propertyCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .propertyImage {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .imagePlaceholder {
+    width: 100%;
+    height: 100%;
+    background-color: #3A3D48;
+  }
+  
+  .propertyInfo {
+    padding: 20px;
+  }
+  
+  .propertyTitle {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .propertyLocation {
+    font-size: 14px;
+    color: #A0A0A0;
+    margin-bottom: 12px;
+  }
+  
+  .propertyPrice {
+    font-size: 20px;
+    font-weight: 700;
+    color: #F5A623;
+    margin-bottom: 16px;
+  }
+  
+  .propertyButton {
+    display: inline-block;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .propertyButton:hover {
+    background-color: white;
+    color: #20222B;
+  }
+  
+  @media (max-width: 768px) {
+    .propertiesGrid {
+      grid-template-columns: 1fr;
+    }
+  }

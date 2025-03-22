@@ -1,8 +1,46 @@
 .page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-image: url('/realty_app/bg1.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+
+/* Full-width image styles */
+.fullWidthImageSection {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* Remove these comments if you want a specific height */
+  /* height: 600px; */
+}
+
+.fullWidthImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* If you want the image to maintain a specific aspect ratio, use these: */
+  /* object-fit: cover; */
+  /* height: 100%; */
 }
 
 @media (max-width: 768px) {
+  .main {
+    padding: 0;
+  }
+  
+  /* Mobile-specific image adjustments if needed */
+  .fullWidthImageSection {
+     height: 300px;
+  }
 }

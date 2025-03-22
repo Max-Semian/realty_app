@@ -1,0 +1,61 @@
+.heroSection {
+    width: 1400px;
+    height: 100vh;
+    background-image: url('/realty_app/HomeBG1.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .content {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: -100px;
+  }
+  
+  .logo {
+    margin-bottom: 24px;
+  }
+  
+  .title {
+    font-size: 48px;
+    font-weight: 700;
+    color: #20222B;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  
+  .subtitle {
+    font-size: 48px;
+    font-weight: 400;
+  }
+  
+  .slogan {
+    font-size: 24px;
+    color: #20222B;
+    margin-top: 16px;
+  }
+  
+  @media (max-width: 768px) {
+    .title {
+      font-size: 36px;
+    }
+    
+    .subtitle {
+      font-size: 36px;
+    }
+    
+    .slogan {
+      font-size: 18px;
+    }
+  }

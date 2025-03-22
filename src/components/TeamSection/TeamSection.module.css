@@ -1,0 +1,9 @@
+.teamSection {
+    /* Add any specific styling for the team section here */
+    /* This overrides default CardCarousel styling when needed */
+  }
+  
+  /* If you need to customize the carousel specifically for team members */
+  .teamSection :global(.carousel) {
+    /* Any specific adjustments to the carousel for team members */
+  }

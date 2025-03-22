@@ -1,0 +1,34 @@
+.subPosition {
+    color: rgba(245, 166, 35, 0.8);
+  }
+  
+  .memberName {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 8px 0;
+    color: white;
+  }
+  
+  .memberDetails {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 16px 0;
+  }
+  
+  .reviewsLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    margin-top: auto;
+  }
+  
+  .arrow {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  .reviewsLink:hover .arrow {
+    transform: translateX(5px);
+  }

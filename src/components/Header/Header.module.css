@@ -1,0 +1,89 @@
+.header {
+  background: #20222B;
+  color: white;
+  padding: 16px 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  gap: 32px;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.nav a:hover {
+  color: #F5A623;
+}
+
+.highlight {
+  color: #F5A623 !important;
+}
+
+.contact {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.contact a {
+  color: white;
+  text-decoration: none;
+}
+
+.mobileMenu {
+  display: none;
+}
+
+.mobileMenu button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: #20222B;
+    flex-direction: column;
+    padding: 20px;
+    display: none;
+    text-align: center;
+  }
+  
+  .navOpen {
+    display: flex;
+  }
+  
+  .mobileMenu {
+    display: block;
+  }
+}
