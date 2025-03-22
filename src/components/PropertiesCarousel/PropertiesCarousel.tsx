@@ -104,9 +104,6 @@ export default function PropertiesCarousel() {
                       alt={property.title}
                       className={styles.propertyImage}
                     />
-                    {property.id === 3 && (
-                      <div className={styles.dimensions}>380 × 314</div>
-                    )}
                   </div>
                 </div>
                 <h3 className={styles.propertyTitle}>{property.title}</h3>
