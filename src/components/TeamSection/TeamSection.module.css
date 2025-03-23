@@ -1,9 +1,44 @@
 .teamSection {
-    /* Add any specific styling for the team section here */
-    /* This overrides default CardCarousel styling when needed */
+  width: 100%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.container {
+  max-width: 1400px;
+  width: 100%;
+  background-color: #20222B;
+  padding: 60px 60px;
+  position: relative;
+}
+
+/* Customize the carousel inside the team section */
+.teamSection :global(.navButton) {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.teamSection :global(.navButton:hover) {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 1400px) {
+  .container {
+    max-width: 100%;
   }
-  
-  /* If you need to customize the carousel specifically for team members */
-  .teamSection :global(.carousel) {
-    /* Any specific adjustments to the carousel for team members */
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding: 60px 40px;
   }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 40px 20px;
+  }
+}

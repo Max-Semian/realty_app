@@ -31,14 +31,14 @@ export default function Home() {
         <AdvanegesSection />
         <TeamSection />
         <WorkStagesSection />
-        
-        {/* Full-width image section */}
         <section className={styles.fullWidthImageSection}>
-          <img 
+         <div className={styles.imageContainer}>
+           <img 
             src={fullWidthImage.src} 
             alt="Real Estate Development" 
             className={styles.fullWidthImage}
-          />
+           />
+        </div>
         </section>
         <TestimonialsCarousel />
         <DocumentsSection />

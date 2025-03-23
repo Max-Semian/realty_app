@@ -18,29 +18,38 @@
 /* Full-width image styles */
 .fullWidthImageSection {
   width: 100%;
-  margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
   overflow: hidden;
-  /* Remove these comments if you want a specific height */
-  /* height: 600px; */
+}
+
+.imageContainer {
+  max-width: 1400px;
+  width: 100%;
+  background-color: #20222B;
+  position: relative;
 }
 
 .fullWidthImage {
   width: 100%;
   height: auto;
   display: block;
-  /* If you want the image to maintain a specific aspect ratio, use these: */
-  /* object-fit: cover; */
-  /* height: 100%; */
+}
+
+@media (max-width: 1400px) {
+  .imageContainer {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
-  .main {
-    padding: 0;
+  .fullWidthImageSection {
+    height: auto;
   }
   
-  /* Mobile-specific image adjustments if needed */
-  .fullWidthImageSection {
-     height: 300px;
+  .fullWidthImage {
+    height: 300px;
+    object-fit: cover;
   }
 }

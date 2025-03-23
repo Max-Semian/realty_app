@@ -1,116 +1,135 @@
 .documentsSection {
-    background-color: #20222B;
-    color: white;
-    padding: 80px 0;
-    width: 100%;
-  }
-  
+  width: 100%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.container {
+  max-width: 1400px;
+  width: 100%;
+  background-color: #20222B;
+  padding: 80px 60px;
+  position: relative;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+.documentsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.documentItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.documentItem:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.documentInfo {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.downloadIcon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.downloadIcon svg {
+  stroke: rgba(255, 255, 255, 0.7);
+  transition: stroke 0.3s;
+}
+
+.downloadIcon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.downloadIcon:hover svg {
+  stroke: white;
+}
+
+.documentDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.documentTitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 8px 0;
+}
+
+.documentFormat {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.documentMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.documentDate {
+  font-size: 14px;
+  margin: 0 0 8px 0;
+}
+
+.documentOrg {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.downloadLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (max-width: 1400px) {
   .container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
+    max-width: 100%;
   }
-  
-  .title {
-    font-size: 36px;
-    font-weight: 400;
-    margin-bottom: 40px;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding: 60px 40px;
   }
-  
-  .documentsList {
-    display: flex;
-    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 40px 20px;
   }
   
   .documentItem {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .documentItem:last-child {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .documentInfo {
-    display: flex;
-    align-items: flex-start;
+    flex-direction: column;
     gap: 16px;
   }
   
-  .downloadIcon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s;
-  }
-  
-  .downloadIcon svg {
-    stroke: rgba(255, 255, 255, 0.7);
-    transition: stroke 0.3s;
-  }
-  
-  .downloadIcon:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .downloadIcon:hover svg {
-    stroke: white;
-  }
-  
-  .documentDetails {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .documentTitle {
-    font-size: 18px;
-    font-weight: 500;
-    margin: 0 0 8px 0;
-  }
-  
-  .documentFormat {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
-    margin: 0;
-  }
-  
   .documentMeta {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    text-align: right;
+    align-items: flex-start;
+    text-align: left;
   }
-  
-  .documentDate {
-    font-size: 14px;
-    margin: 0 0 8px 0;
-  }
-  
-  .documentOrg {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
-    margin: 0;
-  }
-  
-  .downloadLink {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  @media (max-width: 768px) {
-    .documentItem {
-      flex-direction: column;
-      gap: 16px;
-    }
-    
-    .documentMeta {
-      align-items: flex-start;
-      text-align: left;
-    }
-  }
+}

@@ -62,14 +62,17 @@ export default function TeamSection() {
   ];
 
   return (
-    <CardCarousel 
-      title="Наши специалисты" 
-      itemsPerView={4}
-      className={styles.teamSection}
-    >
-      {teamMembers.map(member => (
-        <TeamMemberCard key={member.id} {...member} />
-      ))}
-    </CardCarousel>
+    <section className={styles.teamSection}>
+      <div className={styles.container}>
+        <CardCarousel 
+          title="Наши специалисты" 
+          itemsPerView={4}
+        >
+          {teamMembers.map(member => (
+            <TeamMemberCard key={member.id} {...member} />
+          ))}
+        </CardCarousel>
+      </div>
+    </section>
   );
 }

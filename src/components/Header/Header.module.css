@@ -21,6 +21,7 @@
 .logo {
   display: flex;
   align-items: center;
+  z-index: 1001; /* Keep logo above mobile menu */
 }
 
 .nav {
@@ -40,10 +41,6 @@
   color: #F5A623;
 }
 
-.highlight {
-  color: #F5A623 !important;
-}
-
 .contact {
   font-size: 14px;
   font-weight: 500;
@@ -56,6 +53,7 @@
 
 .mobileMenu {
   display: none;
+  z-index: 1001; /* Keep menu button above mobile menu */
 }
 
 .mobileMenu button {
@@ -69,21 +67,54 @@
 @media (max-width: 768px) {
   .nav {
     position: fixed;
-    top: 70px;
-    left: 0;
-    right: 0;
+    top: 0;
+    left: -100%; /* Start off-screen to the left */
+    width: 70%; /* Take up 70% of the screen width */
+    height: 100vh;
     background: #20222B;
     flex-direction: column;
-    padding: 20px;
-    display: none;
-    text-align: center;
+    padding: 80px 24px 24px; /* Add padding to top to account for header */
+    transition: left 0.3s ease;
+    align-items: flex-start; /* Left align links */
+    gap: 24px;
   }
   
   .navOpen {
-    display: flex;
+    left: 0; /* Slide in from the left */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  }
+  
+  .nav a {
+    font-size: 16px; /* Larger font size for mobile */
+    padding: 8px 0;
   }
   
   .mobileMenu {
     display: block;
+  }
+  
+  /* Hide contact info on mobile */
+  .contact {
+    display: none;
+  }
+  
+  /* Add contact info to mobile menu */
+  .navOpen .contact {
+    display: block;
+    margin-top: 20px;
+  }
+}
+
+/* Add overlay for mobile menu background */
+@media (max-width: 768px) {
+  .navOpen::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
   }
 }
