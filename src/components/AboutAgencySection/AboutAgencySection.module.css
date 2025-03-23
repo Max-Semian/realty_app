@@ -130,4 +130,10 @@
     width: 100%;
     justify-content: space-between;
   }
+  .statNumber {
+    font-size: 48px;
+    font-weight: 600;
+    color: #F5A623;
+    margin-bottom: 8px;
+  }
 }

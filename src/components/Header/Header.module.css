@@ -10,18 +10,18 @@
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1961px; /* Update to match your site's width */
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
+  padding: 0 60px; /* Match your other container padding */
 }
 
 .logo {
   display: flex;
   align-items: center;
-  z-index: 1001; /* Keep logo above mobile menu */
+  z-index: 1001;
 }
 
 .nav {
@@ -51,9 +51,13 @@
   text-decoration: none;
 }
 
+.mobileContact {
+  display: none; /* Hide on desktop */
+}
+
 .mobileMenu {
   display: none;
-  z-index: 1001; /* Keep menu button above mobile menu */
+  z-index: 1001;
 }
 
 .mobileMenu button {
@@ -64,28 +68,41 @@
   cursor: pointer;
 }
 
+@media (max-width: 1400px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 40px;
+  }
+}
+
 @media (max-width: 768px) {
   .nav {
     position: fixed;
     top: 0;
-    left: -100%; /* Start off-screen to the left */
-    width: 70%; /* Take up 70% of the screen width */
+    left: 0;
+    width: 100%; /* Full width menu */
     height: 100vh;
     background: #20222B;
     flex-direction: column;
-    padding: 80px 24px 24px; /* Add padding to top to account for header */
-    transition: left 0.3s ease;
-    align-items: flex-start; /* Left align links */
+    padding: 80px 24px 100px; /* Extra bottom padding for logo */
+    align-items: left; /* Center align links */
     gap: 24px;
+    transform: translateX(-100%); /* Off-screen initially */
+    transition: transform 0.3s ease;
+    z-index: 1000;
   }
   
   .navOpen {
-    left: 0; /* Slide in from the left */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    transform: translateX(0); /* Slide in */
   }
   
   .nav a {
-    font-size: 16px; /* Larger font size for mobile */
+    font-size: 16px;
     padding: 8px 0;
   }
   
@@ -93,28 +110,27 @@
     display: block;
   }
   
-  /* Hide contact info on mobile */
   .contact {
     display: none;
   }
   
-  /* Add contact info to mobile menu */
-  .navOpen .contact {
+  .mobileContact {
     display: block;
     margin-top: 20px;
   }
-}
-
-/* Add overlay for mobile menu background */
-@media (max-width: 768px) {
-  .navOpen::after {
+  
+  /* Add logo to bottom of mobile menu */
+  .navOpen::before {
     content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
+    background-image: url('/realty_app/logo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
