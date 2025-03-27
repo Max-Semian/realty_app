@@ -12,3 +12,77 @@ body {
   overflow-x: hidden;
   font-family: 'Montserrat', sans-serif;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Make all images responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make all sections and containers responsive */
+section, 
+.container,
+.content,
+.heroContent,
+.carouselContainer,
+.testimonialGroup,
+.contactsContent,
+.stagesContainer,
+.advantagesGrid,
+.form,
+.propertiesGrid,
+.carousel {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Fix for button widths on small screens */
+@media (max-width: 450px) {
+  .ctaButton,
+  .submitButton,
+  .leaveCommentButton {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .ctaButton a,
+  .submitButton a,
+  .leaveCommentButton a {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Fix for grid layouts on small screens */
+  .stageRow,
+  .advantagesGrid,
+  .contactsContent,
+  .propertiesGrid,
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Ensure padding doesn't cause overflow */
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  /* Fix for testimonial cards */
+  .testimonialCard {
+    width: 100%;
+  }
+}

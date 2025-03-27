@@ -5,6 +5,7 @@
   padding-top: 70px; /* Account for fixed header */
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 
 /* Main container with background image */
@@ -18,10 +19,9 @@
   background-image: url('/realty_app/HomeBG1.jpg');
   background-size: cover;
   background-position: center;
-  /* No background color or overlay */
 }
 
-/* Content area for agency info with NO background */
+/* Content area for agency info */
 .content {
   flex: 1;
   display: flex;
@@ -29,33 +29,72 @@
   justify-content: center;
   align-items: flex-start;
   padding: 0 60px;
-  /* No background */
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 600px;
+}
+
+.logoTitleWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .logo {
-  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.logo img {
+  width: 150px;
+  height: 150px;
 }
 
 .title {
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 700;
   color: #20222B;
   display: flex;
   flex-direction: column;
   line-height: 1.1;
-  margin-bottom: 16px;
   text-transform: uppercase;
+  margin: 0;
 }
 
 .subtitle {
-  font-size: 48px;
-  font-weight: 400;
+  font-size: 36px;
+  font-weight: 300;
 }
 
 .slogan {
-  font-size: 24px;
+  font-size: 18px;
   color: #20222B;
-  margin-top: 16px;
+  margin: 0;
+  padding-left: 0px; /* Aligns with the start of the title text */
+}
+
+.ctaButton {
+  display: none; /* Hide in desktop view */
+}
+
+.ctaButton a {
+  display: inline-block;
+  padding: 12px 24px;
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  text-transform: uppercase;
+  border: 2px solid #000;
+  transition: all 0.3s ease;
+}
+
+.arrow {
+  margin-left: 8px;
 }
 
 /* Media queries for responsive design */
@@ -65,20 +104,86 @@
   }
 }
 
-@media (max-width: 768px) {
-  .content {
-    padding: 0 30px;
+@media (max-width: 992px) {
+  .logo img {
+    width: 75px;
+    height: 75px;
   }
   
-  .title {
-    font-size: 36px;
-  }
-  
-  .subtitle {
-    font-size: 36px;
+  .title, .subtitle {
+    font-size: 30px;
   }
   
   .slogan {
+    padding-left: 95px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding-top: 56px;
+  }
+  
+  .content {
+    padding: 0 20px;
+    justify-content: flex-start;
+    padding-top: 100px;
+  }
+  
+  .heroContent {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    max-width: none;
+  }
+  
+  .logoTitleWrapper {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .logo {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  
+  .logo img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .title {
+    font-size: 30px;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .subtitle {
+    font-size: 30px;
+  }
+  
+  .slogan {
+    display: block;
     font-size: 18px;
+    margin: 15px 0;
+    padding-left: 0;
+  }
+  
+  .ctaButton {
+    display: block; /* Show in mobile view */
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .ctaButton a {
+    display: inline-block;
+    width: auto;
+    min-width: 250px;
+    max-width: 300px;
+    text-align: center;
+    padding: 12px 24px;
+    box-sizing: border-box;
   }
 }

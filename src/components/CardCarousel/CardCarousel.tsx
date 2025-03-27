@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, ReactNode } from 'react';
+import React, { useState, ReactNode, useEffect } from 'react';
 import styles from './CardCarousel.module.css';
 
 interface CardCarouselProps {
@@ -14,11 +14,38 @@ interface CardCarouselProps {
 const CardCarousel: React.FC<CardCarouselProps> = ({ 
   title, 
   children,
-  itemsPerView = 4,
+  itemsPerView: defaultItemsPerView = 4,
   className = '',
   showDots = true
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(defaultItemsPerView);
+  
+  // Update items per view based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 576) {
+        setItemsPerView(1);
+      } else if (window.innerWidth <= 968) {
+        setItemsPerView(2);
+      } else if (window.innerWidth <= 1200) {
+        setItemsPerView(3);
+      } else {
+        setItemsPerView(defaultItemsPerView);
+      }
+    };
+    
+    // Set initial value
+    handleResize();
+    
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Clean up
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [defaultItemsPerView]);
   
   // Calculate total slides based on children and items per view
   const totalItems = React.Children.count(children);
@@ -43,6 +70,9 @@ const CardCarousel: React.FC<CardCarouselProps> = ({
     currentIndex + itemsPerView
   );
 
+  // Calculate the number of dots needed
+  const numberOfDots = totalItems - itemsPerView + 1;
+
   return (
     <section className={`${styles.carouselSection} ${className}`}>
       <div className={styles.container}>
@@ -57,7 +87,10 @@ const CardCarousel: React.FC<CardCarouselProps> = ({
             ←
           </button>
           
-          <div className={styles.carousel}>
+          <div 
+            className={styles.carousel}
+            style={{ '--items-per-view': itemsPerView } as React.CSSProperties}
+          >
             {visibleItems}
           </div>
           
@@ -70,9 +103,9 @@ const CardCarousel: React.FC<CardCarouselProps> = ({
           </button>
         </div>
         
-        {showDots && (
+        {showDots && numberOfDots > 1 && (
           <div className={styles.dotsContainer}>
-            {Array.from({ length: maxStartIndex + 1 }).map((_, index) => (
+            {Array.from({ length: numberOfDots }).map((_, index) => (
               <button
                 key={index}
                 className={`${styles.dot} ${currentIndex === index ? styles.activeDot : ''}`}

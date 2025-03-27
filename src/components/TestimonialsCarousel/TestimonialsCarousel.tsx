@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './TestimonialsCarousel.module.css';
 
 interface Testimonial {
@@ -31,31 +31,38 @@ export default function TestimonialsCarousel() {
       date: '15.02.2025',
       content: 'Хочу выразить огромную благодарность руководителю агентства Алексею Симченко и его команде за максимально быстрое решение квартирного вопроса. Спасибо Вам за поддержку, профессионализм и внимательное отношение к клиентам. Успехов и процветания Вашему агентству.'
     },
-    {
-      id: 4,
-      author: 'Иван Петров',
-      date: '10.02.2025',
-      content: 'Выражаю благодарность команде агентства за помощь в продаже моей квартиры. Все было организовано на высшем уровне, с соблюдением всех сроков. Отдельное спасибо риэлтору Татьяне за профессионализм и отзывчивость.'
-    },
-    {
-      id: 5,
-      author: 'Мария Иванова',
-      date: '05.02.2025',
-      content: 'Благодарю сотрудников агентства за помощь в покупке моей первой квартиры. Весь процесс от начала до конца был прозрачным и четким. Очень рада, что доверила решение такого важного вопроса профессионалам.'
-    },
-    {
-      id: 6,
-      author: 'Александр Петров',
-      date: '20.01.2025',
-      content: 'Профессиональный подход, внимательность к деталям и отличное знание рынка недвижимости - вот что отличает это агентство от других. Рекомендую всем, кто ищет надежного партнера в вопросах недвижимости.'
-    }
   ];
 
   // State for current slide
   const [currentSlide, setCurrentSlide] = useState(0);
+  // State for testimonials per slide based on screen width
+  const [testimonialsPerSlide, setTestimonialsPerSlide] = useState(3);
   
-  // Now showing 3 testimonials per slide as in the screenshot
-  const testimonialsPerSlide = 3;
+  // Update testimonialsPerSlide based on screen width
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 820) {
+        setTestimonialsPerSlide(1);
+      } else if (window.innerWidth <= 1240) {
+        setTestimonialsPerSlide(2);
+      } else {
+        setTestimonialsPerSlide(3);
+      }
+    };
+    
+    // Set initial value
+    handleResize();
+    
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Clean up event listener
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  
+  // Calculate total slides based on testimonialsPerSlide
   const totalSlides = Math.ceil(testimonials.length / testimonialsPerSlide);
   
   // Navigation handlers
@@ -112,7 +119,7 @@ export default function TestimonialsCarousel() {
               return (
                 <div key={slideIndex} className={styles.carouselSlide}>
                   <div className={styles.testimonialGroup}>
-                    {slideTestimonials.map((testimonial, index) => (
+                    {slideTestimonials.map((testimonial) => (
                       <div key={testimonial.id} className={styles.testimonialCard}>
                         <div className={styles.testimonialHeader}>
                           <h3 className={styles.testimonialAuthor}>{testimonial.author}</h3>
@@ -126,6 +133,17 @@ export default function TestimonialsCarousel() {
               );
             })}
           </div>
+        </div>
+        
+        <div className={styles.dotsContainer}>
+          {Array.from({ length: totalSlides }).map((_, index) => (
+            <button
+              key={index}
+              className={`${styles.dot} ${currentSlide === index ? styles.activeDot : ''}`}
+              onClick={() => setCurrentSlide(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
         
         <div className={styles.leaveCommentContainer}>

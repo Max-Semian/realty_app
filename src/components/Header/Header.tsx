@@ -44,9 +44,16 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
+        {/* Mobile Menu Button - Moved to left side */}
+        <div className={styles.mobileMenu}>
+          <button onClick={toggleMobileMenu} aria-label="Toggle menu">
+            {mobileMenuOpen ? "✕" : "☰"}
+          </button>
+        </div>
+
         {/* Logo */}
         <div className={styles.logo}>
-          <img src="/realty_app/logo.svg" alt="Logo" width="78" height="74" />
+          <img src="/realty_app/logo-fixed.svg" alt="Logo" width="78" height="74" />
         </div>
 
         {/* Navigation Links */}
@@ -55,12 +62,27 @@ const Header = () => {
           <Link href="#" onClick={() => setMobileMenuOpen(false)}>Наши объекты</Link>
           <Link href="#" onClick={() => setMobileMenuOpen(false)}>Преимущества</Link>
           <Link href="#" onClick={() => setMobileMenuOpen(false)}>Сотрудники</Link>
+          {/* Mobile-Only Nav Links */}
+          <div className={styles.mobileOnlyLinks}>
+            <Link href="#" onClick={() => setMobileMenuOpen(false)}>Этапы работы</Link>
+            <Link href="#" onClick={() => setMobileMenuOpen(false)}>Отзывы</Link>
+            <Link href="#" onClick={() => setMobileMenuOpen(false)}>Документы</Link>
+          </div>
           <Link href="#" onClick={() => setMobileMenuOpen(false)}>Контакты</Link>
           <Link href="#" onClick={() => setMobileMenuOpen(false)}>Личный кабинет</Link>
-          
-          {/* Contact Info for Mobile (will be styled to only appear in mobile view) */}
-          <div className={styles.mobileContact}>
-            <a href="tel:+375445630206">+375 (44) 563-02-06</a>
+
+          {/* Logo, title and phone number for the bottom of mobile menu */}
+          <div className={styles.navFooter}>
+            <div className={styles.navLogo}>
+              <img src="/realty_app/logo-fixed.svg" alt="Logo" width="251" height="233" />
+            </div>
+            <div className={styles.navTitle}>
+              АГЕНТСТВО
+              <span className={styles.navSubtitle}>недвижимости</span>
+            </div>
+            <div className={styles.navPhone}>
+              <a href="tel:+375445630206">+375 (44) 563-02-06</a>
+            </div>
           </div>
         </nav>
 
@@ -69,11 +91,9 @@ const Header = () => {
           <a href="tel:+375445630206">+375 (44) 563-02-06</a>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className={styles.mobileMenu}>
-          <button onClick={toggleMobileMenu} aria-label="Toggle menu">
-            {mobileMenuOpen ? "✕" : "☰"}
-          </button>
+        {/* Mobile "Личный кабинет" link */}
+        <div className={styles.mobileLoginLink}>
+          <Link href="#">Личный кабинет</Link>
         </div>
       </div>
     </header>

@@ -10,12 +10,12 @@
 }
 
 .container {
-  max-width: 1961px; /* Update to match your site's width */
+  max-width: 1961px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 60px; /* Match your other container padding */
+  padding: 0 60px;
 }
 
 .logo {
@@ -26,23 +26,27 @@
 
 .nav {
   display: flex;
-  gap: 32px;
+  gap: 24px;
+  margin: 0 auto;
 }
 
 .nav a {
   color: white;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 18px;
+  font-weight: 400;
   transition: color 0.3s ease;
-  font-weight: 500;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
 }
 
 .nav a:hover {
   color: #F5A623;
+  opacity: 1;
 }
 
 .contact {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 500;
 }
 
@@ -63,9 +67,39 @@
 .mobileMenu button {
   background: none;
   border: none;
-  color: white;
+  color: #BA9778;
   font-size: 24px;
   cursor: pointer;
+}
+
+.mobileLoginLink {
+  display: none;
+}
+
+/* Hide mobile-only elements on desktop */
+.mobileOnlyLinks {
+  display: none;
+}
+
+/* Hide navFooter on desktop */
+.navFooter {
+  display: none;
+}
+
+.navLogo {
+  display: none;
+}
+
+.navTitle {
+  display: none;
+}
+
+.navSubtitle {
+  display: none;
+}
+
+.navPhone {
+  display: none;
 }
 
 @media (max-width: 1400px) {
@@ -81,24 +115,46 @@
 }
 
 @media (max-width: 768px) {
+  .header{
+    height: 60px;
+    padding-top: 28px;
+  }
+  .container {
+    padding: 0 20px;
+    position: relative;
+  }
+  
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .logo img {
+    width: 50px;
+    height: auto;
+  }
+  
   .nav {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%; /* Full width menu */
+    width: 100%;
     height: 100vh;
     background: #20222B;
     flex-direction: column;
-    padding: 80px 24px 100px; /* Extra bottom padding for logo */
-    align-items: left; /* Center align links */
-    gap: 24px;
-    transform: translateX(-100%); /* Off-screen initially */
+    padding: 80px 24px 24px;
+    align-items: flex-start;
+    gap: 16px;
+    transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: 1000;
+    display: flex;
+    justify-content: flex-start;
   }
   
   .navOpen {
-    transform: translateX(0); /* Slide in */
+    transform: translateX(0);
   }
   
   .nav a {
@@ -106,8 +162,62 @@
     padding: 8px 0;
   }
   
+  /* Show mobile-only links on mobile */
+  .mobileOnlyLinks {
+    display: contents;
+  }
+  
+  /* Show navFooter on mobile */
+  .navFooter {
+    display: flex;
+    margin-top: auto;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 30px;
+  }
+  
+  .navLogo {
+    display: block;
+    margin-bottom: 15px;
+  }
+  
+  .navTitle {
+    display: flex;
+    font-size: 24px;
+    font-weight: 400;
+    color: white;
+    flex-direction: column;
+    align-items: center;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    line-height: 1.1;
+  }
+  
+  .navSubtitle {
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+  }
+  
+  .navPhone {
+    display: block;
+    margin-top: 5px;
+  }
+  
+  .navPhone a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    opacity: 0.8;
+    padding: 0;
+  }
+  
   .mobileMenu {
     display: block;
+    position: absolute;
+    right: 20px;
   }
   
   .contact {
@@ -119,18 +229,16 @@
     margin-top: 20px;
   }
   
-  /* Add logo to bottom of mobile menu */
-  .navOpen::before {
-    content: '';
-    background-image: url('/realty_app/logo.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 100px;
-    height: 100px;
+  .mobileLoginLink {
+    display: block;
     position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 20px;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+  
+  .mobileLoginLink a {
+    color: white;
+    text-decoration: none;
   }
 }

@@ -4,6 +4,9 @@
   display: flex;
   justify-content: center;
   color: white;
+  margin: 0; /* Added explicit margin */
+  margin-top: -1px; /* Fix for the gap between sections */
+
 }
 
 .container {
@@ -72,7 +75,7 @@
 
 .cardNumber {
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.6);
+  color: #BA9778;
   margin-bottom: 16px;
 }
 

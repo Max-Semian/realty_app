@@ -40,9 +40,9 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid #BA9778;
   background: transparent;
-  color: white;
+  color: #BA9778;
   font-size: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -119,22 +119,28 @@
   -webkit-box-orient: vertical;
 }
 
-.dimensions {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-  padding: 5px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  z-index: 10;
-}
-
-.leaveCommentContainer {
+/* Navigation dots */
+.dotsContainer {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.activeDot {
+  background-color: #F5A623;
+  transform: scale(1.2);
 }
 
 .leaveCommentContainer {
@@ -161,10 +167,6 @@
   background-color: #d9c09b;
 }
 
-.leaveCommentButton:hover {
-  background-color: #d9c09b;
-}
-
 @media (max-width: 1400px) {
   .container {
     max-width: 100%;
@@ -174,16 +176,16 @@
 @media (max-width: 1240px) {
   .container {
     padding: 60px 40px;
+    padding-left: 40px;
   }
   
   .testimonialGroup {
     justify-content: center;
-    flex-wrap: wrap;
     gap: 20px;
   }
   
   .testimonialCard {
-    margin-bottom: 20px;
+    width: 350px;
   }
 }
 
@@ -198,8 +200,9 @@
   }
   
   .testimonialCard {
-    width: 380px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
   }
   
   .sectionHeader {
@@ -211,10 +214,21 @@
   .navigation {
     align-self: center;
   }
+  
+  .carouselTrack {
+    width: 100% !important;
+  }
 }
 
 @media (max-width: 480px) {
   .testimonialCard {
-    width: 100%;
+    height: auto;
+    min-height: 250px;
+  }
+  
+  .navButton {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
   }
 }
