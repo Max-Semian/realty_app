@@ -32,12 +32,12 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   width: 100%;
-  transition: 0.5s;
 }
 
 .propertyCard {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .imageContainer {
@@ -178,12 +178,22 @@
 }
 
 @media (max-width: 768px) {
+  .propertiesSection {
+    margin: 0;
+    margin-top: -1px; /* Fix for the gap between sections */
+  }
+  
   .container {
     padding: 40px 20px;
   }
   
   .carousel {
     grid-template-columns: 1fr;
+  }
+  
+  .propertyCard {
+    max-width: 100%;
+    margin: 0 auto;
   }
   
   .navButton {
@@ -197,5 +207,9 @@
   
   .nextButton {
     right: -10px;
+  }
+  
+  .imageWrapper {
+    max-width: 100%;
   }
 }

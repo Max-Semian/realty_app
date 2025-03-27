@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
 import styles from './PropertiesCarousel.module.css';
 import OurProjects1 from "./assets/OurProjects1.jpg";
 import OurProjects2 from "./assets/OurProjects2.jpg";
@@ -46,15 +45,32 @@ export default function PropertiesCarousel() {
   
   // State to track the current slide index
   const [currentIndex, setCurrentIndex] = useState(0);
+  // State to track items per view based on screen width
+  const [itemsPerView, setItemsPerView] = useState(3);
   
-  // Number of items to show per slide based on screen width
-  const getItemsPerView = () => {
-    // We'll set this to 3 for now, but you could make it responsive
-    // using window.innerWidth if you're not using CSS grid
-    return 3;
-  };
-  
-  const itemsPerView = getItemsPerView();
+  // Update itemsPerView based on screen width
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setItemsPerView(1);
+      } else if (window.innerWidth <= 1200) {
+        setItemsPerView(2);
+      } else {
+        setItemsPerView(3);
+      }
+    };
+    
+    // Set initial value
+    handleResize();
+    
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+    
+    // Clean up event listener
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   
   // Calculate total number of possible starting indices
   const maxStartIndex = Math.max(0, properties.length - itemsPerView);
@@ -98,7 +114,6 @@ export default function PropertiesCarousel() {
               <div key={property.id} className={styles.propertyCard}>
                 <div className={styles.imageContainer}>
                   <div className={styles.imageWrapper}>
-                    {/* Use standard img tag instead of Next.js Image */}
                     <img 
                       src={property.image} 
                       alt={property.title}
@@ -125,7 +140,7 @@ export default function PropertiesCarousel() {
         
         {/* Navigation dots */}
         <div className={styles.dotsContainer}>
-          {Array.from({ length: maxStartIndex + 1 }).map((_, index) => (
+          {Array.from({ length: properties.length - (itemsPerView - 1) }).map((_, index) => (
             <button
               key={index}
               className={`${styles.dot} ${currentIndex === index ? styles.activeDot : ''}`}
