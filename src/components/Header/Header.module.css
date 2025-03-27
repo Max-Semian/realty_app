@@ -33,8 +33,8 @@
 .nav a {
   color: white;
   text-decoration: none;
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 14px;
+  font-weight: 300;
   transition: color 0.3s ease;
   letter-spacing: 0.5px;
   opacity: 0.8;
@@ -145,7 +145,7 @@
     flex-direction: column;
     padding: 80px 24px 24px;
     align-items: flex-start;
-    gap: 16px;
+    gap: 0px;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: 1000;
