@@ -32,12 +32,12 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   width: 100%;
+  transition: 0.5s;
 }
 
 .propertyCard {
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
 .imageContainer {
@@ -107,7 +107,7 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 1px solid #BA9778;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   background: transparent;
   color: #BA9778;
   font-size: 20px;
@@ -178,22 +178,12 @@
 }
 
 @media (max-width: 768px) {
-  .propertiesSection {
-    margin: 0;
-    margin-top: -1px; /* Fix for the gap between sections */
-  }
-  
   .container {
     padding: 40px 20px;
   }
   
   .carousel {
     grid-template-columns: 1fr;
-  }
-  
-  .propertyCard {
-    max-width: 100%;
-    margin: 0 auto;
   }
   
   .navButton {
@@ -207,9 +197,5 @@
   
   .nextButton {
     right: -10px;
-  }
-  
-  .imageWrapper {
-    max-width: 100%;
   }
 }
