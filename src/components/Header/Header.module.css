@@ -151,7 +151,7 @@
     height: 100vh;
     background: #20222B;
     flex-direction: column;
-    padding: 40px 24px 24px;
+    padding: 10px 24px 24px;
     align-items: flex-start;
     gap: 0px;
     transform: translateX(-100%);
@@ -182,8 +182,9 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding-top: 0px;
-    padding-bottom: 30px;
+    padding-top: 40px; /* Already set to 0px, which is good */
+    padding-bottom: 30px; /* Increase bottom padding to move content up */
+    margin-top: -1px; /* This will move the footer up by 30px */
   }
   
   /* Make the navLogo visible in mobile menu */

@@ -9,10 +9,22 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+/* Static background that doesn't move */
+.main:before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-image: url('/realty_app/bg1.jpg');
-  background-attachment: fixed; /* Keep fixed on desktop */
   background-size: cover;
-  background-position: center; /* Add this for better positioning */
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
 }
 
 /* Full-width image styles */
@@ -43,13 +55,7 @@
   }
 }
 
-/* Change background attachment on mobile devices */
 @media (max-width: 768px) {
-  .main {
-    background-attachment: fixed !important;
-    background-position: center; /* Ensure good positioning */
-  }
-  
   .fullWidthImageSection {
     height: auto;
   }
@@ -57,12 +63,5 @@
   .fullWidthImage {
     height: 300px;
     object-fit: cover;
-  }
-}
-
-/* Additional fix for iOS devices which have issues with fixed backgrounds */
-@supports (-webkit-overflow-scrolling: touch) {
-  .main {
-    background-attachment: scroll;
   }
 }
