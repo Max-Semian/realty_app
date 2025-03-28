@@ -65,8 +65,9 @@ export default function TeamSection() {
     <section className={styles.teamSection}>
       <div className={styles.container}>
         <CardCarousel 
-          title="Наши специалисты" 
+          title="Специалисты" 
           itemsPerView={4}
+          showDots={false} /* Hide dots to match Figma design */
         >
           {teamMembers.map(member => (
             <TeamMemberCard key={member.id} {...member} />

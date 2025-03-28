@@ -35,13 +35,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 1px solid #BA9778;
   background: transparent;
-  color: #BA9778;
-  font-size: 20px;
+  color: #BA9778;;
+  font-size: 18px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: absolute;
@@ -56,11 +56,11 @@
 }
 
 .prevButton {
-  left: -25px;
+  left: -20px;
 }
 
 .nextButton {
-  right: -25px;
+  right: -20px;
 }
 
 .dotsContainer {
@@ -94,8 +94,8 @@
 
 @media (max-width: 968px) {
   .navButton {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
   }
   
   .prevButton {
@@ -107,15 +107,34 @@
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
+  .carouselSection {
+    padding: 40px 0;
+  }
+  
+  .title {
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: left; /* Left align title on mobile */
+  }
+  
   .container {
-    padding: 0 20px;
+    padding: 0;
   }
   
   .carouselContainer {
-    padding: 0 10px;
+    padding: 0;
+    margin-bottom: 20px;
   }
   
+  /* Adjust the carousel to show one item per view properly */
+  .carousel {
+    gap: 0;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
   .navButton {
     width: 40px;
     height: 40px;
@@ -123,16 +142,178 @@
   }
   
   .prevButton {
-    left: -15px;
+    left: 10px;
   }
   
   .nextButton {
-    right: -15px;
+    right: 10px;.carouselSection {
+      background-color: #20222B;
+      color: white;
+      padding: 60px 0;
+      width: 100%;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+    
+    .title {
+      font-size: 36px;
+      font-weight: 400;
+      margin-bottom: 50px;
+    }
+    
+    .carouselContainer {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    
+    .carousel {
+      display: grid;
+      gap: 24px;
+      width: 100%;
+      grid-template-columns: repeat(var(--items-per-view, 4), 1fr);
+    }
+    
+    .navButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid #BA9778;
+      background: transparent;
+      color: #BA9778;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+    
+    .navButton:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .prevButton {
+      left: -20px;
+    }
+    
+    .nextButton {
+      right: -20px;
+    }
+    
+    .dotsContainer {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+    }
+    
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.3);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .activeDot {
+      background-color: #F5A623;
+      transform: scale(1.2);
+    }
+    
+    @media (max-width: 1200px) {
+      .container {
+        padding: 0 40px;
+      }
+    }
+    
+    @media (max-width: 968px) {
+      .navButton {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .prevButton {
+        left: -15px;
+      }
+      
+      .nextButton {
+        right: -15px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .carouselSection {
+        padding: 40px 0;
+      }
+      
+      .title {
+        font-size: 28px;
+        margin-bottom: 30px;
+        text-align: left;
+      }
+      
+      .container {
+        padding: 0;
+      }
+      
+      .carouselContainer {
+        padding: 0;
+        margin-bottom: 20px;
+      }
+      
+      /* Adjust the carousel to show one item per view properly */
+      .carousel {
+        gap: 0;
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .navButton {
+        width: 40px;
+        height: 40px;
+        top: 50%;
+      }
+      
+      .prevButton {
+        left: 10px;
+      }
+      
+      .nextButton {
+        right: 10px;
+      }
+    }
+    
+    /* Center card on mobile to match Figma */
+    @media (max-width: 768px) {
+      .carousel > * {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 85%;
+      }
+    }
   }
-  
-  /* Center the content in mobile view */
+}
+
+/* Center card on mobile to match Figma */
+@media (max-width: 768px) {
   .carousel > * {
     margin: 0 auto;
-    max-width: 100%;
+    width: 100%;
+    max-width: 85%; /* Match Figma width proportion */
   }
 }

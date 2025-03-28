@@ -33,7 +33,8 @@ export default function AboutAgencySection() {
               <span className={styles.statNumber}>2000+</span>
               <span className={styles.statText}>довольных клиентов</span>
             </div>
-            <div className={styles.statItem}>
+            {/* This one will be hidden on mobile */}
+            <div className={`${styles.statItem} ${styles.hideOnMobile}`}>
               <span className={styles.statNumber}>250+</span>
               <span className={styles.statText}>обученных специалистов</span>
             </div>
