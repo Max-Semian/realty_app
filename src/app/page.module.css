@@ -3,30 +3,16 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  position: relative; /* For positioning the background div */
+  position: relative;
 }
 
-/* Remove background from .main */
+/* Main content styles */
 .main {
   flex: 1;
   display: flex;
   flex-direction: column;
   position: relative;
   z-index: 1; /* Ensure content is above background */
-}
-
-/* Create a dedicated class for background */
-.pageBackground {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  background-image: url('/realty_app/bg1.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 /* Full-width image styles */

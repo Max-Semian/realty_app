@@ -4,7 +4,8 @@ import React from "react";
 import styles from "./page.module.css";
 // Fix the import paths to match your file structure
 import Header from "../components/Header/Header";
-import bgImage from ".realty_app/bg1.jpg";
+// Remove the bg image import since we're handling it in ClientBackground
+// import bgImage from ".realty_app/bg1.jpg";
 import HeroSection from "../components/HeroSection/HeroSection";
 import AboutSection from "../components/AboutAgencySection/AboutAgencySection";
 import PropertiesCarouselSection from "../components/PropertiesCarousel/PropertiesCarousel";
@@ -23,7 +24,7 @@ import fullWidthImage from "./assets/Mask_group.jpg";
 export default function Home() {
   return (
     <div className={styles.page}>
-      <div className={styles.pageBackground}></div>
+      {/* Remove the background div */}
       <main className={styles.main}>
         <Header />
         <HeroSection />
