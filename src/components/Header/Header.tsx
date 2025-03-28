@@ -60,7 +60,7 @@ const Header = () => {
 
         {/* Navigation Links */}
         <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
-          <Link href="http://localhost:3000/realty_app/about-us" onClick={() => setMobileMenuOpen(false)}>О нас</Link>
+          <Link href="/about-us" onClick={() => setMobileMenuOpen(false)}>О нас</Link>
           <Link href="#" onClick={() => setMobileMenuOpen(false)}>Наши объекты</Link>
           <Link href="#" onClick={() => setMobileMenuOpen(false)}>Преимущества</Link>
           <Link href="#" onClick={() => setMobileMenuOpen(false)}>Сотрудники</Link>
