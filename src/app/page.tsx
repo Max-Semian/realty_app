@@ -23,6 +23,7 @@ import fullWidthImage from "./assets/Mask_group.jpg";
 export default function Home() {
   return (
     <div className={styles.page}>
+      <div className={styles.pageBackground}></div>
       <main className={styles.main}>
         <Header />
         <HeroSection />
