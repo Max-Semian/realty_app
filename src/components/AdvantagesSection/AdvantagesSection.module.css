@@ -4,9 +4,8 @@
   display: flex;
   justify-content: center;
   color: white;
-  margin: 0; /* Added explicit margin */
-  margin-top: -1px; /* Fix for the gap between sections */
-
+  margin: 0;
+  margin-top: -1px;
 }
 
 .container {
@@ -30,47 +29,55 @@
   position: relative;
 }
 
-/* Horizontal lines */
-.advantagesGrid::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
+/* Horizontal lines - desktop only */
+@media (min-width: 769px) {
+  .advantagesGrid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .advantagesGrid::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
-.advantagesGrid::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Vertical lines */
+/* Card styling */
 .advantageCard {
   position: relative;
   padding: 30px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.advantageCard::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
-}
+/* Vertical and bottom lines - desktop only */
+@media (min-width: 769px) {
+  .advantageCard {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .advantageCard::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 
-.advantageCard:nth-child(3n)::after,
-.advantageCard:last-child::after {
-  display: none;
+  .advantageCard:nth-child(3n)::after,
+  .advantageCard:last-child::after {
+    display: none;
+  }
 }
 
 .cardNumber {
@@ -128,13 +135,45 @@
   
   .advantagesGrid {
     grid-template-columns: 1fr;
+    gap: 35px;
   }
   
-  .advantageCard::after {
-    display: none;
+  /* Remove ALL borders and lines for mobile */
+  .advantageCard {
+    border: none !important;
+    border-bottom: none !important;
+    padding: 0;
+    margin-bottom: 0;
+    box-shadow: none !important;
   }
   
-  .advantagesGrid::after {
-    display: none;
+  .advantageCard::after,
+  .advantageCard::before {
+    display: none !important;
+  }
+  
+  /* Add more space between mobile cards */
+  .cardNumber {
+    margin-bottom: 12px;
+  }
+  
+  .cardTitle {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 30px 15px;
+  }
+  
+  .title {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+  
+  .advantagesGrid {
+    gap: 30px;
   }
 }

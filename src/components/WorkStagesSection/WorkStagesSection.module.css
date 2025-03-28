@@ -4,9 +4,8 @@
   display: flex;
   justify-content: center;
   color: white;
-  margin: 0; /* Added explicit margin */
+  margin: 0;
   margin-top: -1px; /* Fix for the gap between sections */
-
 }
 
 .container {
@@ -96,6 +95,17 @@
   
   .stageRow {
     grid-template-columns: 60px 1fr;
+    /* Remove horizontal lines on tablet and mobile */
+    border-top: none;
+  }
+  
+  .stageRow:last-child {
+    border-bottom: none;
+  }
+  
+  /* Add spacing between stages instead of lines */
+  .stageRow {
+    margin-bottom: 30px;
   }
   
   .stageTitleCol {
@@ -113,17 +123,34 @@
     padding: 40px 20px;
   }
   
+  .title {
+    margin-bottom: 40px;
+    font-size: 30px;
+  }
+  
   .stageRow {
     grid-template-columns: 1fr;
     gap: 10px;
+    padding: 15px 0;
+    margin-bottom: 25px;
+    /* Ensure borders are removed */
+    border: none !important;
   }
   
   .stageNumberCol {
     margin-bottom: 10px;
   }
   
+  .stageNumber {
+    font-size: 18px;
+  }
+  
   .stageTitleCol, 
   .stageDescriptionCol {
     grid-column: 1;
+  }
+  
+  .stageTitle {
+    font-size: 16px;
   }
 }

@@ -1,0 +1,143 @@
+.principlesSection {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin: 0;
+    margin-top: -1px; /* Fix for the gap between sections */
+  }
+    
+  .container {
+    max-width: 1400px;
+    width: 100%;
+    background-color: #292D3E;
+    padding: 40px 60px 60px; /* Adjusted top padding from 60px to 40px */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 30px !important; /* Reduced from 60px */
+  }
+    
+  .title {
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: 30px;
+    margin-top: 0; /* Ensure no extra spacing from the title */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #F5A623;
+  }
+  
+.description {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  max-width: 700px;
+}
+  
+.buttonContainer {
+  margin-top: 20px;
+}
+  
+.consultButton {
+  display: inline-block;
+  padding: 14px 30px;
+  background-color: #b89567;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+  
+.consultButton:hover {
+  background-color: #9a7b53;
+}
+  
+/* Media queries */
+@media (max-width: 1400px) {
+  .container {
+    max-width: 100%;
+  }
+}
+  
+@media (max-width: 1200px) {
+  .container {
+    padding: 60px 40px;
+  }
+}
+  
+@media (max-width: 992px) {
+  .title {
+    font-size: 30px;
+  }
+
+  .description {
+    max-width: 90%;
+  }
+}
+  
+@media (max-width: 768px) {
+  /* Fix the spacing for mobile view */
+  .principlesSection {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  
+  .container {
+    padding: 30px 20px 40px; /* Reduced top padding on mobile */
+    margin-top: 0px !important; /* Further reduced on mobile */
+  }
+  
+  .title {
+    margin-bottom: 20px;
+    margin-top: 0;
+    font-size: 28px;
+  }
+  
+  /* If you have a header spacer div, adjust it for mobile */
+  .headerSpacer {
+    height: 60px !important; /* Match your mobile header height */
+  }
+  
+  /* Ensure title is immediately visible without extra space */
+  .header {
+    margin-top: 0;
+  }
+  
+  .description {
+    font-size: 15px;
+  }
+  
+  .consultButton {
+    padding: 12px 24px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 25px 15px;
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+  
+  .description {
+    font-size: 14px;
+  }
+  
+  /* Fix for any potential spacers or layout elements */
+  .withHeaderPadding {
+    padding-top: 60px; /* Reduced padding for mobile */
+  }
+}

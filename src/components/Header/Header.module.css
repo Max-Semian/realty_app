@@ -124,10 +124,18 @@
     position: relative;
   }
   
-  .logo {
+  /* Top logo in header */
+  .container > .logo {
+    display: flex;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+  }
+  
+  /* Only hide the top logo when nav is open */
+  .navOpen ~ .logo,
+  .navOpen + .logo {
+    display: none;
   }
   
   .logo img {
@@ -174,10 +182,11 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding-top: 40px;
+    padding-top: 25px;
     padding-bottom: 30px;
   }
   
+  /* Make the navLogo visible in mobile menu */
   .navLogo {
     display: block;
     margin-bottom: 15px;

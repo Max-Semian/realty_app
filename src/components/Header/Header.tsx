@@ -51,14 +51,16 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Logo */}
-        <div className={styles.logo}>
-          <img src="/realty_app/logo-fixed.svg" alt="Logo" width="78" height="74" />
+          {/* Logo with Link to Main Page - Only visible when menu is closed */}
+        <div className={styles.logo} style={{ display: mobileMenuOpen ? 'none' : 'flex' }}>
+          <Link href="/">
+            <img src="/realty_app/logo-fixed.svg" alt="Logo" width="78" height="74" />
+          </Link>
         </div>
 
         {/* Navigation Links */}
         <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
-          <Link href="#" onClick={() => setMobileMenuOpen(false)}>О нас</Link>
+          <Link href="http://localhost:3000/realty_app/about-us" onClick={() => setMobileMenuOpen(false)}>О нас</Link>
           <Link href="#" onClick={() => setMobileMenuOpen(false)}>Наши объекты</Link>
           <Link href="#" onClick={() => setMobileMenuOpen(false)}>Преимущества</Link>
           <Link href="#" onClick={() => setMobileMenuOpen(false)}>Сотрудники</Link>
@@ -74,7 +76,7 @@ const Header = () => {
           {/* Logo, title and phone number for the bottom of mobile menu */}
           <div className={styles.navFooter}>
             <div className={styles.navLogo}>
-              <img src="/realty_app/logo-fixed.svg" alt="Logo" width="251" height="233" />
+              <img src="/realty_app/logo-fixed.svg" alt="Logo" width="150" height="133" />
             </div>
             <div className={styles.navTitle}>
               АГЕНТСТВО

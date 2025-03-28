@@ -1,0 +1,55 @@
+.page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-image: url('/realty_app/bg1.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  
+  
+  /* Full-width image styles */
+  .fullWidthImageSection {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .imageContainer {
+    max-width: 1400px;
+    width: 100%;
+    background-color: #20222B;
+    position: relative;
+  }
+  
+  .fullWidthImage {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  @media (max-width: 1400px) {
+    .imageContainer {
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .fullWidthImageSection {
+      height: auto;
+    }
+    
+    .fullWidthImage {
+      height: 300px;
+      object-fit: cover;
+    }
+  }

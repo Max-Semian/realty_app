@@ -48,6 +48,17 @@ section,
   max-width: 100%;
   overflow-x: hidden;
 }
+section {
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  box-sizing: border-box;
+}
+
+.container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 100% !important;
+}
 
 /* Fix for button widths on small screens */
 @media (max-width: 450px) {
