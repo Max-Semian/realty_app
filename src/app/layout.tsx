@@ -1,6 +1,5 @@
 import "./globals.css";
 export { metadata } from "./metadata";
-import ClientBackground from "./ClientBackground";
 
 export default function RootLayout({
   children,
@@ -15,7 +14,6 @@ export default function RootLayout({
         overflowX: 'hidden', // Prevent horizontal scrolling
         position: 'relative' // Create a new stacking context
       }}>
-        <ClientBackground />
         {children}
       </body>
     </html>

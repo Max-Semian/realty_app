@@ -9,20 +9,31 @@
 html,
 body {
   width: 100%;
-  overflow-x: hidden;
-  font-family: 'Montserrat', sans-serif;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html, body {
-  width: 100%;
   max-width: 100%;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Keep only ONE background implementation - the most reliable one */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-image: url('/realty_app/bg1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-transform: translateZ(0); /* Force hardware acceleration */
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden; /* Prevent flickering */
+  backface-visibility: hidden;
+  pointer-events: none;
 }
 
 /* Make all images responsive */
@@ -48,6 +59,7 @@ section,
   max-width: 100%;
   overflow-x: hidden;
 }
+
 section {
   padding-left: 20px !important;
   padding-right: 20px !important;
@@ -58,21 +70,6 @@ section {
   padding-left: 0 !important;
   padding-right: 0 !important;
   width: 100% !important;
-}
-
-/* Background container that stays fixed */
-.pageBackground {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url('/realty_app/bg1.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -1;
-  pointer-events: none; /* Allows clicks to pass through */
 }
 
 /* Fix for button widths on small screens */
