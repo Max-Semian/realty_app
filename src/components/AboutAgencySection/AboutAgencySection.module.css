@@ -137,10 +137,10 @@
   
   .stats {
     width: 100%;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
   .statNumber {
-    font-size: 34px;
+    font-size: 24px;
     font-weight: 300;
     color: #F5A623;
     margin-bottom: 8px;
