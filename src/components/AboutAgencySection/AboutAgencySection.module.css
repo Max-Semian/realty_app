@@ -137,7 +137,7 @@
   
   .stats {
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-end;
   }
   .statNumber {
     font-size: 34px;

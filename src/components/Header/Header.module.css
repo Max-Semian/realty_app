@@ -151,7 +151,7 @@
     height: 100vh;
     background: #20222B;
     flex-direction: column;
-    padding: 80px 24px 24px;
+    padding: 40px 24px 24px;
     align-items: flex-start;
     gap: 0px;
     transform: translateX(-100%);
