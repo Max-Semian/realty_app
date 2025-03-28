@@ -14,7 +14,7 @@ export default function AboutUsSection() {
           <div className={styles.content}>
             <div className={styles.mainContent}>
               <div className={styles.textContent}>
-                <h3 className={styles.subtitle}>Наша миссия Алексей Симченко - основатель "Агентство AS недвижимости"</h3>
+                <h3 className={styles.subtitle}>Наша миссия Алексей Симченко - основатель &quot;Агентство AS недвижимости&quot;</h3>
                 
                 <ul className={styles.bulletPoints}>
                   <li>
@@ -49,7 +49,7 @@ export default function AboutUsSection() {
               
               <div className={styles.teamDescription}>
                 <h3 className={styles.subtitle}>
-                  В январе 2023 года в состав семьи АН "Агентство AS недвижимости" входит новый партнер.
+                  В январе 2023 года в состав семьи АН &quot;Агентство AS недвижимости&quot; входит новый партнер.
                 </h3>
                 <p className={styles.paragraph}>
                   История создания любого агентства – это всегда история о том, как человек или группа людей решили заниматься риэлтерской деятельностью. И у каждой такой истории есть свои особенности. Для нас это решение было вполне логичным продолжением нашей деятельности. Мы долгое время работали риэлторами в других компаниях, приобрели опыт и решили открыть свое агентство.
