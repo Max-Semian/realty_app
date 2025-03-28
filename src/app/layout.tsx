@@ -1,5 +1,6 @@
 import "./globals.css";
 export { metadata } from "./metadata";
+import ClientBackground from "./ClientBackground";
 
 export default function RootLayout({
   children,
@@ -7,24 +8,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{height: '100%'}}>
-      <body style={{height: '100%'}}>
-        {/* Fixed background element */}
-        <div 
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundImage: 'url(/realty_app/bg1.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            zIndex: -1,
-            pointerEvents: 'none'
-          }}
-        />
+    <html lang="en">
+      <body style={{
+        margin: 0,
+        padding: 0,
+        overflowX: 'hidden', // Prevent horizontal scrolling
+        position: 'relative' // Create a new stacking context
+      }}>
+        <ClientBackground />
         {children}
       </body>
     </html>
