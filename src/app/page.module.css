@@ -10,10 +10,10 @@
   display: flex;
   flex-direction: column;
   background-image: url('/realty_app/bg1.jpg');
-  background-attachment: fixed;
+  background-attachment: fixed; /* Keep fixed on desktop */
   background-size: cover;
+  background-position: center; /* Add this for better positioning */
 }
-
 
 /* Full-width image styles */
 .fullWidthImageSection {
@@ -43,7 +43,13 @@
   }
 }
 
+/* Change background attachment on mobile devices */
 @media (max-width: 768px) {
+  .main {
+    background-attachment: fixed !important;
+    background-position: center; /* Ensure good positioning */
+  }
+  
   .fullWidthImageSection {
     height: auto;
   }
@@ -51,5 +57,12 @@
   .fullWidthImage {
     height: 300px;
     object-fit: cover;
+  }
+}
+
+/* Additional fix for iOS devices which have issues with fixed backgrounds */
+@supports (-webkit-overflow-scrolling: touch) {
+  .main {
+    background-attachment: scroll;
   }
 }
