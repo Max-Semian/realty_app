@@ -18,7 +18,7 @@ export default function TeamSection() {
       id: 1,
       image: member1.src,
       name: 'Симченко Алексей Александрович',
-      position: 'Учредитель',
+      position: 'Учредитель,',
       subPosition: 'директор, риэлтер',
       reviewsLink: '#'
     },

@@ -35,7 +35,7 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({
           {position}
           {subPosition && (
             <>
-              , <span className={styles.subPosition}>{subPosition}</span>
+               &nbsp; <span className={styles.subPosition}>{subPosition}</span>
             </>
           )}
         </div>
