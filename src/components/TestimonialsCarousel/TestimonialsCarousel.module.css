@@ -178,12 +178,13 @@
     padding: 60px 40px;
     padding-left: 40px;
   }
-  
+
   .testimonialGroup {
     justify-content: center;
     gap: 20px;
+      width: 33%;
   }
-  
+
   .testimonialCard {
     width: 350px;
   }
@@ -193,28 +194,29 @@
   .container {
     padding: 40px 20px;
   }
-  
+
   .testimonialGroup {
     flex-direction: column;
     align-items: center;
+    width: 100%;
   }
-  
+
   .testimonialCard {
     width: 100%;
     max-width: 380px;
     margin: 0 auto;
   }
-  
+
   .sectionHeader {
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
   }
-  
+
   .navigation {
     align-self: center;
   }
-  
+
   .carouselTrack {
     width: 100% !important;
   }
@@ -225,7 +227,7 @@
     height: auto;
     min-height: 250px;
   }
-  
+
   .navButton {
     width: 40px;
     height: 40px;
