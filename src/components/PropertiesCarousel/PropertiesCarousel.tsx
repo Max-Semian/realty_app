@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './PropertiesCarousel.module.css';
-import OurProjects1 from "./assets/OurProjects1.jpg";
-import OurProjects2 from "./assets/OurProjects2.jpg";
-import OurProjects3 from "./assets/OurProjects3.jpg";
-import OurProjects4 from "./assets/OurProjects1.jpg"; // Reusing the first image as a placeholder
-import OurProjects5 from "./assets/OurProjects2.jpg"; // Reusing the second image as a placeholder
+import OurProjects1 from "./assets/OurProjects1.png";
+import OurProjects2 from "./assets/OurProjects2.png";
+import OurProjects3 from "./assets/OurProjects3.png";
+import OurProjects4 from "./assets/OurProjects1.jpg"; 
+import OurProjects5 from "./assets/OurProjects2.jpg"; 
 
 export default function PropertiesCarousel() {
   // Property data with image src paths
@@ -96,60 +96,47 @@ export default function PropertiesCarousel() {
   );
 
   return (
-    <section className={styles.propertiesSection}>
-      <div className={styles.container}>
-        <h2 className={styles.title}>Наши объекты</h2>
-        
-        <div className={styles.carouselContainer}>
-          <button 
-            className={`${styles.navButton} ${styles.prevButton}`}
-            onClick={prevSlide}
-            aria-label="Previous properties"
-          >
-            ←
-          </button>
-          
-          <div className={styles.carousel}>
-            {visibleProperties.map((property) => (
-              <div key={property.id} className={styles.propertyCard}>
-                <div className={styles.imageContainer}>
-                  <div className={styles.imageWrapper}>
-                    <img 
-                      src={property.image} 
-                      alt={property.title}
-                      className={styles.propertyImage}
-                    />
+      <section className={styles.propertiesSection}>
+        <div className={styles.container}>
+          <h2 className={styles.title}>Наши объекты</h2>
+    
+          <div className={styles.carouselContainer}>
+            {/* Карусель отключена — показываем просто первые три объекта */}
+            <div className={styles.carousel}>
+              {properties.slice(0, 3).map((property) => (
+                <div key={property.id} className={styles.propertyCard}>
+                  <div className={styles.imageContainer}>
+                    <div className={styles.imageWrapper}>
+                      <img 
+                        src={property.image} 
+                        alt={property.title}
+                        className={styles.propertyImage}
+                      />
+                    </div>
                   </div>
+                  <h3 className={styles.propertyTitle}>{property.title}</h3>
+                  <a href={property.link} className={styles.propertyLink}>
+                    ПОДРОБНЕЕ <span className={styles.arrow}>→</span>
+                  </a>
                 </div>
-                <h3 className={styles.propertyTitle}>{property.title}</h3>
-                <a href={property.link} className={styles.propertyLink}>
-                  ПОДРОБНЕЕ <span className={styles.arrow}>→</span>
-                </a>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-          
-          <button 
-            className={`${styles.navButton} ${styles.nextButton}`}
-            onClick={nextSlide}
-            aria-label="Next properties"
-          >
-            →
-          </button>
+    
+          {/* Отключаем точки */}
+          {/* <div className={styles.dotsContainer}>
+            {Array.from({ length: properties.length - (itemsPerView - 1) }).map((_, index) => (
+              <button
+                key={index}
+                className={`${styles.dot} ${currentIndex === index ? styles.activeDot : ''}`}
+                onClick={() => setCurrentIndex(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div> */}
         </div>
-        
-        {/* Navigation dots */}
-        <div className={styles.dotsContainer}>
-          {Array.from({ length: properties.length - (itemsPerView - 1) }).map((_, index) => (
-            <button
-              key={index}
-              className={`${styles.dot} ${currentIndex === index ? styles.activeDot : ''}`}
-              onClick={() => setCurrentIndex(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
+      </section>
+ 
+    
   );
 }

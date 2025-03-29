@@ -6,10 +6,10 @@ import CardCarousel from '../CardCarousel/CardCarousel';
 import TeamMemberCard, { TeamMemberProps } from '../TeamMemberCard/TeamMemberCard';
 
 // Import your team member images
-import member1 from './assets/member1.jpg';
-import member2 from './assets/member2.jpg';
-import member3 from './assets/member3.jpg';
-import member4 from './assets/member4.jpg';
+import member1 from './assets/member1.png';
+import member2 from './assets/member2.png';
+import member3 from './assets/member3.png';
+import member4 from './assets/member4.png';
 
 export default function TeamSection() {
   // Team member data
@@ -27,7 +27,7 @@ export default function TeamSection() {
       image: member2.src,
       name: 'Кабышко Никита Викторович',
       position: 'Заместитель',
-      subPosition: 'директора, риэлтер',
+      subPosition: ' директора, риэлтер',
       reviewsLink: '#'
     },
     {
