@@ -19,7 +19,7 @@ import ContactsSection from "../components/ContactsSection/ContactsSection";
 import Footer from "../components/Footer/Footer";
 
 // Import your full-size image
-import fullWidthImage from "./assets/Mask_group.jpg";
+import fullWidthImage from "./assets/Mask_group.png";
 
 export default function Home() {
   return (

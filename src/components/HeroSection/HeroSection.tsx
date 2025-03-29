@@ -10,7 +10,7 @@ export default function HeroSection() {
           <div className={styles.heroContent}>
             <div className={styles.logoTitleWrapper}>
               <div className={styles.logo}>
-                <img src="/realty_app/LOGO_2.svg" alt="Logo" />
+                <img src="/realty_app/LOGO_4.svg" alt="Logo" />
               </div>
               <h1 className={styles.title}>
                 АГЕНТСТВО
