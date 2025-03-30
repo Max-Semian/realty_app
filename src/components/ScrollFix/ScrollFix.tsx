@@ -46,8 +46,9 @@ export default function ScrollFix() {
     // Set up click handlers for all hash links 
     const setupHashLinks = () => {
       document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', function(e) {
-          const href = this.getAttribute('href');
+        // Use arrow function to avoid 'this' context issues
+        link.addEventListener('click', (e) => {
+          const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
           if (!href || href === '#') return;
           
           const id = href.substring(1);
