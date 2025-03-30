@@ -1,5 +1,6 @@
 import "./globals.css";
 export { metadata } from "./metadata";
+import ScrollFix from "../components/ScrollFix/ScrollFix";
 
 export default function RootLayout({
   children,
@@ -14,6 +15,7 @@ export default function RootLayout({
         overflowX: 'hidden', // Prevent horizontal scrolling
         position: 'relative' // Create a new stacking context
       }}>
+        <ScrollFix />
         {children}
       </body>
     </html>

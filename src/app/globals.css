@@ -36,6 +36,62 @@ body::before {
   pointer-events: none;
 }
 
+/* Scroll Behavior Improvements */
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  position: relative;
+}
+
+/* Default scroll margins for sections */
+#properties,
+#advantages,
+#specialists,
+#stages,
+#testimonials,
+#docs,
+#form,
+#contacts {
+  scroll-margin-top: 120px; /* Large default value */
+  position: relative; /* Establish positioning context */
+  z-index: 1; /* Ensure the element is stacked properly */
+}
+
+/* Adjust for mobile */
+@media (max-width: 768px) {
+  /* Adjust for mobile */
+  @media (max-width: 768px) {
+    section[id] {
+      scroll-margin-top: 140px;
+    }
+  }
+}
+
+/* Default scroll margins for all section targets */
+section[id] {
+  scroll-margin-top: 120px;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* Fix for iOS */
+@supports (-webkit-touch-callout: none) {
+  html {
+    /* Disable smooth scrolling on iOS as it can cause issues */
+    scroll-behavior: auto;
+  }
+  
+  /* Add padding to account for fixed header on iOS */
+  body {
+    padding-top: 0;
+  }
+}
+
 /* Make all images responsive */
 img {
   max-width: 100%;
@@ -59,6 +115,7 @@ section,
   max-width: 100%;
   overflow-x: hidden;
 }
+
 
 section {
   padding-left: 20px !important;

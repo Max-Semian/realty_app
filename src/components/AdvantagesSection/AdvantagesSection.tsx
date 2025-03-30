@@ -44,7 +44,7 @@ export default function AdvantagesSection() {
   ];
 
   return (
-    <section className={styles.advantagesSection}>
+    <section id="advantages" className={styles.advantagesSection}>
       <div className={styles.container}>
         <h2 className={styles.title}>Преимущества</h2>
         

@@ -97,7 +97,7 @@ export default function TestimonialsCarousel() {
   };
 
   return (
-    <section className={styles.testimonialsSection}>
+    <section id="testimonials" className={styles.testimonialsSection}>
       <div className={styles.container}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.title}>Отзывы клиентов</h2>

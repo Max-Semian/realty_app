@@ -74,7 +74,7 @@ const CardCarousel: React.FC<CardCarouselProps> = ({
   const numberOfDots = totalItems - itemsPerView + 1;
 
   return (
-    <section className={`${styles.carouselSection} ${className}`}>
+    <section id="specialists" className={`${styles.carouselSection} ${className}`}>
       <div className={styles.container}>
         <h2 className={styles.title}>{title}</h2>
         

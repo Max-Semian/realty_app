@@ -2,10 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from 'next/navigation';
 import styles from "./Header.module.css";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -41,17 +43,46 @@ const Header = () => {
     };
   }, [mobileMenuOpen]);
 
+  // Handle link click with direct scrolling
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    
+    // If we're on a different page, let the browser navigate with the hash
+    if (pathname !== '/') {
+      window.location.href = `/${id}`;
+      return;
+    }
+    
+    // If we're on the home page, scroll directly
+    const section = document.getElementById(id);
+    if (!section) return;
+    
+    const headerHeight = window.innerWidth <= 768 ? 90 : 70;
+    const extraPadding = 20;
+    
+    const y = section.getBoundingClientRect().top + window.scrollY - (headerHeight + extraPadding);
+    
+    window.scrollTo({
+      top: y,
+      behavior: 'smooth'
+    });
+    
+    // Update URL without triggering a scroll
+    window.history.pushState(null, '', `#${id}`);
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        {/* Mobile Menu Button - Moved to left side */}
+        {/* Mobile Menu Button */}
         <div className={styles.mobileMenu}>
           <button onClick={toggleMobileMenu} aria-label="Toggle menu">
             {mobileMenuOpen ? "✕" : "☰"}
           </button>
         </div>
 
-          {/* Logo with Link to Main Page - Only visible when menu is closed */}
+        {/* Logo with Link to Main Page */}
         <div className={styles.logo} style={{ display: mobileMenuOpen ? 'none' : 'flex' }}>
           <Link href="/">
             <img src="/realty_app/logo-fixed.svg" alt="Logo" width="78" height="74" />
@@ -61,17 +92,37 @@ const Header = () => {
         {/* Navigation Links */}
         <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
           <Link href="/about-us" onClick={() => setMobileMenuOpen(false)}>О нас</Link>
-          <Link href="#" onClick={() => setMobileMenuOpen(false)}>Наши объекты</Link>
-          <Link href="#" onClick={() => setMobileMenuOpen(false)}>Преимущества</Link>
-          <Link href="#" onClick={() => setMobileMenuOpen(false)}>Сотрудники</Link>
+          
+          <a href="#properties" onClick={(e) => handleLinkClick(e, 'properties')}>
+            Наши объекты
+          </a>
+          
+          <a href="#advantages" onClick={(e) => handleLinkClick(e, 'advantages')}>
+            Преимущества
+          </a>
+          
+          <a href="#specialists" onClick={(e) => handleLinkClick(e, 'specialists')}>
+            Специалисты
+          </a>
+          
           {/* Mobile-Only Nav Links */}
           <div className={styles.mobileOnlyLinks}>
-            <Link href="#" onClick={() => setMobileMenuOpen(false)}>Этапы работы</Link>
-            <Link href="#" onClick={() => setMobileMenuOpen(false)}>Отзывы</Link>
-            <Link href="#" onClick={() => setMobileMenuOpen(false)}>Документы</Link>
+            <a href="#stages" onClick={(e) => handleLinkClick(e, 'stages')}>
+              Этапы работы
+            </a>
+            
+            <a href="#testimonials" onClick={(e) => handleLinkClick(e, 'testimonials')}>
+              Отзывы
+            </a>
+            
+            <a href="#docs" onClick={(e) => handleLinkClick(e, 'docs')}>
+              Документы
+            </a>
           </div>
-          <Link href="#" onClick={() => setMobileMenuOpen(false)}>Контакты</Link>
-          <Link href="#" onClick={() => setMobileMenuOpen(false)}>Личный кабинет</Link>
+          
+          <a href="#contacts" onClick={(e) => handleLinkClick(e, 'contacts')}>
+            Контакты
+          </a>
 
           {/* Logo, title and phone number for the bottom of mobile menu */}
           <div className={styles.navFooter}>

@@ -21,7 +21,7 @@ export default function PropertiesSection() {
   ];
 
   return (
-    <section className={styles.propertiesSection}>
+    <section id="properties" className={styles.propertiesSection}>
       <div className={styles.container}>
         <h2 className={styles.title}>Наши объекты</h2>
         

@@ -45,7 +45,7 @@ export default function DocumentsSection() {
   ];
 
   return (
-    <section className={styles.documentsSection}>
+    <section id="docs" className={styles.documentsSection}>
       <div className={styles.container}>
         <h2 className={styles.title}>Наши документы</h2>
         

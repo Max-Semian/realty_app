@@ -45,7 +45,7 @@ export default function WorkStagesSection() {
   ];
 
   return (
-    <section className={styles.workStagesSection}>
+    <section id="stages" className={styles.workStagesSection}>
       <div className={styles.container}>
         <h2 className={styles.title}>Этапы работы</h2>
         

@@ -96,7 +96,7 @@ export default function PropertiesCarousel() {
   );
 
   return (
-      <section className={styles.propertiesSection}>
+      <section id="properties" className={styles.propertiesSection}>
         <div className={styles.container}>
           <h2 className={styles.title}>Наши объекты</h2>
     
@@ -122,21 +122,7 @@ export default function PropertiesCarousel() {
               ))}
             </div>
           </div>
-    
-          {/* Отключаем точки */}
-          {/* <div className={styles.dotsContainer}>
-            {Array.from({ length: properties.length - (itemsPerView - 1) }).map((_, index) => (
-              <button
-                key={index}
-                className={`${styles.dot} ${currentIndex === index ? styles.activeDot : ''}`}
-                onClick={() => setCurrentIndex(index)}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div> */}
         </div>
       </section>
- 
-    
-  );
+    );
 }

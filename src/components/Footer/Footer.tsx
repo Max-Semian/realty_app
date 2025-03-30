@@ -2,10 +2,40 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styles from './Footer.module.css';
 
 export default function Footer() {
   const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
+
+  // Handle link click with direct scrolling
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    
+    // If we're on a different page, let the browser navigate with the hash
+    if (pathname !== '/') {
+      window.location.href = `/${id}`;
+      return;
+    }
+    
+    // If we're on the home page, scroll directly
+    const section = document.getElementById(id);
+    if (!section) return;
+    
+    const headerHeight = window.innerWidth <= 768 ? 90 : 70;
+    const extraPadding = 20;
+    
+    const y = section.getBoundingClientRect().top + window.scrollY - (headerHeight + extraPadding);
+    
+    window.scrollTo({
+      top: y,
+      behavior: 'smooth'
+    });
+    
+    // Update URL without triggering a scroll
+    window.history.pushState(null, '', `#${id}`);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -47,16 +77,66 @@ export default function Footer() {
           {/* Right side - Navigation links */}
           <nav className={styles.footerNav}>
             <div className={styles.navColumn}>
-              <Link href="#about" className={styles.navLink}>Об агентстве</Link>
-              <Link href="#properties" className={styles.navLink}>Наши объекты</Link>
-              <Link href="#advantages" className={styles.navLink}>Преимущества</Link>
-              <Link href="#specialists" className={styles.navLink}>Специалисты</Link>
+              <Link href="/about-us" className={styles.navLink}>
+                Об агентстве
+              </Link>
+              
+              <a 
+                href="#properties" 
+                className={styles.navLink}
+                onClick={(e) => handleLinkClick(e, 'properties')}
+              >
+                Наши объекты
+              </a>
+              
+              <a 
+                href="#advantages"
+                className={styles.navLink}
+                onClick={(e) => handleLinkClick(e, 'advantages')}
+              >
+                Преимущества
+              </a>
+              
+              <a 
+                href="#specialists"
+                className={styles.navLink}
+                onClick={(e) => handleLinkClick(e, 'specialists')}
+              >
+                Специалисты
+              </a>
             </div>
             <div className={styles.navColumn}>
-              <Link href="#stages" className={styles.navLink}>Этапы работы</Link>
-              <Link href="#testimonials" className={styles.navLink}>Отзывы</Link>
-              <Link href="#form" className={styles.navLink}>Форма заявки</Link>
-              <Link href="#contacts" className={styles.navLink}>Контакты</Link>
+            <a 
+                href="#stages"
+                className={styles.navLink}
+                onClick={(e) => handleLinkClick(e, 'stages')}
+              >
+                Этапы работы
+              </a>
+              
+              <a 
+                href="#testimonials"
+                className={styles.navLink}
+                onClick={(e) => handleLinkClick(e, 'testimonials')}
+              >
+                Отзывы
+              </a>
+              
+              <a 
+                href="#form"
+                className={styles.navLink}
+                onClick={(e) => handleLinkClick(e, 'form')}
+              >
+                Форма заявки
+              </a>
+              
+              <a 
+                href="#contacts"
+                className={styles.navLink}
+                onClick={(e) => handleLinkClick(e, 'contacts')}
+              >
+                Контакты
+              </a>
             </div>
           </nav>
         </div>
