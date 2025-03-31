@@ -3,6 +3,7 @@
   color: white;
   padding: 60px 0;
   width: 100%;
+  overflow: unset;
 }
 
 .container {
