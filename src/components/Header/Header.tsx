@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./Header.module.css";
 import { useNavigation } from "../../hooks/useNavigation";
-import { APP_BASE_PATH } from "../../utils/constants";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -14,10 +13,9 @@ const Header = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  // Close menu when clicking outside and prevent body scroll when menu is open
+  // Close menu when clicking outside and prevent body scroll
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // If menu is open and clicked outside nav and not on menu button
       if (mobileMenuOpen) {
         const nav = document.querySelector(`.${styles.nav}`);
         const mobileMenuButton = document.querySelector(`.${styles.mobileMenu} button`);
@@ -44,7 +42,7 @@ const Header = () => {
     };
   }, [mobileMenuOpen]);
 
-  // Internal function to handle link clicks - closes mobile menu and calls navigation handler
+  // Handle anchor link clicks - closes mobile menu and calls navigation handler
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     setMobileMenuOpen(false);
     handleAnchorNavigation(e, id);
@@ -60,7 +58,7 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Logo with Link to Main Page - Fixed path */}
+        {/* Logo - Link to Main Page */}
         <div className={styles.logo} style={{ display: mobileMenuOpen ? 'none' : 'flex' }}>
           <Link href="/">
             <img src="/realty_app/logo-fixed.svg" alt="Logo" width="78" height="74" />
@@ -69,9 +67,10 @@ const Header = () => {
 
         {/* Navigation Links */}
         <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
-          {/* Fixed about-us path to avoid duplication */}
+          {/* About Us Page Link */}
           <Link href="/about-us" onClick={() => setMobileMenuOpen(false)}>О нас</Link>
           
+          {/* Anchor links on main page */}
           <a href="#properties" onClick={(e) => handleLinkClick(e, 'properties')}>
             Наши объекты
           </a>
@@ -103,7 +102,7 @@ const Header = () => {
             Контакты
           </a>
 
-          {/* Logo, title and phone number for the bottom of mobile menu */}
+          {/* Logo, title and phone number for mobile menu footer */}
           <div className={styles.navFooter}>
             <div className={styles.navLogo}>
               <img src="/realty_app/logo-fixed.svg" alt="Logo" width="150" height="133" />

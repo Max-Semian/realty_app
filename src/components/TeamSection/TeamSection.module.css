@@ -17,10 +17,6 @@
   position: relative;
 }
 
-.carousel {
-  min-height: 70vh;
-}
-
 /* Customize the carousel inside the team section */
 .teamSection :global(.navButton) {
   background: transparent;

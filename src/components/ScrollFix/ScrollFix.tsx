@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { isHomePage, APP_BASE_PATH } from '../../utils/constants';
 
 export default function ScrollFix() {
   const pathname = usePathname();
@@ -34,8 +33,8 @@ export default function ScrollFix() {
       });
     };
 
-    // Handle initial hash in URL - only on homepage
-    if (window.location.hash && isHomePage(pathname)) {
+    // Handle initial hash in URL
+    if (window.location.hash) {
       const id = window.location.hash.substring(1);
       
       // Use setTimeout to ensure DOM is fully loaded
@@ -43,40 +42,6 @@ export default function ScrollFix() {
         scrollToSection(id);
       }, 500);
     }
-
-    // Set up click handlers for all hash links on the current page
-    const setupHashLinks = () => {
-      document.querySelectorAll('a[href^="#"]').forEach(link => {
-        // Remove any existing event listeners first to prevent duplicates
-        const oldLink = link.cloneNode(true);
-        if (link.parentNode) {
-          link.parentNode.replaceChild(oldLink, link);
-        }
-        
-        // Add new event listener
-        oldLink.addEventListener('click', (e) => {
-          const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
-          if (!href || href === '#') return;
-          
-          const id = href.substring(1);
-          const element = document.getElementById(id);
-          
-          if (element) {
-            e.preventDefault();
-            scrollToSection(id);
-            
-            // Update URL differently based on whether we're on home page
-            if (isHomePage(pathname)) {
-              history.pushState(null, '', `${pathname}${href}`);
-            } else {
-              // If not on homepage, we need special handling
-              // This is a backup - should be handled by useNavigation hook
-              history.pushState(null, '', `${APP_BASE_PATH}/${href}`);
-            }
-          }
-        });
-      });
-    };
 
     // Apply scroll margins to all section elements with IDs
     const applyScrollMargins = () => {
@@ -86,8 +51,7 @@ export default function ScrollFix() {
       });
     };
 
-    // Initialize both functions
-    setupHashLinks();
+    // Initialize
     applyScrollMargins();
     
     // Update margins when window resizes

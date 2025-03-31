@@ -1,8 +1,18 @@
 import { usePathname } from 'next/navigation';
-import { APP_BASE_PATH, isHomePage } from '../utils/constants';
+import { APP_BASE_PATH } from '../utils/constants';
 
 export const useNavigation = () => {
   const pathname = usePathname();
+  
+  // Function to check if we're on the homepage
+  const isOnHomePage = (): boolean => {
+    // In Next.js with basePath, the pathname could be '/' or empty
+    // This check handles both cases with and without trailing slashes
+    return pathname === '/' || 
+           pathname === '' || 
+           pathname === APP_BASE_PATH || 
+           pathname === `${APP_BASE_PATH}/`;
+  };
   
   // Function to handle smooth scrolling to an element
   const scrollToElement = (id: string) => {
@@ -20,7 +30,7 @@ export const useNavigation = () => {
     });
     
     // Update URL without triggering a scroll
-    window.history.pushState(null, '', `${pathname}#${id}`);
+    window.history.pushState(null, '', `#${id}`);
   };
   
   // Handle navigation for anchor links
@@ -28,20 +38,18 @@ export const useNavigation = () => {
     e.preventDefault();
     
     // If we're on the homepage, just scroll to the element
-    if (isHomePage(pathname)) {
+    if (isOnHomePage()) {
       scrollToElement(id);
       return;
     }
     
-    // If we're on a different page (like about-us), 
-    // we must navigate to the main page with the anchor
-    // Force a full navigation, not just a URL update
+    // We're on a different page, navigate to homepage with the anchor
     window.location.href = `${APP_BASE_PATH}/#${id}`;
   };
   
   return {
     pathname,
-    isHomePage: isHomePage(pathname),
+    isHomePage: isOnHomePage(),
     scrollToElement,
     handleAnchorNavigation
   };

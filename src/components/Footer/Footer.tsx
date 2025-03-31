@@ -50,11 +50,12 @@ export default function Footer() {
           {/* Right side - Navigation links */}
           <nav className={styles.footerNav}>
             <div className={styles.navColumn}>
-              {/* Fixed path to avoid duplication */}
+              {/* About Us Page Link */}
               <Link href="/about-us" className={styles.navLink}>
                 Об агентстве
               </Link>
               
+              {/* Anchor links with navigation handler */}
               <a 
                 href="#properties" 
                 className={styles.navLink}
