@@ -164,3 +164,18 @@ section {
     width: 100%;
   }
 }
+
+/* Animation Styles */
+.scrolling-in-progress .fade-in-section {
+  transition: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Don't animate on page load for the first screen */
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in-section:nth-child(-n+2) {
+    opacity: 1;
+    transform: none;
+  }
+}

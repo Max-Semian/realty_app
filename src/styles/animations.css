@@ -1,0 +1,82 @@
+/* Base styling for elements before animation */
+.animate-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+  }
+  
+  /* Applied when element becomes visible */
+  .animate-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Animation variants */
+  .animate-item.from-left {
+    transform: translateX(-30px);
+  }
+  
+  .animate-item.from-left.is-visible {
+    transform: translateX(0);
+  }
+  
+  .animate-item.from-right {
+    transform: translateX(30px);
+  }
+  
+  .animate-item.from-right.is-visible {
+    transform: translateX(0);
+  }
+  
+  /* Animation delay utility classes */
+  .delay-100 {
+    transition-delay: 0.1s;
+  }
+  
+  .delay-200 {
+    transition-delay: 0.2s;
+  }
+  
+  .delay-300 {
+    transition-delay: 0.3s;
+  }
+  
+  .delay-400 {
+    transition-delay: 0.4s;
+  }
+  
+  .delay-500 {
+    transition-delay: 0.5s;
+  }
+  
+  /* Staggered animations for direct children */
+  .stagger-children > *:nth-child(1) { transition-delay: 0.1s; }
+  .stagger-children > *:nth-child(2) { transition-delay: 0.2s; }
+  .stagger-children > *:nth-child(3) { transition-delay: 0.3s; }
+  .stagger-children > *:nth-child(4) { transition-delay: 0.4s; }
+  .stagger-children > *:nth-child(5) { transition-delay: 0.5s; }
+  .stagger-children > *:nth-child(6) { transition-delay: 0.6s; }
+  .stagger-children > *:nth-child(7) { transition-delay: 0.7s; }
+  .stagger-children > *:nth-child(8) { transition-delay: 0.8s; }
+  
+  /* Section with animated content */
+  .animated-section {
+    position: relative;
+  }
+  
+  /* Ensure animations don't interfere with scroll-to functionality */
+  html.scrolling-in-progress .animate-item {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  /* Disable animations for users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-item {
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
