@@ -1,5 +1,5 @@
 // Codebase collection from ./src
-// Generated: 2025-03-31T05:14:36.069Z
+// Generated: 2025-03-31T08:03:37.244Z
 
 
 
@@ -285,8 +285,6 @@ section,
 
 
 section {
-  padding-left: 20px !important;
-  padding-right: 20px !important;
   box-sizing: border-box;
 }
 
@@ -331,6 +329,21 @@ section {
   /* Fix for testimonial cards */
   .testimonialCard {
     width: 100%;
+  }
+}
+
+/* Animation Styles */
+.scrolling-in-progress .fade-in-section {
+  transition: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Don't animate on page load for the first screen */
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in-section:nth-child(-n+2) {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -683,7 +696,7 @@ export default function AboutAgencySection() {
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className={styles.title}>О нашем агентстве</h2>
-          <a href="/about-us" className={styles.learnMore}>
+          <a href="about-us" className={styles.learnMore}>
             УЗНАТЬ БОЛЬШЕ <span className={styles.arrow}>→</span>
           </a>
         </div>
@@ -1071,25 +1084,7 @@ export default function AboutUsSection() {
 
 /* Horizontal lines - desktop only */
 @media (min-width: 769px) {
-  .advantagesGrid::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .advantagesGrid::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.1);
-  }
+ 
 }
 
 /* Card styling */
@@ -1100,24 +1095,7 @@ export default function AboutUsSection() {
 
 /* Vertical and bottom lines - desktop only */
 @media (min-width: 769px) {
-  .advantageCard {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .advantageCard::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 1px;
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .advantageCard:nth-child(3n)::after,
-  .advantageCard:last-child::after {
-    display: none;
-  }
+ 
 }
 
 .cardNumber {
@@ -1287,6 +1265,123 @@ export default function AdvantagesSection() {
 }
 
 ================================================================================
+// FILE: src/components/AnimatedSection/AnimatedSection.tsx
+================================================================================
+
+'use client';
+
+import React, { ReactNode, useEffect, useRef } from 'react';
+import '../../styles/animations.css';
+
+interface AnimatedSectionProps {
+  children: ReactNode;
+  className?: string;
+  id?: string;
+  animateItems?: 'all' | 'direct-children' | 'headings' | 'custom';
+  stagger?: boolean;
+  threshold?: number;
+  rootMargin?: string;
+  customSelector?: string;
+  as?: React.ElementType;
+}
+
+const AnimatedSection: React.FC<AnimatedSectionProps> = ({
+  children,
+  className = '',
+  id,
+  animateItems = 'direct-children',
+  stagger = true,
+  threshold = 0.1,
+  rootMargin = '-50px 0px',
+  customSelector,
+  as: Component = 'section',
+  ...props
+}) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  useEffect(() => {
+    const sectionElement = sectionRef.current;
+    if (!sectionElement || typeof window === 'undefined') return;
+    
+    // Skip if the browser doesn't support IntersectionObserver
+    if (!('IntersectionObserver' in window)) return;
+    
+    // Determine which elements to animate based on the strategy
+    let itemsToAnimate: Element[] = [];
+    
+    if (animateItems === 'all') {
+      // Animate all elements inside the section
+      itemsToAnimate = Array.from(sectionElement.querySelectorAll('*'));
+    } else if (animateItems === 'direct-children') {
+      // Animate only direct children of the section
+      itemsToAnimate = Array.from(sectionElement.children);
+    } else if (animateItems === 'headings') {
+      // Animate headings and paragraphs
+      itemsToAnimate = Array.from(
+        sectionElement.querySelectorAll('h1, h2, h3, h4, h5, h6, p, .card, .item')
+      );
+    } else if (animateItems === 'custom' && customSelector) {
+      // Animate elements matching the custom selector
+      itemsToAnimate = Array.from(sectionElement.querySelectorAll(customSelector));
+    }
+    
+    // Apply animation classes to the selected elements
+    itemsToAnimate.forEach((item, index) => {
+      // Don't animate script tags, styles, etc.
+      if (['SCRIPT', 'STYLE', 'META', 'LINK'].includes(item.tagName)) {
+        return;
+      }
+      
+      item.classList.add('animate-item');
+      
+      // Apply staggered delays if enabled
+      if (stagger) {
+        const delay = Math.min(index, 7) + 1;
+        item.classList.add(`delay-${delay * 100}`);
+      }
+    });
+    
+    // Create an observer for the section
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // When the section is visible, make all animated items visible
+          itemsToAnimate.forEach(item => {
+            item.classList.add('is-visible');
+          });
+          
+          // Once animated, we can stop observing
+          observer.unobserve(sectionElement);
+        }
+      },
+      { threshold, rootMargin }
+    );
+    
+    // Start observing the section
+    observer.observe(sectionElement);
+    
+    return () => {
+      observer.disconnect();
+    };
+  }, [animateItems, stagger, threshold, rootMargin, customSelector]);
+  
+  const combinedClassName = `animated-section ${stagger ? 'stagger-children' : ''} ${className}`.trim();
+  
+  return (
+    <Component
+      ref={sectionRef}
+      className={combinedClassName}
+      id={id}
+      {...props}
+    >
+      {children}
+    </Component>
+  );
+};
+
+export default AnimatedSection;
+
+================================================================================
 // FILE: src/components/CardCarousel/CardCarousel.module.css
 ================================================================================
 
@@ -1295,6 +1390,7 @@ export default function AdvantagesSection() {
   color: white;
   padding: 60px 0;
   width: 100%;
+  overflow: unset;
 }
 
 .container {
@@ -1310,11 +1406,13 @@ export default function AdvantagesSection() {
   scroll-margin-top: 300px;
 }
 
+/* Fixed height container with overflow management */
 .carouselContainer {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* Changed from center to flex-start */
   margin-bottom: 30px;
+  min-height: 400px; /* Set a minimum height for the carousel */
 }
 
 .carousel {
@@ -1332,7 +1430,7 @@ export default function AdvantagesSection() {
   height: 40px;
   border-radius: 50%;
   border: 1px solid #BA9778;
-  background: transparent;
+  background: #20222B;
   color: #BA9778;;
   font-size: 18px;
   cursor: pointer;
@@ -1344,8 +1442,7 @@ export default function AdvantagesSection() {
 }
 
 .navButton:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.5);
+  opacity: 0.8;
 }
 
 .prevButton {
@@ -1383,6 +1480,10 @@ export default function AdvantagesSection() {
   .container {
     padding: 0 40px;
   }
+  
+  .carouselContainer {
+    min-height: 450px; /* Adjust for tablet view */
+  }
 }
 
 @media (max-width: 968px) {
@@ -1397,6 +1498,10 @@ export default function AdvantagesSection() {
   
   .nextButton {
     right: -15px;
+  }
+  
+  .carouselContainer {
+    min-height: 500px; /* Adjust for smaller tablets */
   }
 }
 
@@ -1418,6 +1523,7 @@ export default function AdvantagesSection() {
   .carouselContainer {
     padding: 0;
     margin-bottom: 20px;
+    min-height: 450px; /* Adjusted for mobile */
   }
   
   /* Adjust the carousel to show one item per view properly */
@@ -1439,166 +1545,11 @@ export default function AdvantagesSection() {
   }
   
   .nextButton {
-    right: 10px;.carouselSection {
-      background-color: #20222B;
-      color: white;
-      padding: 60px 0;
-      width: 100%;
-    }
-    
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 30px;
-    }
-    
-    .title {
-      font-size: 36px;
-      font-weight: 400;
-      margin-bottom: 50px;
-    }
-    
-    .carouselContainer {
-      position: relative;
-      display: flex;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-    
-    .carousel {
-      display: grid;
-      gap: 24px;
-      width: 100%;
-      grid-template-columns: repeat(var(--items-per-view, 4), 1fr);
-    }
-    
-    .navButton {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid #BA9778;
-      background: transparent;
-      color: #BA9778;
-      font-size: 18px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-    }
-    
-    .navButton:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.5);
-    }
-    
-    .prevButton {
-      left: -20px;
-    }
-    
-    .nextButton {
-      right: -20px;
-    }
-    
-    .dotsContainer {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 20px;
-    }
-    
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.3);
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      transition: all 0.3s ease;
-    }
-    
-    .activeDot {
-      background-color: #F5A623;
-      transform: scale(1.2);
-    }
-    
-    @media (max-width: 1200px) {
-      .container {
-        padding: 0 40px;
-      }
-    }
-    
-    @media (max-width: 968px) {
-      .navButton {
-        width: 40px;
-        height: 40px;
-      }
-      
-      .prevButton {
-        left: -15px;
-      }
-      
-      .nextButton {
-        right: -15px;
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .carouselSection {
-        padding: 40px 0;
-      }
-      
-      .title {
-        font-size: 28px;
-        margin-bottom: 30px;
-        text-align: left;
-      }
-      
-      .container {
-        padding: 0;
-      }
-      
-      .carouselContainer {
-        padding: 0;
-        margin-bottom: 20px;
-      }
-      
-      /* Adjust the carousel to show one item per view properly */
-      .carousel {
-        gap: 0;
-        grid-template-columns: 1fr;
-      }
-    }
-    
-    @media (max-width: 576px) {
-      .navButton {
-        width: 40px;
-        height: 40px;
-        top: 50%;
-      }
-      
-      .prevButton {
-        left: 10px;
-      }
-      
-      .nextButton {
-        right: 10px;
-      }
-    }
-    
-    /* Center card on mobile to match Figma */
-    @media (max-width: 768px) {
-      .carousel > * {
-        margin: 0 auto;
-        width: 100%;
-        max-width: 85%;
-      }
-    }
+    right: 10px;
+  }
+  
+  .carouselContainer {
+    min-height: 400px; /* Mobile height */
   }
 }
 
@@ -2653,41 +2604,14 @@ export default function DocumentsSection() {
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import styles from './Footer.module.css';
+import { useNavigation } from '../../hooks/useNavigation';
 
 export default function Footer() {
   const [isMobile, setIsMobile] = useState(false);
-  const pathname = usePathname();
+  const { handleAnchorNavigation } = useNavigation();
 
-  // Handle link click with direct scrolling
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
-    
-    // If we're on a different page, let the browser navigate with the hash
-    if (pathname !== '/') {
-      window.location.href = `/${id}`;
-      return;
-    }
-    
-    // If we're on the home page, scroll directly
-    const section = document.getElementById(id);
-    if (!section) return;
-    
-    const headerHeight = window.innerWidth <= 768 ? 90 : 70;
-    const extraPadding = 20;
-    
-    const y = section.getBoundingClientRect().top + window.scrollY - (headerHeight + extraPadding);
-    
-    window.scrollTo({
-      top: y,
-      behavior: 'smooth'
-    });
-    
-    // Update URL without triggering a scroll
-    window.history.pushState(null, '', `#${id}`);
-  };
-
+  // Handle window resize for mobile detection
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -2728,14 +2652,16 @@ export default function Footer() {
           {/* Right side - Navigation links */}
           <nav className={styles.footerNav}>
             <div className={styles.navColumn}>
+              {/* About Us Page Link */}
               <Link href="/about-us" className={styles.navLink}>
                 Об агентстве
               </Link>
               
+              {/* Anchor links with navigation handler */}
               <a 
                 href="#properties" 
                 className={styles.navLink}
-                onClick={(e) => handleLinkClick(e, 'properties')}
+                onClick={(e) => handleAnchorNavigation(e, 'properties')}
               >
                 Наши объекты
               </a>
@@ -2743,7 +2669,7 @@ export default function Footer() {
               <a 
                 href="#advantages"
                 className={styles.navLink}
-                onClick={(e) => handleLinkClick(e, 'advantages')}
+                onClick={(e) => handleAnchorNavigation(e, 'advantages')}
               >
                 Преимущества
               </a>
@@ -2751,16 +2677,16 @@ export default function Footer() {
               <a 
                 href="#specialists"
                 className={styles.navLink}
-                onClick={(e) => handleLinkClick(e, 'specialists')}
+                onClick={(e) => handleAnchorNavigation(e, 'specialists')}
               >
                 Специалисты
               </a>
             </div>
             <div className={styles.navColumn}>
-            <a 
+              <a 
                 href="#stages"
                 className={styles.navLink}
-                onClick={(e) => handleLinkClick(e, 'stages')}
+                onClick={(e) => handleAnchorNavigation(e, 'stages')}
               >
                 Этапы работы
               </a>
@@ -2768,7 +2694,7 @@ export default function Footer() {
               <a 
                 href="#testimonials"
                 className={styles.navLink}
-                onClick={(e) => handleLinkClick(e, 'testimonials')}
+                onClick={(e) => handleAnchorNavigation(e, 'testimonials')}
               >
                 Отзывы
               </a>
@@ -2776,7 +2702,7 @@ export default function Footer() {
               <a 
                 href="#form"
                 className={styles.navLink}
-                onClick={(e) => handleLinkClick(e, 'form')}
+                onClick={(e) => handleAnchorNavigation(e, 'form')}
               >
                 Форма заявки
               </a>
@@ -2784,7 +2710,7 @@ export default function Footer() {
               <a 
                 href="#contacts"
                 className={styles.navLink}
-                onClick={(e) => handleLinkClick(e, 'contacts')}
+                onClick={(e) => handleAnchorNavigation(e, 'contacts')}
               >
                 Контакты
               </a>
@@ -2914,33 +2840,6 @@ export default function Footer() {
   position: relative;
 }
 
-.nav a.active::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #F5A623;
-  transform: scaleX(1);
-  transition: transform 0.3s ease;
-}
-
-.nav a:not(.active)::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #F5A623;
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.nav a:hover::after {
-  transform: scaleX(1);
-}
 
 @media (max-width: 1400px) {
   .container {
@@ -3106,21 +3005,22 @@ export default function Footer() {
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import styles from "./Header.module.css";
+import { useNavigation } from "../../hooks/useNavigation";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
+  const { handleAnchorNavigation } = useNavigation();
+  const router = useRouter();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  // Close menu when clicking outside and prevent body scroll when menu is open
+  // Close menu when clicking outside and prevent body scroll
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // If menu is open and clicked outside nav and not on menu button
       if (mobileMenuOpen) {
         const nav = document.querySelector(`.${styles.nav}`);
         const mobileMenuButton = document.querySelector(`.${styles.mobileMenu} button`);
@@ -3147,33 +3047,17 @@ const Header = () => {
     };
   }, [mobileMenuOpen]);
 
-  // Handle link click with direct scrolling
+  // Handle anchor link clicks - closes mobile menu and calls navigation handler
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    
-    // If we're on a different page, let the browser navigate with the hash
-    if (pathname !== '/realty_app') {
-      window.location.href = `/realty_app/#${id}`;
-      return;
-    }
-    
-    // If we're on the home page, scroll directly
-    const section = document.getElementById(id);
-    if (!section) return;
-    
-    const headerHeight = window.innerWidth <= 768 ? 90 : 70;
-    const extraPadding = 20;
-    
-    const y = section.getBoundingClientRect().top + window.scrollY - (headerHeight + extraPadding);
-    
-    window.scrollTo({
-      top: y,
-      behavior: 'smooth'
-    });
-    
-    // Update URL without triggering a scroll
-    window.history.pushState(null, '', `#${id}`);
+    handleAnchorNavigation(e, id);
+  };
+
+  // Handle page navigation with menu closing
+  const handlePageClick = (path: string) => {
+    setMobileMenuOpen(false);
+    router.push(path);
   };
 
   return (
@@ -3186,17 +3070,25 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Logo with Link to Main Page */}
+        {/* Logo - Link to Main Page */}
         <div className={styles.logo} style={{ display: mobileMenuOpen ? 'none' : 'flex' }}>
-          <Link href="/">
+          <a href="/" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); router.push('/'); }}>
             <img src="/realty_app/logo-fixed.svg" alt="Logo" width="78" height="74" />
-          </Link>
+          </a>
         </div>
 
         {/* Navigation Links */}
         <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
-          <Link href="/about-us" onClick={() => setMobileMenuOpen(false)}>О нас</Link>
+          {/* About Us Page Link - using onClick instead of Link component */}
+          <a 
+            href="/about-us" 
+            onClick={(e) => { e.preventDefault(); handlePageClick('/about-us'); }}
+            className={styles.navLink}
+          >
+            О нас
+          </a>
           
+          {/* Anchor links on main page */}
           <a href="#properties" onClick={(e) => handleLinkClick(e, 'properties')}>
             Наши объекты
           </a>
@@ -3228,7 +3120,7 @@ const Header = () => {
             Контакты
           </a>
 
-          {/* Logo, title and phone number for the bottom of mobile menu */}
+          {/* Logo, title and phone number for mobile menu footer */}
           <div className={styles.navFooter}>
             <div className={styles.navLogo}>
               <img src="/realty_app/logo-fixed.svg" alt="Logo" width="150" height="133" />
@@ -3250,7 +3142,9 @@ const Header = () => {
 
         {/* Mobile "Личный кабинет" link */}
         <div className={styles.mobileLoginLink}>
-          <Link href="#">Личный кабинет</Link>
+          <a href="#" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); }}>
+            Личный кабинет
+          </a>
         </div>
       </div>
     </header>
@@ -3338,12 +3232,7 @@ export default Header;
 .slogan {
   font-size: 18px;
   color: #20222B;
-  margin: 0;
-  padding-left: 0px; /* Aligns with the start of the title text */
-}
-
-.ctaButton {
-  display: none; /* Hide in desktop view */
+  margin-bottom: 20px;
 }
 
 .ctaButton a {
@@ -3815,7 +3704,7 @@ export default function TeamPrinciplesSection() {
   height: 50px;
   border-radius: 50%;
   border: 1px solid #BA9778;
-  background: transparent;
+  background: #20222B;
   color: #BA9778;
   font-size: 20px;
   cursor: pointer;
@@ -3827,8 +3716,7 @@ export default function TeamPrinciplesSection() {
 }
 
 .navButton:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.5);
+  opacity: 0.8;
 }
 
 .prevButton {
@@ -4242,6 +4130,8 @@ export default function PropertiesSection() {
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
+import '../../styles/animations.css';
+
 export default function ScrollFix() {
   const pathname = usePathname();
 
@@ -4266,10 +4156,18 @@ export default function ScrollFix() {
       const yOffset = headerHeight + extraPadding;
       const y = element.getBoundingClientRect().top + window.scrollY - yOffset;
       
+      // Add a class to temporarily disable animations during programmatic scrolling
+      document.documentElement.classList.add('scrolling-in-progress');
+      
       window.scrollTo({
         top: y,
         behavior: 'smooth'
       });
+      
+      // Remove the class after scrolling is complete
+      setTimeout(() => {
+        document.documentElement.classList.remove('scrolling-in-progress');
+      }, 1000);
     };
 
     // Handle initial hash in URL
@@ -4282,37 +4180,77 @@ export default function ScrollFix() {
       }, 500);
     }
 
-    // Set up click handlers for all hash links 
-    const setupHashLinks = () => {
-      document.querySelectorAll('a[href^="#"]').forEach(link => {
-        // Use arrow function to avoid 'this' context issues
-        link.addEventListener('click', (e) => {
-          const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
-          if (!href || href === '#') return;
-          
-          const id = href.substring(1);
-          const element = document.getElementById(id);
-          
-          if (element) {
-            e.preventDefault();
-            scrollToSection(id);
-            history.pushState(null, '', href);
-          }
-        });
-      });
-    };
-
     // Apply scroll margins to all section elements with IDs
     const applyScrollMargins = () => {
       document.querySelectorAll('section[id]').forEach(section => {
         const headerHeight = getHeaderHeight();
-        section.setAttribute('style', `scroll-margin-top: ${headerHeight + 20}px;`);
+        
+        // Don't override existing styles, just add scroll-margin-top
+        const currentStyle = section.getAttribute('style') || '';
+        const newStyle = `scroll-margin-top: ${headerHeight + 20}px; ${currentStyle}`;
+        
+        section.setAttribute('style', newStyle);
       });
     };
 
-    // Initialize both functions
-    setupHashLinks();
+    // Setup animation for all sections that aren't already using AnimatedSection
+    const setupSectionAnimations = () => {
+      // Skip if the browser doesn't support IntersectionObserver
+      if (!('IntersectionObserver' in window)) return;
+      
+      // Target only sections without the animated-section class
+      const sections = document.querySelectorAll('section:not(.animated-section)');
+      
+      sections.forEach(section => {
+        // Add animated-section class to track it
+        section.classList.add('animated-section');
+        
+        // Find elements to animate within each section
+        const elementsToAnimate = [
+          ...section.querySelectorAll('h1, h2, h3, h4, h5, h6, p, .card, .item, .grid > *, .row > *')
+        ].filter(el => 
+          // Don't animate script tags, styles, etc.
+          !['SCRIPT', 'STYLE', 'META', 'LINK'].includes(el.tagName)
+        );
+        
+        // Apply animation classes
+        elementsToAnimate.forEach((el, index) => {
+          el.classList.add('animate-item');
+          
+          // Apply staggered delays
+          const delayClass = `delay-${Math.min(index, 4) * 100 + 100}`;
+          el.classList.add(delayClass);
+        });
+        
+        // Create an observer for the section
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting && !document.documentElement.classList.contains('scrolling-in-progress')) {
+              // Make all animated items visible when section enters viewport
+              elementsToAnimate.forEach(item => {
+                item.classList.add('is-visible');
+              });
+              
+              // Once animated, we can stop observing
+              observer.unobserve(section);
+            }
+          },
+          { 
+            threshold: 0.1,
+            rootMargin: '-50px 0px'
+          }
+        );
+        
+        // Start observing the section
+        observer.observe(section);
+      });
+    };
+
+    // Initialize
     applyScrollMargins();
+    
+    // Set up animations after a short delay to ensure the page is rendered
+    setTimeout(setupSectionAnimations, 100);
     
     // Update margins when window resizes
     window.addEventListener('resize', applyScrollMargins);
@@ -4334,8 +4272,9 @@ export default function ScrollFix() {
   flex-direction: column;
   color: white;
   width: 100%;
-  height: 100%;
   position: relative;
+  /* Set a fixed height for consistent layout */
+  height: 350px; 
 }
 
 .imageContainer {
@@ -4355,6 +4294,10 @@ export default function ScrollFix() {
 
 .memberInfo {
   padding: 0;
+  /* Set a fixed height for the info section */
+  height: 90px;
+  display: flex;
+  flex-direction: column;
 }
 
 .memberPosition {
@@ -4387,6 +4330,7 @@ export default function ScrollFix() {
   text-decoration: none;
   font-size: 14px;
   transition: color 0.3s;
+  margin-top: auto; /* Push to bottom of container */
 }
 
 .reviewsLink:hover {
@@ -4398,6 +4342,10 @@ export default function ScrollFix() {
 }
 
 @media (max-width: 768px) {
+  .memberCard {
+    height: 320px; /* Adjust height for mobile */
+  }
+  
   .imageContainer {
     aspect-ratio: 3/4; /* Maintain same aspect ratio on mobile */
     margin-bottom: 16px;
@@ -4405,6 +4353,7 @@ export default function ScrollFix() {
   
   .memberInfo {
     padding: 0;
+    height: 80px; /* Smaller info height on mobile */
   }
   
   .memberPosition, 
@@ -4495,7 +4444,8 @@ export default TeamMemberCard;
   color: white;
   margin: 0; /* Added explicit margin */
   margin-top: -1px; /* Fix for the gap between sections */
-
+  position: relative; /* Create stacking context */
+  z-index: 1; /* Ensure proper stacking */
 }
 
 .container {
@@ -4504,6 +4454,8 @@ export default TeamMemberCard;
   background-color: #20222B;
   padding: 60px 60px;
   position: relative;
+  /* Add a fixed height for the container to maintain consistent layout */
+  min-height: 600px;
 }
 
 /* Customize the carousel inside the team section */
@@ -4513,8 +4465,7 @@ export default TeamMemberCard;
 }
 
 .teamSection :global(.navButton:hover) {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.5);
+  opacity: 0.8;
 }
 
 @media (max-width: 1400px) {
@@ -4526,12 +4477,14 @@ export default TeamMemberCard;
 @media (max-width: 1200px) {
   .container {
     padding: 60px 40px;
+    min-height: 650px; /* Adjust for tablet */
   }
 }
 
 @media (max-width: 768px) {
   .container {
     padding: 40px 20px;
+    min-height: 550px; /* Adjust for mobile */
   }
 }
 
@@ -4707,7 +4660,7 @@ export default function TeamSection() {
   height: 50px;
   border-radius: 50%;
   border: 1px solid #BA9778;
-  background: transparent;
+  background: #20222B;
   color: #BA9778;
   font-size: 20px;
   cursor: pointer;
@@ -5092,6 +5045,8 @@ export default function TestimonialsCarousel() {
   color: white;
   margin: 0;
   margin-top: -1px; /* Fix for the gap between sections */
+  position: relative; /* Create stacking context */
+  z-index: 2; /* Higher than team section to ensure proper stacking */
 }
 
 .container {
@@ -5317,4 +5272,220 @@ export default function WorkStagesSection() {
   );
 }
 
-// Collection completed: Processed 44 files, skipped 20 binary files
+================================================================================
+// FILE: src/hooks/useIntersectionObserver.ts
+================================================================================
+
+import { useState, useEffect, useRef, RefObject } from 'react';
+
+interface UseIntersectionObserverProps {
+  threshold?: number;
+  rootMargin?: string;
+  triggerOnce?: boolean;
+}
+
+export default function useIntersectionObserver({
+  threshold = 0.1,
+  rootMargin = '0px',
+  triggerOnce = true
+}: UseIntersectionObserverProps = {}) {
+  const [isVisible, setIsVisible] = useState(false);
+  const [wasTriggered, setWasTriggered] = useState(false);
+  const ref = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const currentRef = ref.current;
+    if (!currentRef) return;
+
+    // Don't re-observe if this was already triggered and we only want to trigger once
+    if (triggerOnce && wasTriggered) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Update state when the element enters the viewport
+        const isIntersecting = entry.isIntersecting;
+        
+        if (isIntersecting) {
+          setIsVisible(true);
+          
+          if (triggerOnce) {
+            setWasTriggered(true);
+            // If we only need to trigger once, disconnect the observer
+            observer.disconnect();
+          }
+        } else if (!triggerOnce) {
+          // If we're not using triggerOnce, set visibility to false when element leaves viewport
+          setIsVisible(false);
+        }
+      },
+      { threshold, rootMargin }
+    );
+
+    observer.observe(currentRef);
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, [threshold, rootMargin, triggerOnce, wasTriggered]);
+
+  return { ref, isVisible };
+}
+
+================================================================================
+// FILE: src/hooks/useNavigation.ts
+================================================================================
+
+import { usePathname } from 'next/navigation';
+import { APP_BASE_PATH } from '../utils/constants';
+
+export const useNavigation = () => {
+  const pathname = usePathname();
+  
+  // Function to check if we're on the homepage
+  const isOnHomePage = (): boolean => {
+    // In Next.js with basePath, the pathname could be '/' or empty
+    // This check handles both cases with and without trailing slashes
+    return pathname === '/' || 
+           pathname === '' || 
+           pathname === APP_BASE_PATH || 
+           pathname === `${APP_BASE_PATH}/`;
+  };
+  
+  // Function to handle smooth scrolling to an element
+  const scrollToElement = (id: string) => {
+    const element = document.getElementById(id);
+    if (!element) return;
+    
+    const headerHeight = window.innerWidth <= 768 ? 90 : 70;
+    const extraPadding = 20;
+    
+    const y = element.getBoundingClientRect().top + window.scrollY - (headerHeight + extraPadding);
+    
+    window.scrollTo({
+      top: y,
+      behavior: 'smooth'
+    });
+    
+    // Update URL without triggering a scroll
+    window.history.pushState(null, '', `#${id}`);
+  };
+  
+  // Handle navigation for anchor links
+  const handleAnchorNavigation = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    
+    // If we're on the homepage, just scroll to the element
+    if (isOnHomePage()) {
+      scrollToElement(id);
+      return;
+    }
+    
+    // We're on a different page, navigate to homepage with the anchor
+    window.location.href = `${APP_BASE_PATH}/#${id}`;
+  };
+  
+  return {
+    pathname,
+    isHomePage: isOnHomePage(),
+    scrollToElement,
+    handleAnchorNavigation
+  };
+};
+
+================================================================================
+// FILE: src/styles/animations.css
+================================================================================
+
+/* Base styling for elements before animation */
+.animate-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+  }
+  
+  /* Applied when element becomes visible */
+  .animate-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Animation variants */
+  .animate-item.from-left {
+    transform: translateX(-30px);
+  }
+  
+  .animate-item.from-left.is-visible {
+    transform: translateX(0);
+  }
+  
+  .animate-item.from-right {
+    transform: translateX(30px);
+  }
+  
+  .animate-item.from-right.is-visible {
+    transform: translateX(0);
+  }
+  
+  /* Animation delay utility classes */
+  .delay-100 {
+    transition-delay: 0.1s;
+  }
+  
+  .delay-200 {
+    transition-delay: 0.2s;
+  }
+  
+  .delay-300 {
+    transition-delay: 0.3s;
+  }
+  
+  .delay-400 {
+    transition-delay: 0.4s;
+  }
+  
+  .delay-500 {
+    transition-delay: 0.5s;
+  }
+  
+  /* Staggered animations for direct children */
+  .stagger-children > *:nth-child(1) { transition-delay: 0.1s; }
+  .stagger-children > *:nth-child(2) { transition-delay: 0.2s; }
+  .stagger-children > *:nth-child(3) { transition-delay: 0.3s; }
+  .stagger-children > *:nth-child(4) { transition-delay: 0.4s; }
+  .stagger-children > *:nth-child(5) { transition-delay: 0.5s; }
+  .stagger-children > *:nth-child(6) { transition-delay: 0.6s; }
+  .stagger-children > *:nth-child(7) { transition-delay: 0.7s; }
+  .stagger-children > *:nth-child(8) { transition-delay: 0.8s; }
+  
+  /* Section with animated content */
+  .animated-section {
+    position: relative;
+  }
+  
+  /* Ensure animations don't interfere with scroll-to functionality */
+  html.scrolling-in-progress .animate-item {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  /* Disable animations for users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-item {
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+================================================================================
+// FILE: src/utils/constants.ts
+================================================================================
+
+// Single source of truth for the application base path
+export const APP_BASE_PATH = '/realty_app';
+
+// Collection completed: Processed 49 files, skipped 20 binary files

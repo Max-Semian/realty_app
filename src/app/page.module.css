@@ -15,41 +15,55 @@
   z-index: 1; /* Ensure content is above background */
 }
 
-/* Full-width image styles */
-.fullWidthImageSection {
-  width: 100%;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-}
 
-.imageContainer {
-  max-width: 1400px;
-  width: 100%;
-  background-color: #20222B;
-  position: relative;
-}
-
-.fullWidthImage {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-@media (max-width: 1400px) {
-  .imageContainer {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
+  /* Full Width Image Section Fix */
   .fullWidthImageSection {
-    height: auto;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
   }
   
-  .fullWidthImage {
-    height: 300px;
-    object-fit: cover;
+  .fullWidthImageSection .imageContainer {
+    max-width: 1200px !important; /* Match our new container width */
+    width: 100%;
+    background-color: #20222B;
+    position: relative;
   }
-}
+  
+  .fullWidthImageSection .fullWidthImage {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Add margin to create space between sections */
+  .fullWidthImageSection {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  
+  /* Add subtle shadow for visual separation */
+  .fullWidthImageSection .imageContainer {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1200px) {
+    .fullWidthImageSection .imageContainer {
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .fullWidthImageSection {
+      height: auto;
+    }
+    
+    .fullWidthImageSection .fullWidthImage {
+      height: 300px;
+      object-fit: cover;
+    }
+  }
+

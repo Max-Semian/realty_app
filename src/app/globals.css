@@ -16,7 +16,7 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Keep only ONE background implementation - the most reliable one */
+/* Improved background implementation */
 body::before {
   content: "";
   position: fixed;
@@ -26,12 +26,12 @@ body::before {
   bottom: 0;
   z-index: -1;
   background-image: url('/realty_app/bg1.jpg');
-  background-size: cover;
+  background-size: 120% auto; /* Slightly enlarged to show more background */
   background-position: center;
   background-repeat: no-repeat;
-  -webkit-transform: translateZ(0); /* Force hardware acceleration */
+  -webkit-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-backface-visibility: hidden; /* Prevent flickering */
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   pointer-events: none;
 }
@@ -56,18 +56,15 @@ body {
 #docs,
 #form,
 #contacts {
-  scroll-margin-top: 120px; /* Large default value */
-  position: relative; /* Establish positioning context */
-  z-index: 1; /* Ensure the element is stacked properly */
+  scroll-margin-top: 120px;
+  position: relative;
+  z-index: 1;
 }
 
 /* Adjust for mobile */
 @media (max-width: 768px) {
-  /* Adjust for mobile */
-  @media (max-width: 768px) {
-    section[id] {
-      scroll-margin-top: 140px;
-    }
+  section[id] {
+    scroll-margin-top: 140px;
   }
 }
 
@@ -78,15 +75,12 @@ section[id] {
   z-index: 1;
 }
 
-
 /* Fix for iOS */
 @supports (-webkit-touch-callout: none) {
   html {
-    /* Disable smooth scrolling on iOS as it can cause issues */
     scroll-behavior: auto;
   }
   
-  /* Add padding to account for fixed header on iOS */
   body {
     padding-top: 0;
   }
@@ -116,15 +110,15 @@ section,
   overflow-x: hidden;
 }
 
+/* Define global container max-width */
+.container {
+  max-width: 1200px !important; /* Reduced from 1400px */
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
 
 section {
   box-sizing: border-box;
-}
-
-.container {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  width: 100% !important;
 }
 
 /* Fix for button widths on small screens */
