@@ -32,25 +32,7 @@
 
 /* Horizontal lines - desktop only */
 @media (min-width: 769px) {
-  .advantagesGrid::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .advantagesGrid::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.1);
-  }
+ 
 }
 
 /* Card styling */
@@ -61,24 +43,7 @@
 
 /* Vertical and bottom lines - desktop only */
 @media (min-width: 769px) {
-  .advantageCard {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .advantageCard::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 1px;
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .advantageCard:nth-child(3n)::after,
-  .advantageCard:last-child::after {
-    display: none;
-  }
+ 
 }
 
 .cardNumber {
