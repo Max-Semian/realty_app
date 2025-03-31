@@ -136,4 +136,8 @@
     align-items: flex-start;
     text-align: left;
   }
+  .title {
+    font-size: 46px;
+    font-weight: 300;
+  }
 }

@@ -135,8 +135,10 @@
   }
   
   .title {
-    font-size: 28px;
+    font-size: 48px;
     margin-bottom: 40px;
+    font-weight: 300;
+    text-align: center;
   }
   
   .advantagesGrid {

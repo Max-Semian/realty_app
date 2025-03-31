@@ -7,7 +7,7 @@ export default function ContactsSection() {
   return (
     <section id="contacts" className={styles.contactsSection}>
       <div className={styles.container}>
-        <h2 className={styles.title}>Контакты</h2>
+        <h2 className={styles.title}>Наши контакты</h2>
         
         <div className={styles.contactsContent}>
           <div className={styles.mapContainer}>

@@ -174,4 +174,8 @@
   .container {
     padding: 40px 20px;
   }
+  .title {
+    font-size: 46px;
+    font-weight: 300;
+  }
 }
