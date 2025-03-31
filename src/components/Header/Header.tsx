@@ -2,12 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "./Header.module.css";
 import { useNavigation } from "../../hooks/useNavigation";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { handleAnchorNavigation } = useNavigation();
+  const router = useRouter();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -44,8 +46,15 @@ const Header = () => {
 
   // Handle anchor link clicks - closes mobile menu and calls navigation handler
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
     setMobileMenuOpen(false);
     handleAnchorNavigation(e, id);
+  };
+
+  // Handle page navigation with menu closing
+  const handlePageClick = (path: string) => {
+    setMobileMenuOpen(false);
+    router.push(path);
   };
 
   return (
@@ -60,15 +69,21 @@ const Header = () => {
 
         {/* Logo - Link to Main Page */}
         <div className={styles.logo} style={{ display: mobileMenuOpen ? 'none' : 'flex' }}>
-          <Link href="/">
+          <a href="/" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); router.push('/'); }}>
             <img src="/realty_app/logo-fixed.svg" alt="Logo" width="78" height="74" />
-          </Link>
+          </a>
         </div>
 
         {/* Navigation Links */}
         <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
-          {/* About Us Page Link */}
-          <Link href="/about-us" onClick={() => setMobileMenuOpen(false)}>О нас</Link>
+          {/* About Us Page Link - using onClick instead of Link component */}
+          <a 
+            href="/about-us" 
+            onClick={(e) => { e.preventDefault(); handlePageClick('/about-us'); }}
+            className={styles.navLink}
+          >
+            О нас
+          </a>
           
           {/* Anchor links on main page */}
           <a href="#properties" onClick={(e) => handleLinkClick(e, 'properties')}>
@@ -124,7 +139,9 @@ const Header = () => {
 
         {/* Mobile "Личный кабинет" link */}
         <div className={styles.mobileLoginLink}>
-          <Link href="#">Личный кабинет</Link>
+          <a href="#" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); }}>
+            Личный кабинет
+          </a>
         </div>
       </div>
     </header>
