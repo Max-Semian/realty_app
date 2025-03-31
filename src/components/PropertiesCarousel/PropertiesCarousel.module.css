@@ -109,7 +109,7 @@
   height: 50px;
   border-radius: 50%;
   border: 1px solid #BA9778;
-  background: transparent;
+  background: #20222B;
   color: #BA9778;
   font-size: 20px;
   cursor: pointer;
@@ -121,8 +121,7 @@
 }
 
 .navButton:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.5);
+  opacity: 0.8;
 }
 
 .prevButton {

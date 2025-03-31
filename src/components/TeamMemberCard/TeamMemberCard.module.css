@@ -3,8 +3,9 @@
   flex-direction: column;
   color: white;
   width: 100%;
-  height: 100%;
   position: relative;
+  /* Set a fixed height for consistent layout */
+  height: 350px; 
 }
 
 .imageContainer {
@@ -24,6 +25,10 @@
 
 .memberInfo {
   padding: 0;
+  /* Set a fixed height for the info section */
+  height: 90px;
+  display: flex;
+  flex-direction: column;
 }
 
 .memberPosition {
@@ -56,6 +61,7 @@
   text-decoration: none;
   font-size: 14px;
   transition: color 0.3s;
+  margin-top: auto; /* Push to bottom of container */
 }
 
 .reviewsLink:hover {
@@ -67,6 +73,10 @@
 }
 
 @media (max-width: 768px) {
+  .memberCard {
+    height: 320px; /* Adjust height for mobile */
+  }
+  
   .imageContainer {
     aspect-ratio: 3/4; /* Maintain same aspect ratio on mobile */
     margin-bottom: 16px;
@@ -74,6 +84,7 @@
   
   .memberInfo {
     padding: 0;
+    height: 80px; /* Smaller info height on mobile */
   }
   
   .memberPosition, 

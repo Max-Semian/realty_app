@@ -6,7 +6,8 @@
   color: white;
   margin: 0; /* Added explicit margin */
   margin-top: -1px; /* Fix for the gap between sections */
-
+  position: relative; /* Create stacking context */
+  z-index: 1; /* Ensure proper stacking */
 }
 
 .container {
@@ -15,6 +16,8 @@
   background-color: #20222B;
   padding: 60px 60px;
   position: relative;
+  /* Add a fixed height for the container to maintain consistent layout */
+  min-height: 600px;
 }
 
 /* Customize the carousel inside the team section */
@@ -24,8 +27,7 @@
 }
 
 .teamSection :global(.navButton:hover) {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.5);
+  opacity: 0.8;
 }
 
 @media (max-width: 1400px) {
@@ -37,11 +39,13 @@
 @media (max-width: 1200px) {
   .container {
     padding: 60px 40px;
+    min-height: 650px; /* Adjust for tablet */
   }
 }
 
 @media (max-width: 768px) {
   .container {
     padding: 40px 20px;
+    min-height: 550px; /* Adjust for mobile */
   }
 }

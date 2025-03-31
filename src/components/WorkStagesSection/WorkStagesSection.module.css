@@ -6,6 +6,8 @@
   color: white;
   margin: 0;
   margin-top: -1px; /* Fix for the gap between sections */
+  position: relative; /* Create stacking context */
+  z-index: 2; /* Higher than team section to ensure proper stacking */
 }
 
 .container {
