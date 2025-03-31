@@ -79,9 +79,11 @@ export default function ScrollFix() {
         section.classList.add('animated-section');
         
         // Find elements to animate within each section
-        const elementsToAnimate = [
-          ...section.querySelectorAll('h1, h2, h3, h4, h5, h6, p, .card, .item, .grid > *, .row > *')
-        ].filter(el => 
+        // Fix: Convert NodeListOf<Element> to Array properly for TypeScript
+        const elementsQuery = section.querySelectorAll(
+          'h1, h2, h3, h4, h5, h6, p, .card, .item, .grid > *, .row > *'
+        );
+        const elementsToAnimate = Array.from(elementsQuery).filter(el => 
           // Don't animate script tags, styles, etc.
           !['SCRIPT', 'STYLE', 'META', 'LINK'].includes(el.tagName)
         );
