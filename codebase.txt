@@ -1,5 +1,5 @@
 // Codebase collection from ./src
-// Generated: 2025-03-30T14:22:50.393Z
+// Generated: 2025-03-31T05:14:36.069Z
 
 
 
@@ -203,6 +203,62 @@ body::before {
   pointer-events: none;
 }
 
+/* Scroll Behavior Improvements */
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  position: relative;
+}
+
+/* Default scroll margins for sections */
+#properties,
+#advantages,
+#specialists,
+#stages,
+#testimonials,
+#docs,
+#form,
+#contacts {
+  scroll-margin-top: 120px; /* Large default value */
+  position: relative; /* Establish positioning context */
+  z-index: 1; /* Ensure the element is stacked properly */
+}
+
+/* Adjust for mobile */
+@media (max-width: 768px) {
+  /* Adjust for mobile */
+  @media (max-width: 768px) {
+    section[id] {
+      scroll-margin-top: 140px;
+    }
+  }
+}
+
+/* Default scroll margins for all section targets */
+section[id] {
+  scroll-margin-top: 120px;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* Fix for iOS */
+@supports (-webkit-touch-callout: none) {
+  html {
+    /* Disable smooth scrolling on iOS as it can cause issues */
+    scroll-behavior: auto;
+  }
+  
+  /* Add padding to account for fixed header on iOS */
+  body {
+    padding-top: 0;
+  }
+}
+
 /* Make all images responsive */
 img {
   max-width: 100%;
@@ -226,6 +282,7 @@ section,
   max-width: 100%;
   overflow-x: hidden;
 }
+
 
 section {
   padding-left: 20px !important;
@@ -288,6 +345,7 @@ section {
 
 import "./globals.css";
 export { metadata } from "./metadata";
+import ScrollFix from "../components/ScrollFix/ScrollFix";
 
 export default function RootLayout({
   children,
@@ -302,6 +360,7 @@ export default function RootLayout({
         overflowX: 'hidden', // Prevent horizontal scrolling
         position: 'relative' // Create a new stacking context
       }}>
+        <ScrollFix />
         {children}
       </body>
     </html>
@@ -1209,9 +1268,9 @@ export default function AdvantagesSection() {
   ];
 
   return (
-    <section className={styles.advantagesSection}>
+    <section id="advantages" className={styles.advantagesSection}>
       <div className={styles.container}>
-        <h2 id="advantages" className={styles.title}>Преимущества</h2>
+        <h2 className={styles.title}>Преимущества</h2>
         
         <div className={styles.advantagesGrid}>
           {advantages.map((advantage) => (
@@ -1632,7 +1691,7 @@ const CardCarousel: React.FC<CardCarouselProps> = ({
   const numberOfDots = totalItems - itemsPerView + 1;
 
   return (
-    <section id="specialists"  className={`${styles.carouselSection} ${className}`}>
+    <section id="specialists" className={`${styles.carouselSection} ${className}`}>
       <div className={styles.container}>
         <h2 className={styles.title}>{title}</h2>
         
@@ -1928,9 +1987,9 @@ export default function ContactForm() {
   };
 
   return (
-    <section className={styles.contactFormSection}>
+    <section id="form" className={styles.contactFormSection}>
       <div className={styles.container}>
-        <h2 id="form" className={styles.title}>Оставьте заявку</h2>
+        <h2 className={styles.title}>Оставьте заявку</h2>
         <p className={styles.subtitle}>
           Мы ответим на все интересующие вопросы и поможем<br />
           в любых даже самых сложных случаях
@@ -2136,9 +2195,9 @@ import styles from './ContactsSection.module.css';
 
 export default function ContactsSection() {
   return (
-    <section className={styles.contactsSection}>
+    <section id="contacts" className={styles.contactsSection}>
       <div className={styles.container}>
-        <h2 id="contacts" className={styles.title}>Контакты</h2>
+        <h2 className={styles.title}>Контакты</h2>
         
         <div className={styles.contactsContent}>
           <div className={styles.mapContainer}>
@@ -2388,9 +2447,9 @@ export default function DocumentsSection() {
   ];
 
   return (
-    <section className={styles.documentsSection}>
+    <section id="docs" className={styles.documentsSection}>
       <div className={styles.container}>
-        <h2 id="docs" className={styles.title}>Наши документы</h2>
+        <h2 className={styles.title}>Наши документы</h2>
         
         <div className={styles.documentsList}>
           {documents.map(document => (
@@ -2594,10 +2653,40 @@ export default function DocumentsSection() {
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styles from './Footer.module.css';
 
 export default function Footer() {
   const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
+
+  // Handle link click with direct scrolling
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    
+    // If we're on a different page, let the browser navigate with the hash
+    if (pathname !== '/') {
+      window.location.href = `/${id}`;
+      return;
+    }
+    
+    // If we're on the home page, scroll directly
+    const section = document.getElementById(id);
+    if (!section) return;
+    
+    const headerHeight = window.innerWidth <= 768 ? 90 : 70;
+    const extraPadding = 20;
+    
+    const y = section.getBoundingClientRect().top + window.scrollY - (headerHeight + extraPadding);
+    
+    window.scrollTo({
+      top: y,
+      behavior: 'smooth'
+    });
+    
+    // Update URL without triggering a scroll
+    window.history.pushState(null, '', `#${id}`);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -2639,17 +2728,66 @@ export default function Footer() {
           {/* Right side - Navigation links */}
           <nav className={styles.footerNav}>
             <div className={styles.navColumn}>
-              <Link href="/about-us" className={styles.navLink}>Об агентстве</Link>
-              <Link href="#properties" className={styles.navLink}>Наши объекты</Link>
-              <Link href="#advantages" className={styles.navLink}>Преимущества</Link>
-              <Link href="#specialists" className={styles.navLink}>Специалисты</Link>
+              <Link href="/about-us" className={styles.navLink}>
+                Об агентстве
+              </Link>
+              
+              <a 
+                href="#properties" 
+                className={styles.navLink}
+                onClick={(e) => handleLinkClick(e, 'properties')}
+              >
+                Наши объекты
+              </a>
+              
+              <a 
+                href="#advantages"
+                className={styles.navLink}
+                onClick={(e) => handleLinkClick(e, 'advantages')}
+              >
+                Преимущества
+              </a>
+              
+              <a 
+                href="#specialists"
+                className={styles.navLink}
+                onClick={(e) => handleLinkClick(e, 'specialists')}
+              >
+                Специалисты
+              </a>
             </div>
             <div className={styles.navColumn}>
-              <Link href="#stages" className={styles.navLink}>Этапы работы</Link>
-              <Link href="#testimonials" className={styles.navLink}>Отзывы</Link>
-              <Link href="#form" className={styles.navLink}>Форма заявки</Link>
-              <Link href="#contacts" className={styles.navLink}>Контакты</Link>
-              {/* <Link href="" className={styles.navLink}>Личный кабинет</Link> */}
+            <a 
+                href="#stages"
+                className={styles.navLink}
+                onClick={(e) => handleLinkClick(e, 'stages')}
+              >
+                Этапы работы
+              </a>
+              
+              <a 
+                href="#testimonials"
+                className={styles.navLink}
+                onClick={(e) => handleLinkClick(e, 'testimonials')}
+              >
+                Отзывы
+              </a>
+              
+              <a 
+                href="#form"
+                className={styles.navLink}
+                onClick={(e) => handleLinkClick(e, 'form')}
+              >
+                Форма заявки
+              </a>
+              
+              <a 
+                href="#contacts"
+                className={styles.navLink}
+                onClick={(e) => handleLinkClick(e, 'contacts')}
+              >
+                Контакты
+              </a>
             </div>
           </nav>
         </div>
@@ -2766,6 +2904,44 @@ export default function Footer() {
   display: none;
 }
 
+.nav a.active {
+  color: #F5A623 !important;
+  opacity: 1 !important;
+}
+
+/* Add a subtle indicator for active items */
+.nav a {
+  position: relative;
+}
+
+.nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #F5A623;
+  transform: scaleX(1);
+  transition: transform 0.3s ease;
+}
+
+.nav a:not(.active)::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #F5A623;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.nav a:hover::after {
+  transform: scaleX(1);
+}
+
 @media (max-width: 1400px) {
   .container {
     max-width: 100%;
@@ -2828,6 +3004,7 @@ export default function Footer() {
   .navOpen {
     transform: translateX(0);
   }
+  
   
   .nav a {
     font-size: 16px;
@@ -2915,6 +3092,10 @@ export default function Footer() {
     color: white;
     text-decoration: none;
   }
+
+  .navOpen a.active::after {
+    width: 30px;
+  }
 }
 
 ================================================================================
@@ -2925,10 +3106,12 @@ export default function Footer() {
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from 'next/navigation';
 import styles from "./Header.module.css";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -2964,17 +3147,46 @@ const Header = () => {
     };
   }, [mobileMenuOpen]);
 
+  // Handle link click with direct scrolling
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    
+    // If we're on a different page, let the browser navigate with the hash
+    if (pathname !== '/realty_app') {
+      window.location.href = `/realty_app/#${id}`;
+      return;
+    }
+    
+    // If we're on the home page, scroll directly
+    const section = document.getElementById(id);
+    if (!section) return;
+    
+    const headerHeight = window.innerWidth <= 768 ? 90 : 70;
+    const extraPadding = 20;
+    
+    const y = section.getBoundingClientRect().top + window.scrollY - (headerHeight + extraPadding);
+    
+    window.scrollTo({
+      top: y,
+      behavior: 'smooth'
+    });
+    
+    // Update URL without triggering a scroll
+    window.history.pushState(null, '', `#${id}`);
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        {/* Mobile Menu Button - Moved to left side */}
+        {/* Mobile Menu Button */}
         <div className={styles.mobileMenu}>
           <button onClick={toggleMobileMenu} aria-label="Toggle menu">
             {mobileMenuOpen ? "✕" : "☰"}
           </button>
         </div>
 
-          {/* Logo with Link to Main Page - Only visible when menu is closed */}
+        {/* Logo with Link to Main Page */}
         <div className={styles.logo} style={{ display: mobileMenuOpen ? 'none' : 'flex' }}>
           <Link href="/">
             <img src="/realty_app/logo-fixed.svg" alt="Logo" width="78" height="74" />
@@ -2984,17 +3196,37 @@ const Header = () => {
         {/* Navigation Links */}
         <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
           <Link href="/about-us" onClick={() => setMobileMenuOpen(false)}>О нас</Link>
-          <Link href="#properties" onClick={() => setMobileMenuOpen(false)}>Наши объекты</Link>
-          <Link href="#advantages" onClick={() => setMobileMenuOpen(false)}>Преимущества</Link>
-          <Link href="#specialists" onClick={() => setMobileMenuOpen(false)}>Специалисты</Link>
+          
+          <a href="#properties" onClick={(e) => handleLinkClick(e, 'properties')}>
+            Наши объекты
+          </a>
+          
+          <a href="#advantages" onClick={(e) => handleLinkClick(e, 'advantages')}>
+            Преимущества
+          </a>
+          
+          <a href="#specialists" onClick={(e) => handleLinkClick(e, 'specialists')}>
+            Специалисты
+          </a>
+          
           {/* Mobile-Only Nav Links */}
           <div className={styles.mobileOnlyLinks}>
-            <Link href="#stages" onClick={() => setMobileMenuOpen(false)}>Этапы работы</Link>
-            <Link href="#testimonials" onClick={() => setMobileMenuOpen(false)}>Отзывы</Link>
-            <Link href="#docs" onClick={() => setMobileMenuOpen(false)}>Документы</Link>
+            <a href="#stages" onClick={(e) => handleLinkClick(e, 'stages')}>
+              Этапы работы
+            </a>
+            
+            <a href="#testimonials" onClick={(e) => handleLinkClick(e, 'testimonials')}>
+              Отзывы
+            </a>
+            
+            <a href="#docs" onClick={(e) => handleLinkClick(e, 'docs')}>
+              Документы
+            </a>
           </div>
-          <Link href="#contacts" onClick={() => setMobileMenuOpen(false)}>Контакты</Link>
-          {/* <Link href="#" onClick={() => setMobileMenuOpen(false)}>Личный кабинет</Link> */}
+          
+          <a href="#contacts" onClick={(e) => handleLinkClick(e, 'contacts')}>
+            Контакты
+          </a>
 
           {/* Logo, title and phone number for the bottom of mobile menu */}
           <div className={styles.navFooter}>
@@ -3229,6 +3461,27 @@ import React from 'react';
 import styles from './HeroSection.module.css';
 
 export default function HeroSection() {
+  // Direct scroll function for the CTA button
+  const handleCTAClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    
+    const formSection = document.getElementById('form');
+    if (!formSection) return;
+    
+    const headerHeight = window.innerWidth <= 768 ? 90 : 70;
+    const extraPadding = 20;
+    
+    const y = formSection.getBoundingClientRect().top + window.scrollY - (headerHeight + extraPadding);
+    
+    window.scrollTo({
+      top: y,
+      behavior: 'smooth'
+    });
+    
+    // Update URL without triggering a scroll
+    window.history.pushState(null, '', '#form');
+  };
+
   return (
     <section className={styles.heroSection}>
       {/* Main content container - 1400px wide */}
@@ -3246,7 +3499,9 @@ export default function HeroSection() {
             </div>
             <p className={styles.slogan}>Вместе мы сможем больше!</p>
             <div className={styles.ctaButton}>
-              <a href="#contact">ОСТАВИТЬ ЗАЯВКУ <span className={styles.arrow}>→</span></a>
+              <a href="#form" onClick={handleCTAClick}>
+                ОСТАВИТЬ ЗАЯВКУ <span className={styles.arrow}>→</span>
+              </a>
             </div>
           </div>
         </div>
@@ -3768,9 +4023,9 @@ export default function PropertiesCarousel() {
   );
 
   return (
-      <section className={styles.propertiesSection}>
+      <section id="properties" className={styles.propertiesSection}>
         <div className={styles.container}>
-          <h2 id="properties" className={styles.title}>Наши объекты</h2>
+          <h2 className={styles.title}>Наши объекты</h2>
     
           <div className={styles.carouselContainer}>
             {/* Карусель отключена — показываем просто первые три объекта */}
@@ -3794,23 +4049,9 @@ export default function PropertiesCarousel() {
               ))}
             </div>
           </div>
-    
-          {/* Отключаем точки */}
-          {/* <div className={styles.dotsContainer}>
-            {Array.from({ length: properties.length - (itemsPerView - 1) }).map((_, index) => (
-              <button
-                key={index}
-                className={`${styles.dot} ${currentIndex === index ? styles.activeDot : ''}`}
-                onClick={() => setCurrentIndex(index)}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div> */}
         </div>
       </section>
- 
-    
-  );
+    );
 }
 
 ================================================================================
@@ -3967,9 +4208,9 @@ export default function PropertiesSection() {
   ];
 
   return (
-    <section className={styles.propertiesSection}>
+    <section id="properties" className={styles.propertiesSection}>
       <div className={styles.container}>
-        <h2 id="properties" className={styles.title}>Наши объекты</h2>
+        <h2 className={styles.title}>Наши объекты</h2>
         
         <div className={styles.propertiesGrid}>
           {properties.map(property => (
@@ -3990,6 +4231,98 @@ export default function PropertiesSection() {
       </div>
     </section>
   );
+}
+
+================================================================================
+// FILE: src/components/ScrollFix/ScrollFix.tsx
+================================================================================
+
+'use client';
+
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+
+export default function ScrollFix() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    // Function to get proper header height based on viewport
+    const getHeaderHeight = () => {
+      const header = document.querySelector('header');
+      if (window.innerWidth <= 768) {
+        return header ? header.offsetHeight : 90;
+      }
+      return header ? header.offsetHeight : 70;
+    };
+
+    // Function to scroll to section with proper offset
+    const scrollToSection = (id: string) => {
+      const element = document.getElementById(id);
+      if (!element) return;
+
+      const headerHeight = getHeaderHeight();
+      const extraPadding = 20;
+      
+      const yOffset = headerHeight + extraPadding;
+      const y = element.getBoundingClientRect().top + window.scrollY - yOffset;
+      
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth'
+      });
+    };
+
+    // Handle initial hash in URL
+    if (window.location.hash) {
+      const id = window.location.hash.substring(1);
+      
+      // Use setTimeout to ensure DOM is fully loaded
+      setTimeout(() => {
+        scrollToSection(id);
+      }, 500);
+    }
+
+    // Set up click handlers for all hash links 
+    const setupHashLinks = () => {
+      document.querySelectorAll('a[href^="#"]').forEach(link => {
+        // Use arrow function to avoid 'this' context issues
+        link.addEventListener('click', (e) => {
+          const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
+          if (!href || href === '#') return;
+          
+          const id = href.substring(1);
+          const element = document.getElementById(id);
+          
+          if (element) {
+            e.preventDefault();
+            scrollToSection(id);
+            history.pushState(null, '', href);
+          }
+        });
+      });
+    };
+
+    // Apply scroll margins to all section elements with IDs
+    const applyScrollMargins = () => {
+      document.querySelectorAll('section[id]').forEach(section => {
+        const headerHeight = getHeaderHeight();
+        section.setAttribute('style', `scroll-margin-top: ${headerHeight + 20}px;`);
+      });
+    };
+
+    // Initialize both functions
+    setupHashLinks();
+    applyScrollMargins();
+    
+    // Update margins when window resizes
+    window.addEventListener('resize', applyScrollMargins);
+    
+    return () => {
+      window.removeEventListener('resize', applyScrollMargins);
+    };
+  }, [pathname]);
+
+  return null;
 }
 
 ================================================================================
@@ -4671,10 +5004,10 @@ export default function TestimonialsCarousel() {
   };
 
   return (
-    <section className={styles.testimonialsSection}>
+    <section id="testimonials" className={styles.testimonialsSection}>
       <div className={styles.container}>
         <div className={styles.sectionHeader}>
-          <h2 id="testimonials" className={styles.title}>Отзывы клиентов</h2>
+          <h2 className={styles.title}>Отзывы клиентов</h2>
           <div className={styles.navigation}>
             <button 
               className={styles.navButton}
@@ -4961,9 +5294,9 @@ export default function WorkStagesSection() {
   ];
 
   return (
-    <section className={styles.workStagesSection}>
+    <section id="stages" className={styles.workStagesSection}>
       <div className={styles.container}>
-        <h2 id="stages" className={styles.title}>Этапы работы</h2>
+        <h2 className={styles.title}>Этапы работы</h2>
         
         <div className={styles.stagesContainer}>
           {workStages.map((stage) => (
@@ -4985,4 +5318,4 @@ export default function WorkStagesSection() {
   );
 }
 
-// Collection completed: Processed 43 files, skipped 20 binary files
+// Collection completed: Processed 44 files, skipped 20 binary files

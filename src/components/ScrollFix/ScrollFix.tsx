@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { isHomePage, APP_BASE_PATH } from '../../utils/constants';
 
 export default function ScrollFix() {
   const pathname = usePathname();
@@ -33,8 +34,8 @@ export default function ScrollFix() {
       });
     };
 
-    // Handle initial hash in URL
-    if (window.location.hash) {
+    // Handle initial hash in URL - only on homepage
+    if (window.location.hash && isHomePage(pathname)) {
       const id = window.location.hash.substring(1);
       
       // Use setTimeout to ensure DOM is fully loaded
@@ -43,11 +44,17 @@ export default function ScrollFix() {
       }, 500);
     }
 
-    // Set up click handlers for all hash links 
+    // Set up click handlers for all hash links on the current page
     const setupHashLinks = () => {
       document.querySelectorAll('a[href^="#"]').forEach(link => {
-        // Use arrow function to avoid 'this' context issues
-        link.addEventListener('click', (e) => {
+        // Remove any existing event listeners first to prevent duplicates
+        const oldLink = link.cloneNode(true);
+        if (link.parentNode) {
+          link.parentNode.replaceChild(oldLink, link);
+        }
+        
+        // Add new event listener
+        oldLink.addEventListener('click', (e) => {
           const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
           if (!href || href === '#') return;
           
@@ -57,7 +64,15 @@ export default function ScrollFix() {
           if (element) {
             e.preventDefault();
             scrollToSection(id);
-            history.pushState(null, '', href);
+            
+            // Update URL differently based on whether we're on home page
+            if (isHomePage(pathname)) {
+              history.pushState(null, '', `${pathname}${href}`);
+            } else {
+              // If not on homepage, we need special handling
+              // This is a backup - should be handled by useNavigation hook
+              history.pushState(null, '', `${APP_BASE_PATH}/${href}`);
+            }
           }
         });
       });

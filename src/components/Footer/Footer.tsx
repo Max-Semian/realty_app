@@ -2,41 +2,14 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import styles from './Footer.module.css';
+import { useNavigation } from '../../hooks/useNavigation';
 
 export default function Footer() {
   const [isMobile, setIsMobile] = useState(false);
-  const pathname = usePathname();
+  const { handleAnchorNavigation } = useNavigation();
 
-  // Handle link click with direct scrolling
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
-    
-    // If we're on a different page, let the browser navigate with the hash
-    if (pathname !== '/') {
-      window.location.href = `/${id}`;
-      return;
-    }
-    
-    // If we're on the home page, scroll directly
-    const section = document.getElementById(id);
-    if (!section) return;
-    
-    const headerHeight = window.innerWidth <= 768 ? 90 : 70;
-    const extraPadding = 20;
-    
-    const y = section.getBoundingClientRect().top + window.scrollY - (headerHeight + extraPadding);
-    
-    window.scrollTo({
-      top: y,
-      behavior: 'smooth'
-    });
-    
-    // Update URL without triggering a scroll
-    window.history.pushState(null, '', `#${id}`);
-  };
-
+  // Handle window resize for mobile detection
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -77,6 +50,7 @@ export default function Footer() {
           {/* Right side - Navigation links */}
           <nav className={styles.footerNav}>
             <div className={styles.navColumn}>
+              {/* Fixed path to avoid duplication */}
               <Link href="/about-us" className={styles.navLink}>
                 Об агентстве
               </Link>
@@ -84,7 +58,7 @@ export default function Footer() {
               <a 
                 href="#properties" 
                 className={styles.navLink}
-                onClick={(e) => handleLinkClick(e, 'properties')}
+                onClick={(e) => handleAnchorNavigation(e, 'properties')}
               >
                 Наши объекты
               </a>
@@ -92,7 +66,7 @@ export default function Footer() {
               <a 
                 href="#advantages"
                 className={styles.navLink}
-                onClick={(e) => handleLinkClick(e, 'advantages')}
+                onClick={(e) => handleAnchorNavigation(e, 'advantages')}
               >
                 Преимущества
               </a>
@@ -100,16 +74,16 @@ export default function Footer() {
               <a 
                 href="#specialists"
                 className={styles.navLink}
-                onClick={(e) => handleLinkClick(e, 'specialists')}
+                onClick={(e) => handleAnchorNavigation(e, 'specialists')}
               >
                 Специалисты
               </a>
             </div>
             <div className={styles.navColumn}>
-            <a 
+              <a 
                 href="#stages"
                 className={styles.navLink}
-                onClick={(e) => handleLinkClick(e, 'stages')}
+                onClick={(e) => handleAnchorNavigation(e, 'stages')}
               >
                 Этапы работы
               </a>
@@ -117,7 +91,7 @@ export default function Footer() {
               <a 
                 href="#testimonials"
                 className={styles.navLink}
-                onClick={(e) => handleLinkClick(e, 'testimonials')}
+                onClick={(e) => handleAnchorNavigation(e, 'testimonials')}
               >
                 Отзывы
               </a>
@@ -125,7 +99,7 @@ export default function Footer() {
               <a 
                 href="#form"
                 className={styles.navLink}
-                onClick={(e) => handleLinkClick(e, 'form')}
+                onClick={(e) => handleAnchorNavigation(e, 'form')}
               >
                 Форма заявки
               </a>
@@ -133,7 +107,7 @@ export default function Footer() {
               <a 
                 href="#contacts"
                 className={styles.navLink}
-                onClick={(e) => handleLinkClick(e, 'contacts')}
+                onClick={(e) => handleAnchorNavigation(e, 'contacts')}
               >
                 Контакты
               </a>

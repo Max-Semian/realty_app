@@ -73,12 +73,7 @@
 .slogan {
   font-size: 18px;
   color: #20222B;
-  margin: 0;
-  padding-left: 0px; /* Aligns with the start of the title text */
-}
-
-.ctaButton {
-  display: none; /* Hide in desktop view */
+  margin-bottom: 20px;
 }
 
 .ctaButton a {

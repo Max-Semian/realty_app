@@ -2,12 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from 'next/navigation';
 import styles from "./Header.module.css";
+import { useNavigation } from "../../hooks/useNavigation";
+import { APP_BASE_PATH } from "../../utils/constants";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
+  const { handleAnchorNavigation } = useNavigation();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -43,33 +44,10 @@ const Header = () => {
     };
   }, [mobileMenuOpen]);
 
-  // Handle link click with direct scrolling
+  // Internal function to handle link clicks - closes mobile menu and calls navigation handler
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
     setMobileMenuOpen(false);
-    
-    // If we're on a different page, let the browser navigate with the hash
-    if (pathname !== '/') {
-      window.location.href = `/${id}`;
-      return;
-    }
-    
-    // If we're on the home page, scroll directly
-    const section = document.getElementById(id);
-    if (!section) return;
-    
-    const headerHeight = window.innerWidth <= 768 ? 90 : 70;
-    const extraPadding = 20;
-    
-    const y = section.getBoundingClientRect().top + window.scrollY - (headerHeight + extraPadding);
-    
-    window.scrollTo({
-      top: y,
-      behavior: 'smooth'
-    });
-    
-    // Update URL without triggering a scroll
-    window.history.pushState(null, '', `#${id}`);
+    handleAnchorNavigation(e, id);
   };
 
   return (
@@ -82,7 +60,7 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Logo with Link to Main Page */}
+        {/* Logo with Link to Main Page - Fixed path */}
         <div className={styles.logo} style={{ display: mobileMenuOpen ? 'none' : 'flex' }}>
           <Link href="/">
             <img src="/realty_app/logo-fixed.svg" alt="Logo" width="78" height="74" />
@@ -91,6 +69,7 @@ const Header = () => {
 
         {/* Navigation Links */}
         <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
+          {/* Fixed about-us path to avoid duplication */}
           <Link href="/about-us" onClick={() => setMobileMenuOpen(false)}>О нас</Link>
           
           <a href="#properties" onClick={(e) => handleLinkClick(e, 'properties')}>

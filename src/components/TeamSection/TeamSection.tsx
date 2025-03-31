@@ -65,6 +65,7 @@ export default function TeamSection() {
     <section className={styles.teamSection}>
       <div className={styles.container}>
         <CardCarousel 
+          className={styles.carousel}
           title="Специалисты" 
           itemsPerView={4}
           showDots={false} /* Hide dots to match Figma design */
