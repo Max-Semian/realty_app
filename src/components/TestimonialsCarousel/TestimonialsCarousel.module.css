@@ -257,6 +257,9 @@
   .carouselTrack {
     width: 100% !important;
   }
+  .dotsContainer {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
