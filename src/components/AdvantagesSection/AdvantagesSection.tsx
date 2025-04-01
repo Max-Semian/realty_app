@@ -51,6 +51,8 @@ export default function AdvantagesSection() {
         <div className={styles.advantagesGrid}>
           {advantages.map((advantage) => (
             <div key={advantage.id} className={styles.advantageCard}>
+              <div className={styles.hLine}></div>
+              <div className={styles.vLine}></div>
               <div className={styles.cardNumber}>{advantage.number}</div>
               <h3 className={styles.cardTitle}>{advantage.title}</h3>
               <p className={styles.cardDescription}>{advantage.description}</p>

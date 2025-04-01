@@ -1,5 +1,5 @@
-// Codebase collection from ./src/
-// Generated: 2025-04-01T12:31:10.741Z
+// Codebase collection from ./src
+// Generated: 2025-04-01T17:32:58.527Z
 
 
 
@@ -350,9 +350,11 @@ section {
 // FILE: src/app/layout.tsx
 ================================================================================
 
+// Updated src/app/layout.tsx
 import "./globals.css";
 export { metadata } from "./metadata";
 import ScrollFix from "../components/ScrollFix/ScrollFix";
+import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
 
 // Import our custom CSS adjustments
 import "../styles/container-adjustments.css";
@@ -375,6 +377,7 @@ export default function RootLayout({
         position: 'relative', // Create a new stacking context
         backgroundColor: '#121318' // Darker background color that matches the design
       }}>
+        <LoadingOverlay />
         <ScrollFix />
         {children}
       </body>
@@ -1095,7 +1098,6 @@ export default function AboutUsSection() {
 .advantagesGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
   position: relative;
 }
 
@@ -1106,6 +1108,7 @@ export default function AboutUsSection() {
 
 /* Card styling */
 .advantageCard {
+  border-top: 2px #BA9778 solid;
   position: relative;
   padding: 30px;
 }
@@ -3378,10 +3381,28 @@ export default Header;
 // FILE: src/components/HeroSection/HeroSection.tsx
 ================================================================================
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from './HeroSection.module.css';
+import '../../styles/initial-load-animations.css';
 
 export default function HeroSection() {
+  const sloganRef = useRef<HTMLParagraphElement>(null);
+  
+  // Ensure the slogan animation works correctly
+  useEffect(() => {
+    // Apply animation class with slight delay to force repaint
+    const sloganElement = sloganRef.current;
+    if (sloganElement) {
+      // Force repaint by temporarily removing the animation class
+      sloganElement.classList.remove('initial-load-animation');
+      
+      // Force a browser repaint
+      void sloganElement.offsetWidth;
+      
+      // Re-add the animation class
+      sloganElement.classList.add('initial-load-animation');
+    }
+  }, []);
   // Direct scroll function for the CTA button
   const handleCTAClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -3409,7 +3430,7 @@ export default function HeroSection() {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.heroContent}>
-            <div className={styles.logoTitleWrapper}>
+            <div className={`${styles.logoTitleWrapper} initial-load-animation`}>
               <div className={styles.logo}>
                 <img src="/realty_app/LOGO_4.svg" alt="Logo" />
               </div>
@@ -3418,8 +3439,8 @@ export default function HeroSection() {
                 <span className={styles.subtitle}>недвижимости</span>
               </h1>
             </div>
-            <p className={styles.slogan}>Вместе мы сможем больше!</p>
-            <div className={styles.ctaButton}>
+            <p ref={sloganRef} className={`${styles.slogan} initial-load-animation hero-slogan`}>Вместе мы сможем больше!</p>
+            <div className={`${styles.ctaButton} initial-load-animation`}>
               <a href="#form" onClick={handleCTAClick}>
                 ОСТАВИТЬ ЗАЯВКУ <span className={styles.arrow}>→</span>
               </a>
@@ -3440,6 +3461,174 @@ export default function HeroSection() {
 // FILE: src/components/HeroSection/assets/bg1.jpg
 // [BINARY FILE - CONTENT SKIPPED]
 ================================================================================
+
+================================================================================
+// FILE: src/components/LoadingOverlay/LoadingOverlay.module.css
+================================================================================
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #121318;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Ensure it's above everything */
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
+    will-change: opacity;
+  }
+  
+  .fadeOut {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .logoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+    will-change: opacity, transform;
+  }
+  
+  .logoVisible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .logo {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+  }
+  
+  .loadingText {
+    color: #BA9778;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+  
+  /* Make sure the overlay has a nice transition on smaller screens */
+  @media (max-width: 768px) {
+    .logo {
+      width: 120px;
+      height: 120px;
+    }
+    
+    .loadingText {
+      font-size: 14px;
+    }
+  }
+
+================================================================================
+// FILE: src/components/LoadingOverlay/LoadingOverlay.tsx
+================================================================================
+
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import styles from './LoadingOverlay.module.css';
+
+const LoadingOverlay: React.FC = () => {
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [logoVisible, setLogoVisible] = useState(false);
+  const [overlayVisible, setOverlayVisible] = useState(true);
+
+  useEffect(() => {
+    // Show logo with a slight delay for a better visual effect
+    const logoTimer = setTimeout(() => {
+      setLogoVisible(true);
+    }, 300);
+
+    // Create an array of critical images to preload
+    const imagesToPreload = [
+      '/realty_app/bg1.jpg', // Background image
+      '/realty_app/HomeBG1.jpg', // Hero background
+      '/realty_app/LOGO_4.svg', // Logo in hero
+      '/realty_app/logo-fixed.svg' // Header logo
+    ];
+
+    let loadedCount = 0;
+    const totalImages = imagesToPreload.length;
+
+    // Function to handle image load
+    const handleImageLoad = () => {
+      loadedCount++;
+      if (loadedCount === totalImages) {
+        // All critical images are loaded
+        setTimeout(() => {
+          setImagesLoaded(true);
+          
+          // Add a slight delay before hiding the overlay completely
+          setTimeout(() => {
+            setOverlayVisible(false);
+            
+            // Ensure browser repaints elements before adding animation class
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                // Add the class to show all first-screen animations
+                document.documentElement.classList.add('initial-load-complete');
+              });
+            });
+          }, 800);
+        }, 1000); // Minimum display time for overlay
+      }
+    };
+
+    // Preload all critical images
+    imagesToPreload.forEach(src => {
+      const img = new Image();
+      img.src = src;
+      img.onload = handleImageLoad;
+      img.onerror = handleImageLoad; // Count errors as loaded to prevent infinite wait
+    });
+
+    return () => {
+      clearTimeout(logoTimer);
+    };
+  }, []);
+
+  // If overlay is completely hidden, don't render it at all
+  if (!overlayVisible) return null;
+
+  return (
+    <div 
+      className={`${styles.overlay} ${imagesLoaded ? styles.fadeOut : ''}`}
+      aria-hidden="true"
+    >
+      <div className={`${styles.logoContainer} ${logoVisible ? styles.logoVisible : ''}`}>
+        <img 
+          src="/realty_app/LOGO_4.svg" 
+          alt="Loading" 
+          className={styles.logo}
+        />
+        <div className={styles.loadingText}>Загрузка...</div>
+      </div>
+    </div>
+  );
+};
+
+export default LoadingOverlay;
 
 ================================================================================
 // FILE: src/components/PrincipSection/PrincipSection.module.css
@@ -5896,10 +6085,71 @@ export const useNavigation = () => {
 
 
 ================================================================================
+// FILE: src/styles/initial-load-animations.css
+================================================================================
+
+/* Initial load animation styles */
+.initial-load-animation {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: none; /* No transition initially */
+  }
+  
+  /* Apply transitions only after initial load is complete */
+  html.initial-load-complete .initial-load-animation {
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  /* Staggered animations for hero content */
+  .heroContent .initial-load-animation:nth-child(1) {
+    transition-delay: 0.1s;
+  }
+  
+  /* Target the slogan specifically with a class */
+  .hero-slogan.initial-load-animation {
+    transition-delay: 0.3s !important;
+    /* Ensure this has higher specificity */
+    opacity: 0 !important;
+    transform: translateY(20px) !important;
+  }
+  
+  .heroContent .initial-load-animation:nth-child(3) {
+    transition-delay: 0.5s;
+  }
+  
+  /* Class to show the elements */
+  html.initial-load-complete .initial-load-animation {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Special override for the hero slogan to ensure it animates correctly */
+  html.initial-load-complete .hero-slogan.initial-load-animation {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  
+  /* Ensure transitions don't interfere with scroll-to functionality */
+  html.scrolling-in-progress .initial-load-animation {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  /* Disable animations for users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .initial-load-animation {
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+================================================================================
 // FILE: src/utils/constants.ts
 ================================================================================
 
 // Single source of truth for the application base path
 export const APP_BASE_PATH = '/realty_app';
 
-// Collection completed: Processed 50 files, skipped 20 binary files
+// Collection completed: Processed 53 files, skipped 20 binary files

@@ -30,20 +30,36 @@
   position: relative;
 }
 
-/* Horizontal lines - desktop only */
-@media (min-width: 769px) {
- 
+/* Lines - desktop only */
+@media (min-width: 1200px) {
+  .vLine {
+    position: absolute;
+    background-color: #BA9778;
+    width: 2px;
+    height: 20px;
+    left: 40px;
+    top: 0;
+  }
+  
+  .hLine {
+    position: absolute;
+    background-color: #BA9778;
+    width: 112.5%;
+    height: 2px;
+    left: 40px;
+    top: 0;
+  }
+
+  /* Target the horizontal line only for the last item in each row */
+  .advantagesGrid .advantageCard:nth-child(3n) .hLine {
+    width: 90%; /* Make horizontal line shorter for last items */
+  }
 }
 
 /* Card styling */
 .advantageCard {
   position: relative;
   padding: 30px;
-}
-
-/* Vertical and bottom lines - desktop only */
-@media (min-width: 769px) {
- 
 }
 
 .cardNumber {
