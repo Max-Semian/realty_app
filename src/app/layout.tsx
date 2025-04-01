@@ -1,6 +1,8 @@
+// Updated src/app/layout.tsx
 import "./globals.css";
 export { metadata } from "./metadata";
 import ScrollFix from "../components/ScrollFix/ScrollFix";
+import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
 
 // Import our custom CSS adjustments
 import "../styles/container-adjustments.css";
@@ -23,6 +25,7 @@ export default function RootLayout({
         position: 'relative', // Create a new stacking context
         backgroundColor: '#121318' // Darker background color that matches the design
       }}>
+        <LoadingOverlay />
         <ScrollFix />
         {children}
       </body>

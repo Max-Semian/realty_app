@@ -1,0 +1,73 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #121318;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Ensure it's above everything */
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
+    will-change: opacity;
+  }
+  
+  .fadeOut {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .logoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+    will-change: opacity, transform;
+  }
+  
+  .logoVisible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .logo {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+  }
+  
+  .loadingText {
+    color: #BA9778;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+  
+  /* Make sure the overlay has a nice transition on smaller screens */
+  @media (max-width: 768px) {
+    .logo {
+      width: 120px;
+      height: 120px;
+    }
+    
+    .loadingText {
+      font-size: 14px;
+    }
+  }

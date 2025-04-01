@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from './HeroSection.module.css';
+import '../../styles/initial-load-animations.css';
 
 export default function HeroSection() {
+  const sloganRef = useRef<HTMLParagraphElement>(null);
+  
+  // Ensure the slogan animation works correctly
+  useEffect(() => {
+    // Apply animation class with slight delay to force repaint
+    const sloganElement = sloganRef.current;
+    if (sloganElement) {
+      // Force repaint by temporarily removing the animation class
+      sloganElement.classList.remove('initial-load-animation');
+      
+      // Force a browser repaint
+      void sloganElement.offsetWidth;
+      
+      // Re-add the animation class
+      sloganElement.classList.add('initial-load-animation');
+    }
+  }, []);
   // Direct scroll function for the CTA button
   const handleCTAClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -29,7 +47,7 @@ export default function HeroSection() {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.heroContent}>
-            <div className={styles.logoTitleWrapper}>
+            <div className={`${styles.logoTitleWrapper} initial-load-animation`}>
               <div className={styles.logo}>
                 <img src="/realty_app/LOGO_4.svg" alt="Logo" />
               </div>
@@ -38,8 +56,8 @@ export default function HeroSection() {
                 <span className={styles.subtitle}>недвижимости</span>
               </h1>
             </div>
-            <p className={styles.slogan}>Вместе мы сможем больше!</p>
-            <div className={styles.ctaButton}>
+            <p ref={sloganRef} className={`${styles.slogan} initial-load-animation hero-slogan`}>Вместе мы сможем больше!</p>
+            <div className={`${styles.ctaButton} initial-load-animation`}>
               <a href="#form" onClick={handleCTAClick}>
                 ОСТАВИТЬ ЗАЯВКУ <span className={styles.arrow}>→</span>
               </a>

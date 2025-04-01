@@ -1,0 +1,56 @@
+/* Initial load animation styles */
+.initial-load-animation {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: none; /* No transition initially */
+  }
+  
+  /* Apply transitions only after initial load is complete */
+  html.initial-load-complete .initial-load-animation {
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  /* Staggered animations for hero content */
+  .heroContent .initial-load-animation:nth-child(1) {
+    transition-delay: 0.1s;
+  }
+  
+  /* Target the slogan specifically with a class */
+  .hero-slogan.initial-load-animation {
+    transition-delay: 0.3s !important;
+    /* Ensure this has higher specificity */
+    opacity: 0 !important;
+    transform: translateY(20px) !important;
+  }
+  
+  .heroContent .initial-load-animation:nth-child(3) {
+    transition-delay: 0.5s;
+  }
+  
+  /* Class to show the elements */
+  html.initial-load-complete .initial-load-animation {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Special override for the hero slogan to ensure it animates correctly */
+  html.initial-load-complete .hero-slogan.initial-load-animation {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  
+  /* Ensure transitions don't interfere with scroll-to functionality */
+  html.scrolling-in-progress .initial-load-animation {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  /* Disable animations for users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .initial-load-animation {
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
