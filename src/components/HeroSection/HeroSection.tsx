@@ -49,7 +49,7 @@ export default function HeroSection() {
           <div className={styles.heroContent}>
             <div className={`${styles.logoTitleWrapper} initial-load-animation`}>
               <div className={styles.logo}>
-                <img src="/realty_app/LOGO_4.svg" alt="Logo" />
+                <img src="/realty_app/LOGO_BLACK.png" alt="Logo" />
               </div>
               <h1 className={styles.title}>
                 АГЕНТСТВО
