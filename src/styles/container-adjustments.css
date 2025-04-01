@@ -5,6 +5,11 @@
     --container-padding-tablet: 40px;
     --container-padding-mobile: 20px;
   }
+  @media (max-width: 1650px) {
+    :root {
+        --max-container-width: 1200px;
+    }
+}
   
   /* Target all container classes across components */
   .container,

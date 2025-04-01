@@ -22,8 +22,8 @@
   }
     
   .title {
-    font-size: 36px;
-    font-weight: 400;
+    font-size: 48px;
+    font-weight: 100;
     margin-bottom: 30px;
     margin-top: 0; /* Ensure no extra spacing from the title */
     text-transform: uppercase;

@@ -55,6 +55,12 @@
       max-width: 100%;
     }
   }
+
+  @media (max-width: 1600px) {
+    .fullWidthImageSection .imageContainer {
+      max-width: 1200px !important;
+    }
+  }
   
   @media (max-width: 768px) {
     .fullWidthImageSection {
