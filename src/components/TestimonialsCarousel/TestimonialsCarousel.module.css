@@ -126,7 +126,7 @@
 
 .testimonialHeader {
   margin-bottom: 16px;
-  padding-top: 36px;
+  padding-top: 20px;
 }
 
 .testimonialAuthor {
@@ -163,7 +163,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: #3c4050;
   border: none;
   cursor: pointer;
   padding: 0;
@@ -171,8 +171,8 @@
 }
 
 .activeDot {
-  background-color: #F5A623;
-  transform: scale(1.2);
+  background-color: #BA9778;
+  /* transform: scale(1.2); */
 }
 
 .leaveCommentContainer {
@@ -184,12 +184,12 @@
 }
 
 .leaveCommentButton {
-  padding: 12px 24px;
-  background-color: #cbb18b;
-  color: #222;
+  padding: 16px 30px;
+  background-color: #BA9778;
+  color: #20222B;
   border: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   transition: background-color 0.3s;
   text-align: center;

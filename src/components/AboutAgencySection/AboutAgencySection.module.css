@@ -22,8 +22,8 @@
 }
 
 .title {
-  font-size: 36px;
-  font-weight: 300;
+  font-size: 58px;
+  font-weight: 100;
   margin: 0;
   scroll-margin-top: 300px;
 }
@@ -33,7 +33,7 @@
   align-items: center;
   color: white;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 18px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -52,6 +52,7 @@
   flex-direction: row; /* Horizontal layout for desktop */
   justify-content: space-between;
   align-items: flex-start;
+  gap:50px;
 }
 
 .description {
@@ -59,7 +60,7 @@
 }
 
 .description p {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.6;
   margin-bottom: 20px;
   font-weight: 300;
@@ -79,17 +80,17 @@
 }
 
 .statNumber {
-  font-size: 48px;
+  font-size: 55px;
   font-weight: 300;
   color: #BA9778;
   margin-bottom: 8px;
 }
 
 .statText {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.8);
-  max-width: 120px;
+  max-width: 180px;
 }
 
 .mobileLearnMore {

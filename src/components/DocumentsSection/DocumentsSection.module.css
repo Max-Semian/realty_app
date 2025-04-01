@@ -18,8 +18,8 @@
 }
 
 .title {
-  font-size: 36px;
-  font-weight: 400;
+  font-size: 58px;
+  font-weight: 100;
   margin-bottom: 40px;
   scroll-margin-top: 300px;
 }
@@ -32,18 +32,18 @@
 .documentItem {
   display: flex;
   justify-content: space-between;
-  padding: 20px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 40px 0;
+  border-top: 2px solid #BA9778;
 }
 
 .documentItem:last-child {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid #BA9778;
 }
 
 .documentInfo {
   display: flex;
   align-items: flex-start;
-  gap: 16px;
+  gap: 70px;
 }
 
 .downloadIcon {
@@ -76,13 +76,13 @@
 }
 
 .documentTitle {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 300;
   margin: 0 0 8px 0;
 }
 
 .documentFormat {
-  font-size: 14px;
+  font-size: 16px;
   color: rgba(255, 255, 255, 0.6);
   margin: 0;
 }
@@ -90,17 +90,18 @@
 .documentMeta {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   text-align: right;
 }
 
 .documentDate {
-  font-size: 14px;
+  font-size: 16px;
+  color: rgb(255, 255, 255);
   margin: 0 0 8px 0;
 }
 
 .documentOrg {
-  font-size: 14px;
+  font-size: 16px;
   color: rgba(255, 255, 255, 0.6);
   margin: 0;
 }
