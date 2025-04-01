@@ -119,6 +119,24 @@ export default function TestimonialsCarousel() {
           </div>
         </div>
         
+        {/* Mobile Navigation Buttons */}
+        <div className={styles.mobileNavigation}>
+          <button 
+            className={`${styles.mobileNavButton} ${styles.mobileNavPrev}`}
+            onClick={prevSlide}
+            aria-label="Previous testimonial"
+          >
+            ←
+          </button>
+          <button 
+            className={`${styles.mobileNavButton} ${styles.mobileNavNext}`}
+            onClick={nextSlide}
+            aria-label="Next testimonial"
+          >
+            →
+          </button>
+        </div>
+        
         <div className={styles.carouselContainer}>
           <div 
             className={styles.carouselTrack}

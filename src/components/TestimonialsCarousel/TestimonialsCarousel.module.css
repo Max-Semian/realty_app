@@ -53,6 +53,37 @@
   opacity: 0.8;
 }
 
+/* Mobile side navigation buttons */
+.mobileNavigation {
+  display: none; /* Hidden by default */
+}
+
+.mobileNavButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #BA9778;
+  background: rgba(32, 34, 43, 0.8);
+  color: #BA9778;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.mobileNavPrev {
+  left: 10px;
+}
+
+.mobileNavNext {
+  right: 10px;
+}
+
 /* Carousel structure */
 .carouselContainer {
   width: 100%;
@@ -182,7 +213,7 @@
   .testimonialGroup {
     justify-content: center;
     gap: 20px;
-      width: 33%;
+    width: 33%;
   }
 
   .testimonialCard {
@@ -202,7 +233,7 @@
   }
 
   .testimonialCard {
-    width: 100%;
+    width: 88%;
     max-width: 380px;
     margin: 0 auto;
   }
@@ -215,6 +246,12 @@
 
   .navigation {
     align-self: center;
+    display: none; /* Hide original navigation on mobile */
+  }
+  
+  /* Show mobile navigation on mobile */
+  .mobileNavigation {
+    display: block;
   }
 
   .carouselTrack {
@@ -237,5 +274,8 @@
     width: 40px;
     height: 40px;
     font-size: 16px;
+  }
+  .dotsContainer {
+    display: none;
   }
 }

@@ -1,5 +1,5 @@
 // Codebase collection from ./src
-// Generated: 2025-03-31T08:03:37.244Z
+// Generated: 2025-03-31T15:37:25.764Z
 
 
 
@@ -183,7 +183,7 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Keep only ONE background implementation - the most reliable one */
+/* Improved background implementation */
 body::before {
   content: "";
   position: fixed;
@@ -193,12 +193,12 @@ body::before {
   bottom: 0;
   z-index: -1;
   background-image: url('/realty_app/bg1.jpg');
-  background-size: cover;
+  background-size: 120% auto; /* Slightly enlarged to show more background */
   background-position: center;
   background-repeat: no-repeat;
-  -webkit-transform: translateZ(0); /* Force hardware acceleration */
+  -webkit-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-backface-visibility: hidden; /* Prevent flickering */
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   pointer-events: none;
 }
@@ -223,18 +223,15 @@ body {
 #docs,
 #form,
 #contacts {
-  scroll-margin-top: 120px; /* Large default value */
-  position: relative; /* Establish positioning context */
-  z-index: 1; /* Ensure the element is stacked properly */
+  scroll-margin-top: 120px;
+  position: relative;
+  z-index: 1;
 }
 
 /* Adjust for mobile */
 @media (max-width: 768px) {
-  /* Adjust for mobile */
-  @media (max-width: 768px) {
-    section[id] {
-      scroll-margin-top: 140px;
-    }
+  section[id] {
+    scroll-margin-top: 140px;
   }
 }
 
@@ -245,15 +242,12 @@ section[id] {
   z-index: 1;
 }
 
-
 /* Fix for iOS */
 @supports (-webkit-touch-callout: none) {
   html {
-    /* Disable smooth scrolling on iOS as it can cause issues */
     scroll-behavior: auto;
   }
   
-  /* Add padding to account for fixed header on iOS */
   body {
     padding-top: 0;
   }
@@ -283,15 +277,15 @@ section,
   overflow-x: hidden;
 }
 
+/* Define global container max-width */
+.container {
+  max-width: 1200px !important; /* Reduced from 1400px */
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
 
 section {
   box-sizing: border-box;
-}
-
-.container {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  width: 100% !important;
 }
 
 /* Fix for button widths on small screens */
@@ -360,6 +354,9 @@ import "./globals.css";
 export { metadata } from "./metadata";
 import ScrollFix from "../components/ScrollFix/ScrollFix";
 
+// Import our custom CSS adjustments
+import "../styles/container-adjustments.css";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -367,11 +364,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Add this meta tag to improve mobile rendering */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+      </head>
       <body style={{
         margin: 0,
         padding: 0,
         overflowX: 'hidden', // Prevent horizontal scrolling
-        position: 'relative' // Create a new stacking context
+        position: 'relative', // Create a new stacking context
+        backgroundColor: '#121318' // Darker background color that matches the design
       }}>
         <ScrollFix />
         {children}
@@ -413,44 +415,59 @@ export const metadata: Metadata = {
   z-index: 1; /* Ensure content is above background */
 }
 
-/* Full-width image styles */
-.fullWidthImageSection {
-  width: 100%;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-}
 
-.imageContainer {
-  max-width: 1400px;
-  width: 100%;
-  background-color: #20222B;
-  position: relative;
-}
-
-.fullWidthImage {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-@media (max-width: 1400px) {
-  .imageContainer {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
+  /* Full Width Image Section Fix */
   .fullWidthImageSection {
-    height: auto;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
   }
   
-  .fullWidthImage {
-    height: 300px;
-    object-fit: cover;
+  .fullWidthImageSection .imageContainer {
+    max-width: 1200px !important; /* Match our new container width */
+    width: 100%;
+    background-color: #20222B;
+    position: relative;
   }
-}
+  
+  .fullWidthImageSection .fullWidthImage {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Add margin to create space between sections */
+  .fullWidthImageSection {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  
+  /* Add subtle shadow for visual separation */
+  .fullWidthImageSection .imageContainer {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1200px) {
+    .fullWidthImageSection .imageContainer {
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .fullWidthImageSection {
+      height: auto;
+    }
+    
+    .fullWidthImageSection .fullWidthImage {
+      height: 300px;
+      object-fit: cover;
+    }
+  }
+
+
 
 ================================================================================
 // FILE: src/app/page.tsx
@@ -539,7 +556,7 @@ export default function Home() {
 
 .title {
   font-size: 36px;
-  font-weight: 400;
+  font-weight: 300;
   margin: 0;
   scroll-margin-top: 300px;
 }
@@ -625,7 +642,7 @@ export default function Home() {
   }
   
   .title {
-    font-size: 28px;
+    font-size: 38px;
     margin-bottom: 10px;
   }
   
@@ -695,7 +712,7 @@ export default function AboutAgencySection() {
     <section className={styles.aboutSection}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>О нашем агентстве</h2>
+          <h2 className={styles.title}>О наc</h2>
           <a href="about-us" className={styles.learnMore}>
             УЗНАТЬ БОЛЬШЕ <span className={styles.arrow}>→</span>
           </a>
@@ -1187,8 +1204,10 @@ export default function AboutUsSection() {
   }
   
   .title {
-    font-size: 28px;
+    font-size: 38px;
     margin-bottom: 40px;
+    font-weight: 300;
+    text-align: center;
   }
   
   .advantagesGrid {
@@ -1511,7 +1530,7 @@ export default AnimatedSection;
   }
   
   .title {
-    font-size: 28px;
+    font-size: 38px;
     margin-bottom: 30px;
     text-align: left; /* Left align title on mobile */
   }
@@ -1870,6 +1889,10 @@ export default CardCarousel;
   .container {
     padding: 40px 20px;
   }
+  .title {
+    font-size: 38px;
+    font-weight: 300;
+  }
 }
 
 ================================================================================
@@ -2133,6 +2156,11 @@ export default function ContactForm() {
   .container {
     padding: 40px 20px;
   }
+  .title {
+    font-size: 38px;
+    font-weight: 300;
+    text-align: left;
+  }
 }
 
 ================================================================================
@@ -2148,7 +2176,7 @@ export default function ContactsSection() {
   return (
     <section id="contacts" className={styles.contactsSection}>
       <div className={styles.container}>
-        <h2 className={styles.title}>Контакты</h2>
+        <h2 className={styles.title}>Наши контакты</h2>
         
         <div className={styles.contactsContent}>
           <div className={styles.mapContainer}>
@@ -2344,6 +2372,10 @@ export default function ContactsSection() {
   .documentMeta {
     align-items: flex-start;
     text-align: left;
+  }
+  .title {
+    font-size: 38px;
+    font-weight: 300;
   }
 }
 
@@ -3773,6 +3805,13 @@ export default function TeamPrinciplesSection() {
 }
 
 @media (max-width: 768px) {
+
+  .title {
+    font-size: 38px;
+    font-weight: 300;
+    text-align: center;
+  }
+
   .propertiesSection {
     margin: 0;
     margin-top: -1px; /* Fix for the gap between sections */
@@ -4206,9 +4245,11 @@ export default function ScrollFix() {
         section.classList.add('animated-section');
         
         // Find elements to animate within each section
-        const elementsToAnimate = [
-          ...section.querySelectorAll('h1, h2, h3, h4, h5, h6, p, .card, .item, .grid > *, .row > *')
-        ].filter(el => 
+        // Fix: Convert NodeListOf<Element> to Array properly for TypeScript
+        const elementsQuery = section.querySelectorAll(
+          'h1, h2, h3, h4, h5, h6, p, .card, .item, .grid > *, .row > *'
+        );
+        const elementsToAnimate = Array.from(elementsQuery).filter(el => 
           // Don't animate script tags, styles, etc.
           !['SCRIPT', 'STYLE', 'META', 'LINK'].includes(el.tagName)
         );
@@ -4704,7 +4745,7 @@ export default function TeamSection() {
   border-radius: 0;
   display: flex;
   flex-direction: column;
-  width: 380px;
+  width: 342px;
   height: 294px;
   flex-shrink: 0;
   box-sizing: border-box;
@@ -4844,6 +4885,11 @@ export default function TeamSection() {
   .testimonialCard {
     height: auto;
     min-height: 250px;
+  }
+
+  .title {
+    font-size: 38px;
+    font-weight: 300;
   }
 
   .navButton {
@@ -5167,7 +5213,7 @@ export default function TestimonialsCarousel() {
   
   .title {
     margin-bottom: 40px;
-    font-size: 30px;
+    font-size: 38px;
   }
   
   .stageRow {
@@ -5482,10 +5528,317 @@ export const useNavigation = () => {
   }
 
 ================================================================================
+// FILE: src/styles/container-adjustments.css
+================================================================================
+
+/* Global container width adjustments */
+:root {
+    --max-container-width: 1200px; /* Reduced from 1400px */
+    --container-padding-desktop: 60px;
+    --container-padding-tablet: 40px;
+    --container-padding-mobile: 20px;
+  }
+  
+  /* Target all container classes across components */
+  .container,
+  [class*="container"],
+  [class*="Section"] .container,
+  [class*="section"] .container {
+    max-width: var(--max-container-width) !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Add padding to maintain proper spacing */
+  @media (min-width: 1025px) {
+    .container,
+    [class*="container"],
+    [class*="Section"] .container,
+    [class*="section"] .container {
+      padding-left: var(--container-padding-desktop) !important;
+      padding-right: var(--container-padding-desktop) !important;
+    }
+  }
+  
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .container,
+    [class*="container"],
+    [class*="Section"] .container,
+    [class*="section"] .container {
+      padding-left: var(--container-padding-tablet) !important;
+      padding-right: var(--container-padding-tablet) !important;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .container,
+    [class*="container"],
+    [class*="Section"] .container,
+    [class*="section"] .container {
+      padding-left: var(--container-padding-mobile) !important;
+      padding-right: var(--container-padding-mobile) !important;
+    }
+  }
+  
+  /* Adjust the fullWidthImageSection to maintain proper spacing */
+  .fullWidthImageSection .imageContainer {
+    max-width: var(--max-container-width) !important;
+  }
+  
+  /* Fix for the background to be more visible */
+  body::before {
+    background-size: 120% auto; /* Slightly larger to show more of the background */
+    animation: subtleMovement 120s infinite alternate ease-in-out;
+  }
+  
+  @keyframes subtleMovement {
+    0% {
+      background-position: center center;
+    }
+    100% {
+      background-position: center 55%;
+    }
+  }
+  
+  /* Add side gradients to enhance the content separation from background */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: 
+      linear-gradient(to right, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 15%, rgba(0,0,0,0) 85%, rgba(0,0,0,0.4) 100%);
+    pointer-events: none;
+  }
+  
+  /* Responsive adjustments for specific sections */
+  
+  /* Fix for hero section height */
+  .heroSection {
+    height: 85vh; /* Slightly reduced height to show more content below */
+    min-height: 550px;
+  }
+  
+  /* Team member cards */
+  @media (min-width: 1025px) {
+    .teamSection .carousel {
+      gap: 20px !important;
+    }
+  }
+  
+  /* Testimonials section */
+  .testimonialsSection .container {
+    padding-left: var(--container-padding-desktop) !important;
+  }
+  
+  @media (max-width: 1024px) {
+    .testimonialsSection .container {
+      padding-left: var(--container-padding-tablet) !important;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .testimonialsSection .container {
+      padding-left: var(--container-padding-mobile) !important;
+    }
+    
+    .testimonialCard {
+      max-width: 90% !important;
+    }
+  }
+  
+  /* Preserve card widths in carousels */
+  @media (min-width: 1025px) {
+    .propertyCard, 
+    .testimonialCard,
+    .memberCard {
+      width: 100% !important; /* Let them flex to maintain proper spacing */
+      max-width: 350px !important;
+    }
+  }
+
+
+  /* Header Adjustments */
+.header .container {
+    max-width: 1200px !important;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  @media (min-width: 1025px) {
+    .header .container {
+      padding-left: 60px !important;
+      padding-right: 60px !important;
+    }
+  }
+  
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .header .container {
+      padding-left: 40px !important;
+      padding-right: 40px !important;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .header .container {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+    }
+  }
+  
+  /* Hero Section Adjustments */
+  .heroSection .container {
+    max-width: 1200px !important;
+  }
+  
+  .heroSection .content {
+    padding: 0 60px;
+  }
+  
+  @media (max-width: 1024px) {
+    .heroSection .content {
+      padding: 0 40px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .heroSection .content {
+      padding: 0 20px;
+    }
+  }
+  
+  /* Properties Carousel Adjustments */
+  .propertiesSection .carousel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  @media (max-width: 1200px) {
+    .propertiesSection .carousel {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .propertiesSection .carousel {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Team Section Adjustments */
+  .teamSection .carousel {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  @media (max-width: 1024px) {
+    .teamSection .carousel {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .teamSection .carousel {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .teamSection .carousel {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Testimonials Carousel Adjustments */
+  .testimonialsSection .testimonialGroup {
+    gap: 20px;
+  }
+  
+  @media (min-width: 1025px) {
+    .testimonialCard {
+      width: calc(33.33% - 14px);
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    .testimonialCard {
+      width: calc(50% - 10px);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .testimonialCard {
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+  
+  /* Footer Adjustments */
+  .footer .container {
+    max-width: 1200px !important;
+    padding: 0 60px;
+  }
+  
+  @media (max-width: 1024px) {
+    .footer .container {
+      padding: 0 40px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .footer .container {
+      padding: 0 20px;
+    }
+  }
+  
+  /* Full Width Image Adjustments */
+  .fullWidthImageSection .imageContainer {
+    max-width: 1200px !important;
+  }
+  
+  /* About Agency Section Adjustments */
+  .aboutSection .description {
+    max-width: 55%;
+  }
+  
+  @media (max-width: 768px) {
+    .aboutSection .description {
+      max-width: 100%;
+    }
+  }
+  
+  /* Contact Form Adjustments */
+  .contactFormSection .form {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Work Stages Section Adjustments */
+  @media (min-width: 901px) {
+    .stageRow {
+      grid-template-columns: 80px 250px 1fr;
+    }
+  }
+  
+  /* Add subtle shadow to section backgrounds for better separation */
+  .container {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  }
+
+
+
+
+================================================================================
 // FILE: src/utils/constants.ts
 ================================================================================
 
 // Single source of truth for the application base path
 export const APP_BASE_PATH = '/realty_app';
 
-// Collection completed: Processed 49 files, skipped 20 binary files
+// Collection completed: Processed 50 files, skipped 20 binary files
