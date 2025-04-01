@@ -50,11 +50,12 @@
 .stageNumber {
   font-size: 48px;
   color: #BA9778;
-  font-weight: 200;
+  font-weight: 300;
 }
 
 .stageTitleCol {
-  padding-right: 30px;
+  width: 420px;
+  /* padding-right: 30px; */
 }
 
 .stageTitle {
@@ -66,6 +67,7 @@
 
 .stageDescriptionCol {
   max-width: 750px;
+  margin-left: 120px;
 }
 
 .stageDescription {
