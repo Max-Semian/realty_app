@@ -1,7 +1,7 @@
 /* Global container width adjustments */
 :root {
-    --max-container-width: 1200px; /* Reduced from 1400px */
-    --container-padding-desktop: 60px;
+    --max-container-width: 1400px; /* Reduced from 1400px */
+    --container-padding-desktop: 90px;
     --container-padding-tablet: 40px;
     --container-padding-mobile: 20px;
   }
