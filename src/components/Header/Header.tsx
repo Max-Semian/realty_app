@@ -70,7 +70,7 @@ const Header = () => {
         {/* Logo - Link to Main Page */}
         <div className={styles.logo} style={{ display: mobileMenuOpen ? 'none' : 'flex' }}>
           <a href="/" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); router.push('/'); }}>
-            <img src="/realty_app/LOGO_1.png" alt="Logo" width="78" height="74" />
+            <img src="/realty_app/LOGO_1.png" alt="Logo" width="50" height="50" />
           </a>
         </div>
 

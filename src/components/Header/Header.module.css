@@ -1,7 +1,7 @@
 .header {
   background: #20222B;
   color: white;
-  padding: 16px 0;
+  padding: 30px 0;
   position: fixed;
   width: 100%;
   top: 0;
@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 60px;
+  padding: 0;
 }
 
 .logo {
@@ -26,14 +26,14 @@
 
 .nav {
   display: flex;
-  gap: 24px;
+  gap: 70px;
   margin: 0 auto;
 }
 
 .nav a {
   color: white;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 300;
   transition: color 0.3s ease;
   letter-spacing: 0.5px;
@@ -41,13 +41,13 @@
 }
 
 .nav a:hover {
-  color: #F5A623;
+  color: #BA9778;
   opacity: 1;
 }
 
 .contact {
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 300;
 }
 
 .contact a {

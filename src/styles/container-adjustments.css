@@ -2,6 +2,8 @@
 :root {
     --max-container-width: 1400px; /* Reduced from 1400px */
     --container-padding-desktop: 90px;
+    --max-container-width: 1400px; /* Reduced from 1400px */
+    --container-padding-desktop: 60px;
     --container-padding-tablet: 40px;
     --container-padding-mobile: 20px;
   }
@@ -19,7 +21,7 @@
   }
   
   /* Add padding to maintain proper spacing */
-  @media (min-width: 1025px) {
+  /* @media (min-width: 1025px) {
     .container,
     [class*="container"],
     [class*="Section"] .container,
@@ -27,7 +29,7 @@
       padding-left: var(--container-padding-desktop) !important;
       padding-right: var(--container-padding-desktop) !important;
     }
-  }
+  } */
   
   @media (max-width: 1024px) and (min-width: 769px) {
     .container,
@@ -133,8 +135,8 @@
   /* Header Adjustments */
 .header .container {
     max-width: 1200px !important;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
   
   @media (min-width: 1025px) {

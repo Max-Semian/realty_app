@@ -28,6 +28,7 @@
   flex-direction: column;
   /* justify-content: center; */
   margin-top: 10%;
+  margin-left: 60px;
   align-items: flex-start;
   padding: 0px 10px;
 }
@@ -115,6 +116,9 @@
   }
 }
 
+
+
+
 @media (max-width: 768px) {
   .heroSection {
     padding-top: 56px;
@@ -123,7 +127,8 @@
   .content {
     padding: 0 20px;
     justify-content: flex-start;
-    padding-top: 100px;
+    padding-top: 1.5rem;
+    margin-left: 0px;
   }
   
   .heroContent {
@@ -155,7 +160,7 @@
   }
   
   .subtitle {
-    font-size: 30px;
+    font-size: 20px;
   }
   
   .slogan {
@@ -168,9 +173,10 @@
   .ctaButton {
     display: block; /* Show in mobile view */
     width: 100%;
-    margin-top: 30px;
+    margin-top: 0.5rem;
     display: flex;
     justify-content: center;
+ 
   }
   
   .ctaButton a {
@@ -181,5 +187,15 @@
     text-align: center;
     padding: 12px 24px;
     box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.1); /* светлый полупрозрачный фон */
+    backdrop-filter: blur(3px);                /* эффект блюра */
+    -webkit-backdrop-filter: blur(3px);        /* для Safari */
   }
 }
+
+@media (max-width: 400px) {
+  .slogan {
+    font-size: 18px;
+  }
+}
+ 

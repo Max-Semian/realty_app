@@ -26,8 +26,8 @@ body::before {
   bottom: 0;
   z-index: -1;
   background-image: url('/realty_app/bg1.jpg');
-  background-size: 120% auto; /* Slightly enlarged to show more background */
-  background-position: center;
+  background-size: 80% auto; /* Slightly enlarged to show more background */
+  background-position: center left;
   background-repeat: no-repeat;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
