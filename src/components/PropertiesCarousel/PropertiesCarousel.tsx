@@ -115,7 +115,7 @@ export default function PropertiesCarousel() {
                     </div>
                   </div>
                   <h3 className={styles.propertyTitle}>{property.title}</h3>
-                  <a href={property.link} className={styles.propertyLink}>
+                  <a href={property.link} className={styles.propertyLink} target="_blank" rel="noopener noreferrer">
                     ПОДРОБНЕЕ <span className={styles.arrow}>→</span>
                   </a>
                 </div>
