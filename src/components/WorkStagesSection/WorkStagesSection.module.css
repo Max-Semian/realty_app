@@ -113,7 +113,7 @@
   .stageRow {
     margin-bottom: 30px;
   }
-  
+
   .stageTitleCol {
     grid-column: 2;
     margin-bottom: 10px;
@@ -121,6 +121,7 @@
   
   .stageDescriptionCol {
     grid-column: 2;
+    margin-left: 20px;
   }
 }
 
