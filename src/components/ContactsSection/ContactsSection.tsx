@@ -52,7 +52,7 @@ export default function ContactsSection() {
             <div className={styles.infoBlock}>
               <h3 className={styles.infoTitle}>ИНСТАГРАМ:</h3>
               <p className={styles.infoText}>
-                <a href="https://instagram.com/asrealt" className={styles.infoLink}>@asrealt</a>
+                <a href="https://instagram.com/asrealt" className={styles.infoLink} target="_blank" rel="noopener noreferrer" >@asrealt</a>
               </p>
             </div>
           </div>

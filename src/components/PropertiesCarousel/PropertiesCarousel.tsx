@@ -15,13 +15,13 @@ export default function PropertiesCarousel() {
       id: 1,
       image: OurProjects1.src,
       title: 'Квартиры',
-      link: '#',
+      link: 'https://realt.by/belarus/sale/flats/?agencyUuids=c6e5cb90-d314-11ef-a0d4-8fa3c3913ed1&seller=false',
     },
     {
       id: 2,
       image: OurProjects2.src,
       title: 'Дома, коттеджи',
-      link: '#',
+      link: 'https://realt.by/belarus/sale/cottages/?agencyUuids=c6e5cb90-d314-11ef-a0d4-8fa3c3913ed1&seller=false',
     },
     {
       id: 3,
