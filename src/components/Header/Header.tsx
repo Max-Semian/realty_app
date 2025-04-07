@@ -59,7 +59,7 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.container}>
+      <div className={styles.headerContainer}>
         {/* Mobile Menu Button */}
         <div className={styles.mobileMenu}>
           <button onClick={toggleMobileMenu} aria-label="Toggle menu">
@@ -67,15 +67,15 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Logo - Link to Main Page */}
-        <div className={styles.logo} style={{ display: mobileMenuOpen ? 'none' : 'flex' }}>
-          <a href="/" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); router.push('/'); }}>
-            <img src="/realty_app/LOGO_1.png" alt="Logo" width="50" height="50" />
-          </a>
-        </div>
-
         {/* Navigation Links */}
         <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
+          {/* Logo - Link to Main Page */}
+          <div className={styles.logo} style={{ display: mobileMenuOpen ? 'none' : 'flex' }}>
+            <a href="/" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); router.push('/'); }}>
+              <img src="/realty_app/LOGO_1.png" alt="Logo" width="50" height="50" />
+            </a>
+          </div>
+
           {/* About Us Page Link - using onClick instead of Link component */}
           <a 
             href="/about-us" 
@@ -95,7 +95,7 @@ const Header = () => {
           </a>
           
           <a href="#specialists" onClick={(e) => handleLinkClick(e, 'specialists')}>
-            Специалисты
+            Сотрудники
           </a>
           
           {/* Mobile-Only Nav Links */}
@@ -117,6 +117,15 @@ const Header = () => {
             Контакты
           </a>
 
+          <a href="#login" onClick={(e) => handleLinkClick(e, 'login')}>
+            Личный кабинет
+          </a>
+
+          {/* Contact Info for Desktop */}
+          <div className={styles.contact}>
+            <a href="tel:+375445630206">+375 (44) 563-02-06</a>
+          </div>
+
           {/* Logo, title and phone number for mobile menu footer */}
           <div className={styles.navFooter}>
             <div className={styles.navLogo}>
@@ -131,11 +140,6 @@ const Header = () => {
             </div>
           </div>
         </nav>
-
-        {/* Contact Info for Desktop */}
-        <div className={styles.contact}>
-          <a href="tel:+375445630206">+375 (44) 563-02-06</a>
-        </div>
 
         {/* Mobile "Личный кабинет" link */}
         <div className={styles.mobileLoginLink}>

@@ -95,21 +95,21 @@
 }
 
 /* Media queries for responsive design */
+@media (max-width: 1600px) {
+  .content{
+    margin-top: 5%;
+  }
+}
+
 @media (max-width: 1200px) {
   .heroSection {
     padding-top: 111px;
   }
 }
 
-@media (max-width: 1150px) {
+@media (max-width: 1024px) {
   .heroSection {
     padding-top: 56px;
-  }
-}
-
-@media (max-width: 1600px) {
-  .content{
-    margin-top: 5%;
   }
 }
 
@@ -123,9 +123,6 @@
     font-size: 30px;
   }
 }
-
-
-
 
 @media (max-width: 768px) {
   .container {
@@ -203,15 +200,18 @@
   }
 }
 
+@media (max-width: 520px) {
+  .container {
+    background-size: 400%;
+  }
+}
 
-
-@media (max-width: 420px) {
+@media (max-width: 400px) {
   .slogan {
     font-size: 18px;
   }
 
   .container {
-    background-size: 400%;
+    background-size: 500%;
   }
 }
- 

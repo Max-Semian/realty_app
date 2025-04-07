@@ -1,21 +1,12 @@
 .header {
   background: #20222B;
   color: white;
-  padding: 30px 0;
+  padding: 40px 0;
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 1000;
-}
-
-.container {
-  max-width: 1961px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0;
 }
 
 .logo {
@@ -26,8 +17,10 @@
 
 .nav {
   display: flex;
-  gap: 70px;
   margin: 0 auto;
+  max-width: 1400px;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .nav a {
@@ -113,30 +106,14 @@
 }
 
 
-@media (max-width: 1400px) {
-  .container {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 1200px) {
-  .container {
-    padding: 0 40px;
-  }
-}
-
-@media (max-width: 1150px) {
-  .header{
-    height: 60px;
-    padding-top: 28px;
-  }
-  .container {
-    padding: 0 20px;
-    position: relative;
+@media (max-width: 1024px) {`
+  .headerContainer {
+    display: flex;
+    align-items: center;
   }
   
   /* Top logo in header */
-  .container > .logo {
+  .headerContainer > .logo {
     display: flex;
     position: absolute;
     left: 50%;
