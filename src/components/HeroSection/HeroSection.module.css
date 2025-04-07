@@ -95,9 +95,15 @@
 }
 
 /* Media queries for responsive design */
-@media (max-width: 1400px) {
-  .container {
-    max-width: 100%;
+@media (max-width: 1200px) {
+  .heroSection {
+    padding-top: 111px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .heroSection {
+    padding-top: 56px;
   }
 }
 
@@ -106,6 +112,7 @@
     margin-top: 5%;
   }
 }
+
 @media (max-width: 992px) {
   .logo img {
     width: 75px;
@@ -115,18 +122,16 @@
   .title, .subtitle {
     font-size: 30px;
   }
-  
-  .slogan {
-    padding-left: 95px;
-  }
 }
 
 
 
 
 @media (max-width: 768px) {
-  .heroSection {
-    padding-top: 56px;
+  .container {
+    height: auto;
+    background-size: 300%;
+    background-position: center;
   }
   
   .content {
@@ -198,9 +203,15 @@
   }
 }
 
-@media (max-width: 400px) {
+
+
+@media (max-width: 420px) {
   .slogan {
     font-size: 18px;
+  }
+
+  .container {
+    background-size: 400%;
   }
 }
  
