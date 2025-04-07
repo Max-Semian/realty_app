@@ -60,12 +60,25 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.headerContainer}>
-        {/* Mobile Menu Button */}
+        
+        {/* Mobile Menu */}
         <div className={styles.mobileMenu}>
-          <button onClick={toggleMobileMenu} aria-label="Toggle menu">
+          <div className={styles.mobileLoginLink}>
+            <a href="#" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); }}>
+              Личный кабинет
+            </a>
+          </div>
+          <a href="/" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); router.push('/'); }}>
+            <img src="/realty_app/LOGO_1.png" alt="Logo" width="50" height="50" />
+          </a>
+          <button className={styles.mobileMenuButton} onClick={toggleMobileMenu} aria-label="Toggle menu">
             {mobileMenuOpen ? "✕" : "☰"}
           </button>
+
+          
         </div>
+
+        
 
         {/* Navigation Links */}
         <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
@@ -140,13 +153,6 @@ const Header = () => {
             </div>
           </div>
         </nav>
-
-        {/* Mobile "Личный кабинет" link */}
-        <div className={styles.mobileLoginLink}>
-          <a href="#" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); }}>
-            Личный кабинет
-          </a>
-        </div>
       </div>
     </header>
   );

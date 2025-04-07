@@ -54,7 +54,6 @@
 
 .mobileMenu {
   display: none;
-  z-index: 1001;
 }
 
 .mobileMenu button {
@@ -63,10 +62,7 @@
   color: #BA9778;
   font-size: 24px;
   cursor: pointer;
-}
-
-.mobileLoginLink {
-  display: none;
+  z-index: 1001;
 }
 
 /* Hide mobile-only elements on desktop */
@@ -106,7 +102,7 @@
 }
 
 
-@media (max-width: 1024px) {`
+@media (max-width: 1024px) {
   .headerContainer {
     display: flex;
     align-items: center;
@@ -214,9 +210,12 @@
   }
   
   .mobileMenu {
-    display: block;
+    width: 100%;
+    display: flex;
+    padding: 0 20px;
     position: absolute;
-    right: 20px;
+    align-items: center;
+    justify-content: space-between;
   }
   
   .contact {
@@ -230,8 +229,6 @@
   
   .mobileLoginLink {
     display: block;
-    position: absolute;
-    left: 20px;
     font-size: 14px;
     opacity: 0.8;
   }

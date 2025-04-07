@@ -70,27 +70,47 @@ export default function ContactForm() {
         
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Ваше имя"
-              className={`${styles.input} ${formErrors.name ? styles.inputError : ''}`}
-            />
-            <div className={`${styles.inputLine} ${formErrors.name ? styles.inputLineError : ''}`}></div>
-          </div>
-          
-          <div className={styles.inputGroup}>
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="Ваш телефон"
-              className={`${styles.input} ${formErrors.phone ? styles.inputError : ''}`}
-            />
-            <div className={`${styles.inputLine} ${formErrors.phone ? styles.inputLineError : ''}`}></div>
+            <div className={styles.inputRow}>
+              <div className={styles.inputItem}>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Ваше имя"
+                  className={`${styles.input} ${formErrors.name ? styles.inputError : ''}`}
+                />
+                <div className={`${styles.inputLine} ${formErrors.name ? styles.inputLineError : ''}`}></div>
+              </div>
+              
+              <div className={styles.inputItem}>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="Ваш телефон"
+                  className={`${styles.input} ${formErrors.phone ? styles.inputError : ''}`}
+                />
+                <div className={`${styles.inputLine} ${formErrors.phone ? styles.inputLineError : ''}`}></div>
+              </div>
+            </div>
+
+            <div className={styles.agreementCheckbox}>
+              <label className={styles.checkboxLabel}>
+                <input
+                  type="checkbox"
+                  name="agreementChecked"
+                  checked={formData.agreementChecked}
+                  onChange={handleChange}
+                  className={styles.checkboxInput}
+                />
+                <span className={`${styles.customCheckbox} ${formErrors.agreement ? styles.checkboxError : ''}`}></span>
+                <span className={styles.checkboxText}>
+                  Я соглашаюсь с обработкой персональных данных
+                </span>
+              </label>
+            </div>
           </div>
           
           <button type="submit" className={styles.submitButton}>
@@ -98,21 +118,7 @@ export default function ContactForm() {
           </button>
         </form>
         
-        <div className={styles.agreementCheckbox}>
-          <label className={styles.checkboxLabel}>
-            <input
-              type="checkbox"
-              name="agreementChecked"
-              checked={formData.agreementChecked}
-              onChange={handleChange}
-              className={styles.checkboxInput}
-            />
-            <span className={`${styles.customCheckbox} ${formErrors.agreement ? styles.checkboxError : ''}`}></span>
-            <span className={styles.checkboxText}>
-              Я соглашаюсь с обработкой персональных данных
-            </span>
-          </label>
-        </div>
+        
       </div>
     </section>
   );
