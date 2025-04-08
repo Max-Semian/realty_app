@@ -8,7 +8,7 @@ export default function AboutAgencySection() {
     <section className={styles.aboutSection}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>О </h2>
+          <h2 className={styles.title}>О нашем агенстве </h2>
           <a href="/about-us" className={styles.learnMore}>
             УЗНАТЬ БОЛЬШЕ <span className={styles.arrow}>→</span>
           </a>
