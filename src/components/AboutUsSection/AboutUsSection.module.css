@@ -226,6 +226,10 @@
     margin: 0;
     text-align: center !important; 
   }
+  .subtitle {
+    font-size: 28px !important;
+    font-weight: 400;
+  }
   .header {
     flex-direction: column;
     gap: 20px;
