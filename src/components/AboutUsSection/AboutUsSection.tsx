@@ -11,17 +11,33 @@ export default function AboutUsSection() {
             <h2 className={styles.title}>О нашем агентстве</h2>
           </div>
           
+          {/* First subtitle - left aligned */}
+          <div className={styles.subtitleContainer} style={{textAlign: 'left'}}>
+                <p className={styles.subtitleMain} style={{
+                  margin: '0 0 2px 0',
+                  fontSize: '24px',
+                  fontWeight: 'normal',
+                  lineHeight: '1.4',
+                  color: 'rgba(255, 255, 255, 0.95)',
+                  display: 'block'
+                }}>
+                  Меня зовут Алексей Симченко - основатель
+                </p>
+                <p className={styles.subtitleAgency} style={{
+                  margin: '0',
+                  fontSize: '24px',
+                  fontWeight: 'normal',
+                  lineHeight: '1.4',
+                  color: '#BA9778',
+                  display: 'block'
+                }}>
+                  "Агентства AS недвижимости"
+                </p>
+          </div>
           <div className={styles.content}>
             <div className={styles.mainContent}>
+              
               <div className={styles.textContent}>
-                {/* Corrected subtitle with agency name in gold color */}
-                <h3 className={styles.subtitle}>
-                  Меня зовут Алексей Симченко - основатель{' '}
-                  <span className={styles.agencyName}>
-                    "Агентства AS недвижимости"
-                  </span>
-                </h3>
-                
                 <ul className={styles.bulletPoints}>
                   <li>
                   В 2012 году закончил Минский Институт Управления
@@ -44,8 +60,8 @@ export default function AboutUsSection() {
                 </ul>
               </div>
               
-              <div className={styles.founderImage}>
-              <img 
+              <div className={styles.founderImage} style={{ marginTop: '-120px' }}>
+                <img 
                   src="/realty_app/Alex2-1.jpg" 
                   alt="Команда агентства" 
                   className={styles.image}
@@ -53,6 +69,7 @@ export default function AboutUsSection() {
               </div>
             </div>
             
+            {/* Team section with left image and right text */}
             <div className={styles.teamSection}>
               <div className={styles.teamImage}>
               <img 
@@ -92,28 +109,28 @@ export default function AboutUsSection() {
             
             <div className={styles.gallerySection}>
               <div className={styles.galleryItem}>
-              <img 
+                <img 
                   src="/realty_app/images/kv1-1.jpg" 
                   alt="Недвижимость пример 1" 
                   className={styles.image}
                 />
               </div>
               <div className={styles.galleryItem}>
-              <img 
+                <img 
                   src="/realty_app/images/kv2-1.jpg" 
                   alt="Недвижимость пример 2" 
                   className={styles.image}
                 />
               </div>
               <div className={styles.galleryItem}>
-              <img 
+                <img 
                   src="/realty_app/images/kv3-1.jpg" 
                   alt="Недвижимость пример 3" 
                   className={styles.image}
                 />
               </div>
               <div className={styles.galleryItem}>
-              <img 
+                <img 
                   src="/realty_app/kv4-1.jpg" 
                   alt="Logo" 
                   className={styles.image}
@@ -122,6 +139,40 @@ export default function AboutUsSection() {
             </div>
           </div>
         </div>
+        
+        {/* Add responsive styling */}
+        <style jsx>{`
+          @media (max-width: 992px) {
+            div[class*='teamSection'] {
+              flex-direction: column;
+            }
+            
+            div[class*='teamImage'] {
+              max-width: 100% !important;
+              margin-bottom: 20px;
+            }
+            
+            div[class*='teamDescription'] {
+              max-width: 100% !important;
+            }
+          }
+          
+          @media (max-width: 768px) {
+            div[class*='subtitleContainer'] {
+              text-align: center !important;
+            }
+            
+            p[class*='subtitleMain'],
+            p[class*='subtitleAgency'] {
+              font-size: 14px !important;
+              text-align: center !important;
+            }
+            
+            div[class*='teamImage'] img {
+              width: 100%;
+            }
+          }
+        `}</style>
       </section>
     );
   }

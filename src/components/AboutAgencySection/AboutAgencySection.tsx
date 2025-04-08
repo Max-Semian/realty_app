@@ -8,8 +8,8 @@ export default function AboutAgencySection() {
     <section className={styles.aboutSection}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>О нашем агентстве</h2>
-          <a href="about-us" className={styles.learnMore}>
+          <h2 className={styles.title}>О </h2>
+          <a href="/about-us" className={styles.learnMore}>
             УЗНАТЬ БОЛЬШЕ <span className={styles.arrow}>→</span>
           </a>
         </div>
@@ -17,10 +17,13 @@ export default function AboutAgencySection() {
         <div className={styles.content}>
           <div className={styles.description}>
             <p>
-              Наше агентство недвижимости - это сочетание молодости и опыта. Несмотря на то, что мы новая компания, за нашими плечами более 15 лет успешной работы в сфере недвижимости.
+              Меня зовут Алексей Симченко - основатель "Агентство AS недвижимости"
             </p>
             <p>
-              Мы предлагаем индивидуальный подход к каждому клиенту и гарантируем высокое качество услуг. Доверьтесь нам, и мы поможем вам сделать правильный выбор!
+              В 2017 году окончил Минский Институт Управления по специальности юрист. После окончания работал юристом в области недвижимости в бизнесе 12 лет. Работал в агентстве недвижимости очень плохо работал в компаниях, которые научили меня не только продавать, но и тому, как строить команду.
+            </p>
+            <p>
+              2019 год стал для меня настоящим прорывом в карьере. Я вошел в ТОП-10 риелторов Минска по объему продаж за один год. У меня была сформирована команда, с которой мы мотивировали вокруг: «Недвижимость надо создавать то, чего еще нет».
             </p>
           </div>
           
@@ -33,7 +36,6 @@ export default function AboutAgencySection() {
               <span className={styles.statNumber}>2000+</span>
               <span className={styles.statText}>довольных клиентов</span>
             </div>
-            {/* This one will be hidden on mobile */}
             <div className={`${styles.statItem} ${styles.hideOnMobile}`}>
               <span className={styles.statNumber}>250+</span>
               <span className={styles.statText}>обученных специалистов</span>
