@@ -22,7 +22,7 @@ const ClientBackground = () => {
         right: 0;
         bottom: 0;
         z-index: -1;
-        background-image: url('/realty_app/bg1.jpg');
+        background-image: url('/realty_app/bg1.webp');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -147,7 +147,7 @@ export default function AboutPage() {
 }
 
 ================================================================================
-// FILE: src/app/assets/HomeBG1.jpg
+// FILE: src/app/assets/home.jpg
 // [BINARY FILE - CONTENT SKIPPED]
 ================================================================================
 
@@ -192,7 +192,7 @@ body::before {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background-image: url('/realty_app/bg1.jpg');
+  background-image: url('/realty_app/bg1.webp');
   background-size: 120% auto; /* Slightly enlarged to show more background */
   background-position: center;
   background-repeat: no-repeat;
@@ -483,7 +483,7 @@ import styles from "./page.module.css";
 // Fix the import paths to match your file structure
 import Header from "../components/Header/Header";
 // Remove the bg image import since we're handling it in ClientBackground
-// import bgImage from ".realty_app/bg1.jpg";
+// import bgImage from ".realty_app/bg1.webp";
 import HeroSection from "../components/HeroSection/HeroSection";
 import AboutSection from "../components/AboutAgencySection/AboutAgencySection";
 import PropertiesCarouselSection from "../components/PropertiesCarousel/PropertiesCarousel";
@@ -3210,7 +3210,7 @@ export default Header;
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-image: url('/realty_app/HomeBG1.jpg');
+  background-image: url('/realty_app/home.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -3453,12 +3453,12 @@ export default function HeroSection() {
 }
 
 ================================================================================
-// FILE: src/components/HeroSection/assets/HomeBG1.jpg
+// FILE: src/components/HeroSection/assets/home.jpg
 // [BINARY FILE - CONTENT SKIPPED]
 ================================================================================
 
 ================================================================================
-// FILE: src/components/HeroSection/assets/bg1.jpg
+// FILE: src/components/HeroSection/assets/bg1.webp
 // [BINARY FILE - CONTENT SKIPPED]
 ================================================================================
 
@@ -3562,8 +3562,8 @@ const LoadingOverlay: React.FC = () => {
 
     // Create an array of critical images to preload
     const imagesToPreload = [
-      '/realty_app/bg1.jpg', // Background image
-      '/realty_app/HomeBG1.jpg', // Hero background
+      '/realty_app/bg1.webp', // Background image
+      '/realty_app/home.jpg', // Hero background
       '/realty_app/LOGO_4.svg', // Logo in hero
       '/realty_app/logo-fixed.svg' // Header logo
     ];

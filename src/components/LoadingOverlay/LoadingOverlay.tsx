@@ -16,8 +16,8 @@ const LoadingOverlay: React.FC = () => {
 
     // Create an array of critical images to preload
     const imagesToPreload = [
-      '/realty_app/bg1.jpg', // Background image
-      '/realty_app/HomeBG1.jpg', // Hero background
+      '/realty_app/bg1.webp', // Background image
+      '/realty_app/home.jpg', // Hero background
       '/realty_app/LOGO_4.svg', // Logo in hero
       '/realty_app/logo-fixed.svg' // Header logo
     ];
