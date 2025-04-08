@@ -221,13 +221,18 @@
     width: 100%;
   }
   .title {
-    font-size: 48px;
+    font-size: 38px;
     font-weight: 300;
     margin: 0;
     text-align: center !important; 
   }
-  .subtitle {
-    font-size: 28px !important;
+  .subtitleMain {
+    font-size: 20px !important;
+    font-weight: 400;
+    margin-top: -10px !important;
+  }
+  .subtitleAgency {
+    font-size: 20px !important;
     font-weight: 400;
   }
   .header {
@@ -241,8 +246,9 @@
     gap: 10px;
   }
   .subtitle {
-    font-size: 16px;
+    font-size: 22px !important;
     text-align: center;
+    font-weight: 400;
   }
 }
 
