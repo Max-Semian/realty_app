@@ -62,20 +62,42 @@ const Header = () => {
       <div className={styles.headerContainer}>
         
         {/* Mobile Menu */}
-        <div className={styles.mobileMenu}>
-          <div className={styles.mobileLoginLink}>
-            <a href="#" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); }}>
-              Личный кабинет
-            </a>
-          </div>
-          <a href="/" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); router.push('/'); }}>
-            <img src="/realty_app/LOGO_1.png" alt="Logo" width="50" height="50" />
-          </a>
-          <button className={styles.mobileMenuButton} onClick={toggleMobileMenu} aria-label="Toggle menu">
-            {mobileMenuOpen ? "✕" : "☰"}
-          </button>
 
+        <div className={styles.headerContainer}>
+          {/* Mobile menu with the 3 elements properly laid out */}
+          <div className={`${styles.mobileMenu} ${mobileMenuOpen ? styles.navOpen : ''}`}>
+            {/* Left element: Login link */}
+            <div className={styles.mobileLoginLink}>
+              <a href="#" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); }}>
+                Личный кабинет
+              </a>
+            </div>
+            
+            {/* Center element: Logo */}
+            {!mobileMenuOpen && (
+              <a 
+                href="/" 
+                className={styles.mobileLogo}
+                onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); router.push('/'); }}
+              >
+                <img src="/realty_app/LOGO_1.png" alt="Logo" width="50" height="50" />
+              </a>
+            )}
+            
+            {/* Right element: Menu toggle button */}
+            <button 
+              className={styles.mobileMenuButton} 
+              onClick={toggleMobileMenu} 
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? "✕" : "☰"} 
+            </button>
+          </div>
           
+          {/* Your nav component would be here */}
+          <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
+            {/* Navigation menu content */}
+          </nav>
         </div>
 
         

@@ -183,6 +183,12 @@
   .aboutSection {
     padding-top: 56px; /* Match heroSection */
   }
+  .title {
+    font-size: 32px;
+    font-weight: 300;
+    margin: 0;
+    text-align: center !important; 
+  }
 }
 
 @media (max-width: 992px) {
@@ -221,11 +227,12 @@
     width: 100%;
   }
   .title {
-    font-size: 38px;
+    font-size: 32px;
     font-weight: 300;
     margin: 0;
     text-align: center !important; 
   }
+
   .subtitleMain {
     font-size: 20px !important;
     font-weight: 400;
