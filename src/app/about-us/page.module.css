@@ -6,7 +6,7 @@
   position: relative;
 }
 
-/* Remove background from .main */
+/* Main content styles */
 .main {
   flex: 1;
   display: flex;
@@ -15,9 +15,6 @@
   z-index: 1; /* Ensure content is above background */
 }
 
-/* Remove the pageBackground class as we're using ClientBackground component instead */
-/* .pageBackground class removed */
-
 /* Full-width image styles */
 .fullWidthImageSection {
   width: 100%;
@@ -25,6 +22,8 @@
   display: flex;
   justify-content: center;
   overflow: hidden;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .imageContainer {
@@ -32,6 +31,7 @@
   width: 100%;
   background-color: #20222B;
   position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .fullWidthImage {
@@ -40,7 +40,14 @@
   display: block;
 }
 
-@media (max-width: 1400px) {
+/* Responsive styles following the pattern of HeroSection and AboutSection */
+@media (max-width: 1600px) {
+  .imageContainer {
+    max-width: 1200px;
+  }
+}
+
+@media (max-width: 1200px) {
   .imageContainer {
     max-width: 100%;
   }
@@ -54,5 +61,19 @@
   .fullWidthImage {
     height: 300px;
     object-fit: cover;
+  }
+}
+
+@media (max-width: 520px) {
+  /* Additional responsive adjustments for smaller screens */
+  .fullWidthImage {
+    height: 250px;
+  }
+}
+
+@media (max-width: 400px) {
+  /* Additional responsive adjustments for very small screens */
+  .fullWidthImage {
+    height: 200px;
   }
 }

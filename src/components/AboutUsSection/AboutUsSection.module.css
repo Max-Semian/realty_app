@@ -1,25 +1,25 @@
 .aboutSection {
   width: 100%;
-  padding: 0;
+  height: auto;
+  position: relative;
+  padding-top: 170px; /* Account for fixed header, same as heroSection */
   display: flex;
   justify-content: center;
-  color: white;
-  margin: 0;
-  margin-top: -1px; /* Fix for the gap between sections */
+  overflow: hidden;
 }
 
-.withHeaderPadding {
-  padding-top: 100px; /* Increased padding to account for header height */
-}
-
+/* Main container */
 .container {
+  position: relative;
   max-width: 1400px;
   width: 100%;
   background-color: #20222B;
   padding: 60px 60px;
-  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Header section */
 .header {
   display: flex;
   justify-content: space-between;
@@ -28,21 +28,23 @@
 }
 
 .title {
-  font-size: 36px;
-  font-weight: 400;
+  font-size: 48px;
+  font-weight: 100;
   margin: 0;
   color: #F5A623;
 }
 
 .subtitle {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 300;
   margin: 0 0 20px 0;
   color: rgba(255, 255, 255, 0.95);
   line-height: 1.4;
 }
 
+/* Content area */
 .content {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 60px;
@@ -70,7 +72,7 @@
   position: relative;
   padding-left: 20px;
   margin-bottom: 20px;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.8);
 }
@@ -114,7 +116,7 @@
 }
 
 .paragraph {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.6;
   margin-bottom: 20px;
   color: rgba(255, 255, 255, 0.8);
@@ -137,7 +139,17 @@
   justify-content: center;
 }
 
-/* Media queries */
+.subtitle .agencyName {
+  color: #BA9778; /* Gold/bronze color for the agency name including quotes */
+  font-weight: 500; /* Matching the weight in screenshot */
+}
+/* Media queries for responsive design */
+@media (max-width: 1600px) {
+  .content {
+    margin-top: 0; /* Adjusted from heroSection */
+  }
+}
+
 @media (max-width: 1400px) {
   .container {
     max-width: 100%;
@@ -145,6 +157,10 @@
 }
 
 @media (max-width: 1200px) {
+  .aboutSection {
+    padding-top: 111px; /* Match heroSection */
+  }
+  
   .container {
     padding: 60px 40px;
   }
@@ -152,6 +168,12 @@
   .mainContent, 
   .teamSection {
     gap: 30px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .aboutSection {
+    padding-top: 56px; /* Match heroSection */
   }
 }
 
@@ -181,7 +203,13 @@
 
 @media (max-width: 768px) {
   .container {
+    height: auto;
     padding: 40px 20px;
+  }
+  
+  .content {
+    padding: 0;
+    width: 100%;
   }
   
   .header {
@@ -193,6 +221,10 @@
   /* Fix gallery for mobile */
   .gallerySection {
     gap: 10px;
+  }
+  .subtitle {
+    font-size: 16px;
+    text-align: center;
   }
 }
 
