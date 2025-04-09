@@ -1,0 +1,95 @@
+.loginSection {
+  width: 100%;
+  height: auto;
+  position: relative;
+  padding-top: 170px; /* Account for fixed header, same as heroSection */
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Main container */
+.container {
+  position: relative;
+  max-width: 1400px;
+  width: 100%;
+  background-color: #20222B;
+  padding: 60px 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.loginBox {
+  background-color: #20222B;
+  padding: 60px;
+  max-width: 460px;
+  width: 100%;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 100;
+  margin-bottom: 40px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.inputItem {
+  border-bottom: 2px solid #BA9778;
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  background-color: transparent;
+  border: none;
+  padding: 10px 0;
+  font-size: 18px;
+  font-weight: 200;
+  color: white;
+  outline: none;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.button {
+  font-family: 'Montserrat', sans-serif;
+  padding: 15px;
+  background-color: #cbb18b;
+  color: #222;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 300;
+  transition: background-color 0.3s;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.button:hover {
+  background-color: #d9c09b;
+}
+
+@media (max-width: 900px) {
+  .overlay {
+    padding: 40px 30px;
+  }
+
+  .loginBox {
+    padding: 40px 30px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+}

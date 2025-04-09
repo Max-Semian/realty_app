@@ -152,7 +152,7 @@ const Header = () => {
             Контакты
           </a>
 
-          <a href="#login" onClick={(e) => handleLinkClick(e, 'login')}>
+          <a href="/realty_app/login" onClick={(e) => { e.preventDefault(); handlePageClick('/realty_app/login'); }}className={styles.navLink}>
             Личный кабинет
           </a>
 
