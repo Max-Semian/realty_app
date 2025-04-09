@@ -1,17 +1,17 @@
 'use client';
 
 import React from 'react';
-import styles from './LoginPersonalAccount.module.css';
+import styles from './LoginSection.module.css';
 
-export default function LoginPersonalAccount() {
+export default function LoginSection() {
   return (
     <section className={styles.loginSection}>
       <div className={styles.container}>
           <h2 className={styles.title}>Вход в личный кабинет продавца</h2>
           <form className={styles.form}>
             <input
-              type="email"
-              placeholder="Email"
+              type="Name"
+              placeholder="Ваше имя"
               className={styles.input}
             />
             <input
@@ -19,7 +19,7 @@ export default function LoginPersonalAccount() {
               placeholder="Пароль"
               className={styles.input}
             />
-            <button type="submit" className={styles.button}>Войти</button>
+            <button type="submit" className={styles.button}>ВОЙТИ</button>
           </form>
         </div>
     </section>
