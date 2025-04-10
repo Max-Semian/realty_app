@@ -114,7 +114,7 @@ const Header = () => {
           {/* About Us Page Link - using onClick instead of Link component */}
           <a 
             href="/realty_app/about-us/" 
-            onClick={(e) => { e.preventDefault(); handlePageClick('/realty_app/about-us/'); }}
+            onClick={(e) => { e.preventDefault(); handlePageClick('/about-us/'); }}
             className={styles.navLink}
           >
             О нас
