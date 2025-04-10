@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styles from "./Header.module.css";
@@ -10,9 +10,20 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { handleAnchorNavigation } = useNavigation();
   const router = useRouter();
+  const navRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  // Handle empty space clicks in the nav menu
+  const handleNavBackgroundClick = (e: React.MouseEvent) => {
+    // Only stop propagation if clicking directly on the nav element (background)
+    // and not on a child element like a link
+    if (e.target === e.currentTarget) {
+      e.stopPropagation();
+    }
   };
 
   // Close menu when clicking outside and prevent body scroll
@@ -22,8 +33,12 @@ const Header = () => {
         const nav = document.querySelector(`.${styles.nav}`);
         const mobileMenuButton = document.querySelector(`.${styles.mobileMenu} button`);
         
-        if (nav && !nav.contains(event.target as Node) && 
-            mobileMenuButton && !mobileMenuButton.contains(event.target as Node)) {
+        // Check if the click is outside both the navigation menu AND the mobile menu button
+        // Only close if the click is outside both elements
+        if (
+          (nav && !nav.contains(event.target as Node)) && 
+          (mobileMenuButton && !mobileMenuButton.contains(event.target as Node))
+        ) {
           setMobileMenuOpen(false);
         }
       }
@@ -62,7 +77,6 @@ const Header = () => {
       <div className={styles.headerContainer}>
         
         {/* Mobile Menu */}
-
         <div className={styles.headerContainer}>
           {/* Mobile menu with the 3 elements properly laid out */}
           <div className={`${styles.mobileMenu} ${mobileMenuOpen ? styles.navOpen : ''}`}>
@@ -86,6 +100,7 @@ const Header = () => {
             
             {/* Right element: Menu toggle button */}
             <button 
+              ref={menuButtonRef}
               className={styles.mobileMenuButton} 
               onClick={toggleMobileMenu} 
               aria-label="Toggle menu"
@@ -93,17 +108,25 @@ const Header = () => {
               {mobileMenuOpen ? "✕" : "☰"} 
             </button>
           </div>
-          
-          {/* Your nav component would be here */}
-          <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
-            {/* Navigation menu content */}
-          </nav>
         </div>
 
-        
-
         {/* Navigation Links */}
-        <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
+        <nav 
+          ref={navRef}
+          className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}
+          onClick={handleNavBackgroundClick} // Only stops propagation on background clicks
+        >
+          {/* Close button for mobile menu */}
+          {mobileMenuOpen && (
+            <button 
+              className={styles.mobileCloseButton}
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              ✕
+            </button>
+          )}
+
           {/* Logo - Link to Main Page */}
           <div className={styles.logo} style={{ display: mobileMenuOpen ? 'none' : 'flex' }}>
             <a href="/" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); router.push('/'); }}>
@@ -111,12 +134,13 @@ const Header = () => {
             </a>
           </div>
 
-          {/* About Us Page Link - using onClick instead of Link component */}
-          <a 
-            href="/realty_app/about-us/" 
-            onClick={(e) => { e.preventDefault(); handlePageClick('/about-us/'); }}
-            className={styles.navLink}
-          >
+          {/* About Us Page Link */}
+          <a href="/about-us" onClick={(e) => {
+            // For "About Us" handle as a real page navigation
+            e.preventDefault();
+            setMobileMenuOpen(false);
+            router.push('/about-us');
+          }}>
             О нас
           </a>
           
@@ -152,7 +176,7 @@ const Header = () => {
             Контакты
           </a>
 
-          <a href="/realty_app/login" onClick={(e) => { e.preventDefault(); handlePageClick('/realty_app/login'); }}className={styles.navLink}>
+          <a href="/login" onClick={(e) => { e.preventDefault(); handlePageClick('/login'); }}className={styles.navLink}>
             Личный кабинет
           </a>
 
