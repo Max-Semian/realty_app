@@ -22,7 +22,7 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({
   reviewsLink
 }) => {
   return (
-    <div className={styles.teamMemberCard}>
+    <div className={styles.memberCard}>
       <div className={styles.imageContainer}>
         <img 
           src={image} 
@@ -31,13 +31,15 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({
         />
       </div>
       <div className={styles.memberInfo}>
-        <div className={styles.positionInfo}>
-          {position}
-          {subPosition && (
-            <>
-               &nbsp;<span className={styles.subPosition}>{subPosition}</span>
-            </>
-          )}
+        <div className={styles.professionContainer}>
+          <p className={styles.memberPosition}>
+            {position}
+            {subPosition && (
+              <>
+                 &nbsp;<span className={styles.memberSubPosition}>{subPosition}</span>
+              </>
+            )}
+          </p>
         </div>
         <h3 className={styles.memberName}>{name}</h3>
         {details && <p className={styles.memberDetails}>{details}</p>}

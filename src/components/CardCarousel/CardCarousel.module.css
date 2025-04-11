@@ -13,10 +13,11 @@
 }
 
 .title {
-  font-size: 48px;
+  font-size: 58px;
   font-weight: 100;
   margin-bottom: 50px;
   scroll-margin-top: 300px;
+  text-align: center;
 }
 
 /* Fixed height container with overflow management */
@@ -39,8 +40,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 53px; /* Changed from 80px to 53px (1.5 times smaller) */
+  height: 53px; /* Changed from 80px to 53px (1.5 times smaller) */
   border-radius: 50%;
   border: 1px solid #BA9778;
   background: #20222B;
@@ -59,11 +60,11 @@
 }
 
 .prevButton {
-  left: -20px;
+  left: -15px; /* Adjusted from -20px to account for smaller button size */
 }
 
 .nextButton {
-  right: -20px;
+  right: -15px; /* Adjusted from -20px to account for smaller button size */
 }
 
 .dotsContainer {
@@ -101,8 +102,8 @@
 
 @media (max-width: 968px) {
   .navButton {
-    width: 40px;
-    height: 40px;
+    width: 40px; /* Return to original size on mobile/tablet */
+    height: 40px; /* Return to original size on mobile/tablet */
   }
   
   .prevButton {
@@ -130,7 +131,7 @@
   }
   
   .container {
-    padding: 0;
+    padding: 0 !important;
   }
   
   .carouselContainer {
