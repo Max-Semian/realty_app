@@ -17,7 +17,10 @@ export default function TeamPrinciplesSection() {
         </p>
         
         <div className={styles.buttonContainer}>
-          <a href="/realty_app/consultation" className={styles.consultButton}>
+          <a 
+            href="/realty_app/#form" 
+            className={styles.consultButton}
+          >
             Бесплатная консультация
           </a>
         </div>
