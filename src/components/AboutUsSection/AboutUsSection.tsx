@@ -1,19 +1,39 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './AboutUsSection.module.css';
 
 export default function AboutUsSection() {
+    const [animate, setAnimate] = useState(false);
+    
+    // Apply animation after a short delay to ensure page is loaded
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setAnimate(true);
+      }, 300);
+      
+      return () => clearTimeout(timer);
+    }, []);
+
+    // Create custom animation styles directly
+    const fadeInStyle = (delay: number) => ({
+      opacity: animate ? 1 : 0,
+      transform: animate ? 'translateY(0)' : 'translateY(20px)',
+      transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
+      transitionDelay: `${delay}ms`,
+    });
+
     return (
       <section className={styles.aboutSection}>
         <div className={styles.container}>
           <div className={styles.header}>
-            <h2 className={styles.title}>О нашем агентстве</h2>
+            <h2 className={styles.title} style={fadeInStyle(1000)}>О нашем агентстве</h2>
           </div>
           
           {/* First subtitle - left aligned */}
           <div className={styles.subtitleContainer} style={{textAlign: 'left'}}>
                 <p className={styles.subtitleMain} style={{
+                  ...fadeInStyle(1150),
                   margin: '0 0 2px 0',
                   fontSize: '24px',
                   fontWeight: 'normal',
@@ -24,6 +44,7 @@ export default function AboutUsSection() {
                   Меня зовут Алексей Симченко - основатель
                 </p>
                 <p className={styles.subtitleAgency} style={{
+                  ...fadeInStyle(1150),
                   margin: '0',
                   fontSize: '24px',
                   fontWeight: 'normal',
@@ -39,18 +60,18 @@ export default function AboutUsSection() {
               
               <div className={styles.textContent}>
                 <ul className={styles.bulletPoints}>
-                  <li>
+                  <li style={fadeInStyle(1450)}>
                   В 2012 году закончил Минский Институт Управления
                   полный энтузиазма и готовности применить свои знания
                   в реальном мире.
                   </li>
-                  <li>
+                  <li style={fadeInStyle(1600)}>
                   В сфере недвижимости я более 15 лет. Работал в агентстве
                   «Дианэст», где очень тесно работал с руководителем,
                   который научил меня не только продажам, но и тому,
                   как строить команду.
                   </li>
-                  <li>
+                  <li style={fadeInStyle(1750)}>
                   2017 год стал для меня настоящим поворотным моментом.
                   Я почувствовал, что готов к новым вызовам и решил, что пришло
                   время для роста. С этой целью я начал формировать
@@ -60,7 +81,7 @@ export default function AboutUsSection() {
                 </ul>
               </div>
               
-              <div className={styles.founderImage} style={{ marginTop: '-120px' }}>
+              <div className={styles.founderImage} style={{ ...fadeInStyle(1450), marginTop: '-120px' }}>
                 <img 
                   src="/realty_app/Alex2-1.jpg" 
                   alt="Команда агентства" 
@@ -79,7 +100,7 @@ export default function AboutUsSection() {
                 />
               </div>
               
-              <div className={styles.teamDescription}>
+              <div className={styles.teamDescription} style={{ ...fadeInStyle(1450)}}>
                 <h3 className={styles.subtitle}>
                   В январе 2025 года я осуществил свою давнюю
                   мечту и создал своё &quot;Агентство AS недвижимости&quot;

@@ -66,6 +66,15 @@ export default function ScrollFix() {
       });
     };
 
+    // Helper function to check if element is in viewport
+    const isElementInViewport = (el: Element) => {
+      const rect = el.getBoundingClientRect();
+      return (
+        rect.top <= window.innerHeight &&
+        rect.bottom >= 0
+      );
+    };
+
     // Setup animation for all sections that aren't already using AnimatedSection
     const setupSectionAnimations = () => {
       // Skip if the browser doesn't support IntersectionObserver
@@ -97,27 +106,40 @@ export default function ScrollFix() {
           el.classList.add(delayClass);
         });
         
-        // Create an observer for the section
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting && !document.documentElement.classList.contains('scrolling-in-progress')) {
-              // Make all animated items visible when section enters viewport
-              elementsToAnimate.forEach(item => {
+        // Immediately show animations for sections already in viewport
+        if (isElementInViewport(section)) {
+          // Add delay to make sure this happens after initial page rendering
+          setTimeout(() => {
+            elementsToAnimate.forEach((item, index) => {
+              // Stagger the animation of initial elements too
+              setTimeout(() => {
                 item.classList.add('is-visible');
-              });
-              
-              // Once animated, we can stop observing
-              observer.unobserve(section);
+              }, Math.min(index, 5) * 100);
+            });
+          }, 100);
+        } else {
+          // Create an observer for sections not yet in viewport
+          const observer = new IntersectionObserver(
+            ([entry]) => {
+              if (entry.isIntersecting && !document.documentElement.classList.contains('scrolling-in-progress')) {
+                // Make all animated items visible when section enters viewport
+                elementsToAnimate.forEach(item => {
+                  item.classList.add('is-visible');
+                });
+                
+                // Once animated, we can stop observing
+                observer.unobserve(section);
+              }
+            },
+            { 
+              threshold: 0.1,
+              rootMargin: '-50px 0px'
             }
-          },
-          { 
-            threshold: 0.1,
-            rootMargin: '-50px 0px'
-          }
-        );
-        
-        // Start observing the section
-        observer.observe(section);
+          );
+          
+          // Start observing the section
+          observer.observe(section);
+        }
       });
     };
 
