@@ -4,6 +4,7 @@ export { metadata } from "./metadata";
 import ScrollFix from "../components/ScrollFix/ScrollFix";
 import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
 import InitCookies from '../components/Cookies/InitCookies';
+import CookieBanner from '../components/Cookies/CookieBanner';
 
 // Import our custom CSS adjustments
 import "../styles/container-adjustments.css";
@@ -27,6 +28,7 @@ export default function RootLayout({
         backgroundColor: '#121318' // Darker background color that matches the design
       }}>
         <InitCookies /> 
+        <CookieBanner />
         <LoadingOverlay />
         <ScrollFix />
         {children}
