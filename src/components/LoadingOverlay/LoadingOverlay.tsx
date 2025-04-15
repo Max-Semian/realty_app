@@ -72,7 +72,7 @@ const LoadingOverlay: React.FC = () => {
     >
       <div className={`${styles.logoContainer} ${logoVisible ? styles.logoVisible : ''}`}>
         <img 
-          src="/realty_app/LOGO_1.png" 
+          src="/realty_app/LOGO_1.webp" 
           alt="Loading" 
           className={styles.logo}
         />
