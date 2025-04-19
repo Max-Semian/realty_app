@@ -14,7 +14,7 @@ export default function ContactsSection() {
             {/* Map placeholder - replace with actual Google Maps embed code or component */}
             <div className={styles.mapContainer}>
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2350.394428302704!2d27.5519!3d53.9045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTPCsDU0JzE2LjIiTiAyN8KwMzMnMDYuOCJF!5e0!3m2!1sen!2sby!4v1616593424796!5m2!1sen!2sby" 
+                    src="https://yandex.ru/map-widget/v1/?um=constructor%3A8cd1e497becbfca1d205df8a729aa4332cafa1cb133d168b071f0eb1ceb4dfc3&amp;source=constructor" 
                     width="100%" 
                     height="400" 
                     style={{ border: 0 }} 
