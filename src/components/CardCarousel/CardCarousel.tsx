@@ -87,7 +87,7 @@ const CardCarousel: React.FC<CardCarouselProps> = ({
       <div className={styles.container}>
         <h2 className={styles.title}>{displayTitle}</h2>
         
-        <div className={styles.carouselContainer}>
+          <div className={styles.carouselContainer}>
           <button 
             className={`${styles.navButton} ${styles.prevButton}`}
             onClick={prevSlide}

@@ -40,8 +40,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 53px; /* Changed from 80px to 53px (1.5 times smaller) */
-  height: 53px; /* Changed from 80px to 53px (1.5 times smaller) */
+  width: 53px; 
+  height: 53px; 
   border-radius: 50%;
   border: 1px solid #BA9778;
   background: #20222B;
@@ -50,8 +50,8 @@
   cursor: pointer;
   transition: all 0.3s ease;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 30%;
+  /* transform: translateY(-90%); */
   z-index: 10;
 }
 
@@ -60,11 +60,11 @@
 }
 
 .prevButton {
-  left: -15px; /* Adjusted from -20px to account for smaller button size */
+  left: -35px; 
 }
 
 .nextButton {
-  right: -15px; /* Adjusted from -20px to account for smaller button size */
+  right: -35px; 
 }
 
 .dotsContainer {
@@ -127,7 +127,6 @@
   .title {
     font-size: 38px;
     margin-bottom: 30px;
-    text-align: left; /* Left align title on mobile */
   }
   
   .container {
@@ -151,7 +150,7 @@
   .navButton {
     width: 40px;
     height: 40px;
-    top: 50%;
+    top: 30%;
   }
   
   .prevButton {

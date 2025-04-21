@@ -68,7 +68,7 @@ export default function TeamSection() {
           title="Наши специалисты" 
           mobileTitle="Специалисты"
           itemsPerView={4}
-          showDots={false} /* Hide dots to match Figma design */
+          showDots={false}
         >
           {teamMembers.map(member => (
             <TeamMemberCard key={member.id} {...member} />
