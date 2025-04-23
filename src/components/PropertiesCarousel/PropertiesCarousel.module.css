@@ -194,6 +194,8 @@
   
   .container {
     padding: 40px 20px;
+    margin-left: 30px !important;
+    margin-right: 30px !important;
   }
   
   .carousel {
