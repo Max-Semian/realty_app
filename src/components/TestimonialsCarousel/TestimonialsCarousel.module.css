@@ -225,6 +225,8 @@
 @media (max-width: 820px) {
   .container {
     padding: 40px 20px;
+    margin-left: 30px !important;
+    margin-right: 30px !important;
   }
 
   .testimonialGroup {
@@ -261,12 +263,6 @@
   }
   .dotsContainer {
     display: none;
-  }
-}
-@media (max-width: 768px) {
-  .container {
-    margin-left: 30px !important;
-    margin-right: 30px !important;
   }
 }
 @media (max-width: 480px) {
