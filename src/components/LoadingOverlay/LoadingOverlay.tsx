@@ -19,7 +19,7 @@ const LoadingOverlay: React.FC = () => {
       '/realty_app/bg1.jpg', // Background image
       '/realty_app/home.webp', // Hero background
       '/realty_app/LOGO_BLACK.png', // Logo in hero
-      '/realty_app/logo-fixed.svg' // Header logo
+      '/realty_app/LOGO_1.webp' // Header logo
     ];
 
     let loadedCount = 0;
