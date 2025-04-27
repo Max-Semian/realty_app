@@ -225,13 +225,6 @@
 @media (max-width: 820px) {
   .container {
     padding: 40px 20px;
-    margin: 0 30px !important; /* Добавляем горизонтальные отступы 30px */
-    width: calc(100% - 60px) !important;
-  }
-  .testimonialsSection {
-    width: 100%;
-    padding: 0;
-    background: transparent; /* Делаем фон прозрачным, чтобы показать фоновое изображение */
   }
   
   .testimonialGroup {
@@ -239,7 +232,6 @@
     align-items: center;
     width: 100%;
   }
-  
 
   .testimonialCard {
     width: 88%;
@@ -266,10 +258,25 @@
   .carouselTrack {
     width: 100% !important;
   }
+  
   .dotsContainer {
     display: none;
   }
 }
+
+@media (max-width: 768px) {
+  .container {
+    margin: 0 30px !important; /* Добавляем горизонтальные отступы 30px */
+    width: calc(100% - 60px) !important;
+  }
+  
+  .testimonialsSection {
+    width: 100%;
+    padding: 0;
+    background: transparent; /* Делаем фон прозрачным, чтобы показать фоновое изображение */
+  }
+}
+
 @media (max-width: 480px) {
   .testimonialCard {
     height: auto;
@@ -288,18 +295,15 @@
     font-size: 16px;
   }
 
-
   .dotsContainer {
     display: none;
   }
 }
 
 @media (max-width: 400px) {
-
   .title {
     font-size: 32px;
     font-weight: 300;
     text-align: center;
   }
-
 }
