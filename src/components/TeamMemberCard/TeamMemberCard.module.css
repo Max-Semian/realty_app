@@ -81,7 +81,7 @@
     min-height: 120px;
   }
   .memberCard {
-    height: auto;
+    height: 320px; /* Adjust height for mobile */
     padding: 16px;
   }
   
