@@ -68,7 +68,13 @@ body {
     scroll-margin-top: 140px;
   }
 }
-
+/* Mobile background fix */
+@media (max-width: 768px) {
+  body::before {
+    background-size: cover !important; /* Растягиваем изображение на весь экран */
+    background-position: center center !important; /* Центрируем изображение */
+  }
+}
 /* Default scroll margins for all section targets */
 section[id] {
   scroll-margin-top: 120px;
