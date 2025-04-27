@@ -77,11 +77,8 @@
 }
 
 @media (max-width: 768px) {
-  .memberInfo{
-    min-height: 120px;
-  }
   .memberCard {
-    height: 100% /* Adjust height for mobile */
+    height: 100%; 
     padding: 16px;
   }
   
@@ -91,7 +88,7 @@
   }
   
   .memberInfo {
-    height: 150px;
+    height: 150px; /* Может вызвать конфликт со min-height */
   }
   
   .memberPosition, 
