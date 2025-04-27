@@ -47,7 +47,13 @@
   .container {
     padding: 40px 20px;
     min-height: 550px; /* Adjust for mobile */
-    margin-left: 30px !important;
-    margin-right: 30px !important;
+    padding: 40px 20px;
+    margin: 0 30px !important; /* Добавляем горизонтальные отступы 30px */
+    width: calc(100% - 60px) !important;
+  }
+  .teamSection {
+    width: 100%;
+    padding: 0;
+    background: transparent; /* Делаем фон прозрачным, чтобы показать фоновое изображение */
   }
 }
