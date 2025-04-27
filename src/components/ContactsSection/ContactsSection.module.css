@@ -131,6 +131,11 @@
     margin: 0 30px !important; /* Добавляем горизонтальные отступы 30px */
     width: calc(100% - 60px) !important;
   }
+  .contactsSection {
+    width: 100%;
+    padding: 0;
+    background: transparent; /* Делаем фон прозрачным, чтобы показать фоновое изображение */
+  }
 }
 @media (max-width: 600px) {
   .container {
