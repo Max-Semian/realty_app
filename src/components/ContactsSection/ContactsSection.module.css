@@ -107,7 +107,7 @@
 
 @media (max-width: 900px) {
   .container {
-    padding: 50px 30px;
+    padding: 40px 20px;
   }
   
   .contactsContent {
@@ -127,7 +127,6 @@
 }
 @madia (max-width: 768px) {
   .container {
-    padding: 40px 20px;
     margin: 0 30px !important; /* Добавляем горизонтальные отступы 30px */
     width: calc(100% - 60px) !important;
   }
