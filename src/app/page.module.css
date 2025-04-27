@@ -65,6 +65,8 @@
   @media (max-width: 768px) {
     .fullWidthImageSection {
       height: auto;
+      width: 100%;
+      padding: 0 30px;
     }
     
     .fullWidthImageSection .fullWidthImage {
