@@ -206,6 +206,10 @@
   .container {
     background-size: 400%;
   }
+  
+  .heroSection {
+    margin-bottom: -10px;
+  }
 }
 
 @media (max-width: 400px) {
