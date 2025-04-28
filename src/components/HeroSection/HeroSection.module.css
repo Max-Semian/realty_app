@@ -215,5 +215,6 @@
 
   .container {
     background-size: 500%;
+    width: calc(100% - 40px) !important;
   }
 }
