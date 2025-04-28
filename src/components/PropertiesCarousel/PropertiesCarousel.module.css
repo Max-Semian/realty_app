@@ -224,3 +224,7 @@
     max-width: 100%;
   }
 }
+@media (max-width: 378px) {
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+}
