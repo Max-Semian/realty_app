@@ -128,7 +128,7 @@
 @media (max-width: 768px) {
   .container {
     padding: 40px 20px;
-    margin: 0 30px !important; /* Добавляем горизонтальные отступы 30px */
+    margin: 0 20px !important; /* Добавляем горизонтальные отступы 20px */
     width: calc(100% - 60px) !important;
   }
   .contactsSection {
