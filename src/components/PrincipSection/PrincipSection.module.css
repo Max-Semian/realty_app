@@ -97,8 +97,8 @@
   .container {
     padding: 30px 20px 40px; /* Reduced top padding on mobile */
     margin-top: 0px !important; /* Further reduced on mobile */
-    margin-left: 30px !important;
-    margin-right: 30px !important;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
   }
   
   .title {
