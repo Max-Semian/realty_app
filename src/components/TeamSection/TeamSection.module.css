@@ -48,7 +48,7 @@
     padding: 40px 20px;
     min-height: 550px; /* Adjust for mobile */
     padding: 40px 20px;
-    margin: 0 30px !important; /* Добавляем горизонтальные отступы 30px */
+    margin: 0 20px !important; /* Добавляем горизонтальные отступы 30px */
     width: calc(100% - 60px) !important;
   }
   .teamSection {
