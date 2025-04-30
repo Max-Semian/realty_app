@@ -6,6 +6,8 @@
   color: white;
   margin: 0; /* Added explicit margin */
   margin-top: -1px; /* Fix for the gap between sections */
+  /* min-height: 45vh; */
+  /* outline: 1px solid red; */
 }
 
 .container {
@@ -39,24 +41,23 @@
 
 .inputGroup {
   width: 65%;
-  margin-right: 5%;
+  margin-right: 10%;
 }
 
 .inputRow {
   display: flex;
   margin-bottom: 40px;
-  gap: 50px;
+  gap: 20px;
 }
 
 .inputItem {
-  border-bottom: 2px solid #BA9778;
   position: relative;
-  max-width: 300px;
+  max-width: 550px;
   flex: 1;
 }
 
 .input {
-  width: 100%;
+  width: 90%;
   font-family: 'Montserrat', sans-serif;
   background-color: transparent;
   border: none;
@@ -65,20 +66,21 @@
   font-weight: 200;
   color: white;
   outline: none;
+  border-bottom: 2px solid #BA9778;
 }
 
 .input::placeholder {
   color: rgba(255, 255, 255, 0.6);
 }
 
-.inputLine {
+/* .inputLine {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 80%;
   height: 1px;
   background-color: rgba(255, 255, 255, 0.3);
-}
+} */
 
 .inputError {
   color: #ff6b6b;
@@ -153,6 +155,87 @@
   font-size: 14px;
   color: rgba(255, 255, 255, 0.7);
 }
+
+.select {
+  width: 120%;
+  font-family: 'Montserrat', sans-serif;
+  background-color: transparent;
+  border: none;
+  padding: 10px 0;
+  font-size: 20px;
+  font-weight: 200;
+  color: white;
+  outline: none;
+  appearance: none;
+  border-bottom: 2px solid #BA9778;
+  border-radius: 0; /* 🟩 Убираем скругление */
+}
+
+.select option {
+  background-color: #cbb18b;
+  color: #222;
+  font-weight: 400;
+  border-radius: 0; /* 🟩 Убираем скругление у самих опций */
+}
+
+/* 🟨 Стили для выделенной опции (работает в большинстве браузеров) */
+.select option:checked,
+.select option:focus,
+.select option:hover {
+  background-color: #F1F1F1; /* Твой цвет */
+  color: #222; /* Сохраняем читаемость */
+}
+
+
+.customSelectWrapper {
+  position: relative;
+  width: 110%;
+  max-width: 550px;
+}
+
+.customSelectTrigger {
+  width: 110%;
+  background: transparent;
+  border: none;
+border-bottom: 2px solid #BA9778;
+outline: none;
+
+  padding: 12px;
+  font-size: 20px;
+  font-weight: 200;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 0;
+}
+
+.customSelectList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #cbb18b;
+  border: 1px solid #ba9778;
+  border-top: none;
+  z-index: 10;
+}
+
+.customSelectOption {
+  padding: 12px;
+  color: #222;
+  font-weight: 400;
+  background: #cbb18b;
+  cursor: pointer;
+  border-radius: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.customSelectOption:hover {
+  background: #F1F1F1;
+}
+
+
 
 @media (max-width: 1400px) {
   .container {
