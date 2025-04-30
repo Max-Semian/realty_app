@@ -9,6 +9,14 @@
     :root {
         --max-container-width: 1200px;
     }
+
+}
+
+@media (max-width: 650px) {
+  :root {
+      --max-container-width: 85%;
+  }
+
 }
   
   /* Target all container classes across components */
