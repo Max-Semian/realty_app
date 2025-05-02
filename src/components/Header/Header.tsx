@@ -94,7 +94,7 @@ const Header = () => {
                 className={styles.mobileLogo}
                 onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); router.push('/'); }}
               >
-                <img src="/realty_app/LOGO_1.webp" alt="Logo" width="50" height="50" />
+                <img src="/LOGO_1.webp" alt="Logo" width="50" height="50" />
               </a>
             )}
             
@@ -130,7 +130,7 @@ const Header = () => {
           {/* Logo - Link to Main Page */}
           <div className={styles.logo} style={{ display: mobileMenuOpen ? 'none' : 'flex' }}>
             <a href="/" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); router.push('/'); }}>
-              <img src="/realty_app/LOGO_1.webp" alt="Logo" width="50" height="50" />
+              <img src="/LOGO_1.webp" alt="Logo" width="50" height="50" />
             </a>
           </div>
 
@@ -188,7 +188,7 @@ const Header = () => {
           {/* Logo, title and phone number for mobile menu footer */}
           <div className={styles.navFooter}>
             <div className={styles.navLogo}>
-              <img src="/realty_app/LOGO_1.webp" alt="Logo" width="150" height="133" />
+              <img src="/LOGO_1.webp" alt="Logo" width="150" height="133" />
             </div>
             <div className={styles.navTitle}>
               АГЕНТСТВО

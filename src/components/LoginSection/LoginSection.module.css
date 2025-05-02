@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   overflow: hidden;
-  background-image: url('/realty_app/home.webp');
+  background-image: url('/home.webp');
   background-size: cover;
   background-position: center;
 }

@@ -16,10 +16,10 @@ const LoadingOverlay: React.FC = () => {
 
     // Create an array of critical images to preload
     const imagesToPreload = [
-      '/realty_app/bg1.jpg', // Background image
-      '/realty_app/home.webp', // Hero background
-      '/realty_app/LOGO_BLACK.png', // Logo in hero
-      '/realty_app/LOGO_1.webp' // Header logo
+      '/bg1.jpg', // Background image
+      '/home.webp', // Hero background
+      '/LOGO_BLACK.png', // Logo in hero
+      '/LOGO_1.webp' // Header logo
     ];
 
     let loadedCount = 0;
@@ -72,7 +72,7 @@ const LoadingOverlay: React.FC = () => {
     >
       <div className={`${styles.logoContainer} ${logoVisible ? styles.logoVisible : ''}`}>
         <img 
-          src="/realty_app/LOGO_1.webp" 
+          src="/LOGO_1.webp" 
           alt="Loading" 
           className={styles.logo}
         />

@@ -34,7 +34,7 @@ export default function Footer() {
           {/* Left side - Logo and agency info */}
           <div className={styles.leftSection}>
             <div className={styles.logoContainer}>
-              <img src="/realty_app/LOGO_1.webp" alt="Логотип агентства" className={styles.logo} />
+              <img src="/LOGO_1.webp" alt="Логотип агентства" className={styles.logo} />
             </div>
             <div className={styles.agencyInfo}>
               <p className={styles.agencyName}>АГЕНТСТВО</p>

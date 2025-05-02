@@ -1,14 +1,13 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: '/realty_app',
-  assetPrefix: '/realty_app/',
+  basePath: '', // либо просто удали эту строку
+  assetPrefix: '', // тоже можно удалить
   output: 'export',
   trailingSlash: true,
   images: {
     unoptimized: true,
   },
   eslint: {
-    ignoreDuringBuilds: true, // This will ignore all ESLint errors during build
+    ignoreDuringBuilds: true,
   },
   transpilePackages: ['next-image-export-optimizer'],
   env: {
@@ -22,12 +21,9 @@ const nextConfig = {
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {
-      // Ensure the necessary objects exist
       config.optimization = config.optimization || {};
       config.optimization.splitChunks = config.optimization.splitChunks || {};
       config.optimization.splitChunks.cacheGroups = config.optimization.splitChunks.cacheGroups || {};
-
-      // Now it's safe to set the property
       config.optimization.splitChunks.cacheGroups.enhance = {
         test: /enhance\.ts$/,
         name: 'enhance',

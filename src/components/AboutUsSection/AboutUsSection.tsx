@@ -83,7 +83,7 @@ export default function AboutUsSection() {
               
               <div className={styles.founderImage} style={{ ...fadeInStyle(1450), marginTop: '-120px' }}>
                 <img 
-                  src="/realty_app/Alex2-1.jpg" 
+                  src="/Alex2-1.jpg" 
                   alt="Команда агентства" 
                   className={styles.image}
                 />
@@ -94,7 +94,7 @@ export default function AboutUsSection() {
             <div className={styles.teamSection}>
               <div className={styles.teamImage}>
               <img 
-                  src="/realty_app/group-1.jpg" 
+                  src="/group-1.jpg" 
                   alt="Команда агентства" 
                   className={styles.image}
                 />
@@ -131,28 +131,28 @@ export default function AboutUsSection() {
             <div className={styles.gallerySection}>
               <div className={styles.galleryItem}>
                 <img 
-                  src="/realty_app/images/kv1-1.jpg" 
+                  src="/images/kv1-1.jpg" 
                   alt="Недвижимость пример 1" 
                   className={styles.image}
                 />
               </div>
               <div className={styles.galleryItem}>
                 <img 
-                  src="/realty_app/images/kv2-1.jpg" 
+                  src="/images/kv2-1.jpg" 
                   alt="Недвижимость пример 2" 
                   className={styles.image}
                 />
               </div>
               <div className={styles.galleryItem}>
                 <img 
-                  src="/realty_app/images/kv3-1.jpg" 
+                  src="/images/kv3-1.jpg" 
                   alt="Недвижимость пример 3" 
                   className={styles.image}
                 />
               </div>
               <div className={styles.galleryItem}>
                 <img 
-                  src="/realty_app/kv4-1.jpg" 
+                  src="/kv4-1.jpg" 
                   alt="Logo" 
                   className={styles.image}
                 />

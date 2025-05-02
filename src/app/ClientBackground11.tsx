@@ -13,7 +13,7 @@ const ClientBackground = () => {
         right: 0;
         bottom: 0;
         z-index: -1;
-        background-image: url('/realty_app/bg1.jpg');
+        background-image: url('/bg1.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
